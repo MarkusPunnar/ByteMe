@@ -1,0 +1,50 @@
+.navbar {
+	background-color: #05398c;
+}
+
+.navbar-default .navbar-nav .button  {
+	color: white; 
+	font-family: Merienda One;
+}
+
+#home {
+	color: white;
+	font-family: Merienda One;
+	font-size: 1.8em;
+}
+
+body { 
+  background: url(../images/main.jpg) no-repeat center center fixed; 
+  background-size: cover;
+}
+
+h1 {
+	text-align: center; 
+	padding-top: 0.5em;
+	font-family: Merienda One;
+	font-size: 10vw;
+	color: white;
+}
+
+h4 {
+	padding-top: 1.0em;
+	font-size: 2.5vw;
+	font-family: Merienda One;
+	text-align: center;
+	color: white;
+}
+
+.btn-info {
+	font-family: Merienda One;
+	background-color: black;
+	border: none;
+	margin-top: 2.0em;
+}
+
+#left {
+	margin-right: 2em;
+}
+
+#right {
+	margin-left: 2em;
+}
