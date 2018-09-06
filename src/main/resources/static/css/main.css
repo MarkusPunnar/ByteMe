@@ -5,12 +5,17 @@
 
 .navbar-default .navbar-nav .button {
     color: white;
-    font-family: Shrikhand, cursive;
+    font-family: Amaranth;
+    font-weight: 400;
 }
 
+.navbar-default .navbar-nav .button:hover {
+    color: #8d9ab2;
+}
 #home {
     color: white;
-    font-family: Shrikhand, cursive;
+    font-family: Amaranth;
+    font-weight: 400;
 }
 
 body {
@@ -21,31 +26,26 @@ body {
 h1 {
     text-align: center;
     margin-top: 14rem;
-    font-family: Shrikhand, cursive;
+    font-family: Amaranth;
+    font-weight: 700;
     font-size: 10vw;
     color: white;
 }
 
 h4 {
-    margin-top: 1.0vw;
+    margin-top: 1vw;
+    font-family: Amaranth;
+    font-weight: 400;
     font-size: 2.5vw;
-    font-family: Shrikhand, cursive;
     text-align: center;
     color: white;
 }
 
-#left {
-    margin-right: 2vw;
-}
-
-#right {
-    margin-left: 2vw;
-}
-
 .room {
-    font-family: Shrikhand, cursive;
+    font-family: Amaranth;
+    font-weight: 400;
     font-size: 1.5vw;
-    margin-top: 2vw;
+    color: white;
     background-color: #153759;
     border: none;
     padding: 0.4vw 0.7vw;
@@ -56,9 +56,12 @@ h4 {
 
 .room:hover {
     background-color: #05398c;
+    color: white;
+    text-decoration: none !important;
 }
 
 .buttons {
     text-align: center;
     color: white;
+    margin-top: 3vw;
 }
