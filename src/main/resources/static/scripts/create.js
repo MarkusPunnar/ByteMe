@@ -18,6 +18,7 @@ function addTextfields() {
     var button = document.createElement("input");
     button.setAttribute("type", "submit");
     button.setAttribute("value", "Create");
+    button.classList.add("input");
     var lineBreak2 = document.createElement("br");
     form.appendChild(lineBreak2);
     form.appendChild(button);
