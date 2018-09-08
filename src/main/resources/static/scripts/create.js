@@ -5,7 +5,7 @@ button.addEventListener("click", function() {
     var form = document.createElement("form");
     document.body.appendChild(form);
     form.setAttribute("th:object", "${assessmentElement}");
-    form.setAttribute("th:action", "@{/create}");
+    form.setAttribute("th:action", "@{/session/create}");
     form.setAttribute("method", "post");
     for (var i = 0; i < numberOfElements; i++) {
         var descriptiveText = document.createElement("p");
@@ -23,6 +23,7 @@ button.addEventListener("click", function() {
     var button = document.createElement("input");
     button.setAttribute("type", "submit");
     button.setAttribute("value", "Create");
+    button.classList.add("center");
     var lineBreak2 = document.createElement("br");
     form.appendChild(lineBreak2);
     form.appendChild(button);

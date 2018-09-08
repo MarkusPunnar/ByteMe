@@ -5,10 +5,13 @@ import byteMe.model.AssessmentElement;
 import byteMe.model.Session;
 import byteMe.services.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,8 +29,10 @@ public class SessionController {
         this.sessionService = sessionService;
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createRoom() {
+    @RequestMapping(value = "/create", method = RequestMethod.POST,
+    consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String createRoom(@RequestBody List<String> elementData) {
+        System.out.println(elementData.get(0));
         int sessionID = sessionService.generateSessionID();
         while (sessionIDCollection.contains(sessionID)) {
             sessionID = sessionService.generateSessionID();
