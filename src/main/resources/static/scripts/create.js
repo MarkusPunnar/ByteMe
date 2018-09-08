@@ -1,12 +1,6 @@
-var button = document.getElementById("confirmButton");
-var input = document.querySelector("input");
-button.addEventListener("click", function() {
+function addTextfields() {
     var numberOfElements = Number(input.value);
-    var form = document.createElement("form");
-    document.body.appendChild(form);
-    form.setAttribute("th:object", "${assessmentElement}");
-    form.setAttribute("th:action", "@{/session/create}");
-    form.setAttribute("method", "post");
+    var form = document.querySelector("form");
     for (var i = 0; i < numberOfElements; i++) {
         var descriptiveText = document.createElement("p");
         var node = document.createTextNode("Text " + (i+1));
@@ -14,6 +8,7 @@ button.addEventListener("click", function() {
         var lineBreak = document.createElement("br");
         var inputBox = document.createElement("input");
         inputBox.setAttribute("type", "text");
+        inputBox.setAttribute("name", "assessment")
         inputBox.classList.add("textfield");
         descriptiveText.classList.add("descriptiveText");
         form.appendChild(lineBreak);
@@ -23,8 +18,13 @@ button.addEventListener("click", function() {
     var button = document.createElement("input");
     button.setAttribute("type", "submit");
     button.setAttribute("value", "Create");
-    button.classList.add("center");
     var lineBreak2 = document.createElement("br");
     form.appendChild(lineBreak2);
     form.appendChild(button);
-});
+    this.removeEventListener("click", addTextfields);
+}
+
+var button = document.getElementById("confirmButton");
+var input = document.querySelector("input");
+
+button.addEventListener("click", addTextfields);
