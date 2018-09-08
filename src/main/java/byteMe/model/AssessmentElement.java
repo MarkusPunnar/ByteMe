@@ -2,20 +2,14 @@ package byteMe.model;
 
 public class AssessmentElement {
 
-    private int elementNumber;
+    private int elementId;
     private String elementContent;
 
-    public AssessmentElement(int elementNumber, String elementContent) {
-        this.elementNumber = elementNumber;
+    public AssessmentElement() {
+    }
+
+    public AssessmentElement(String elementContent) {
         this.elementContent = elementContent;
-    }
-
-    public int getElementNumber() {
-        return elementNumber;
-    }
-
-    public void setElementNumber(int elementNumber) {
-        this.elementNumber = elementNumber;
     }
 
     public String getElementContent() {
@@ -25,4 +19,13 @@ public class AssessmentElement {
     public void setElementContent(String elementContent) {
         this.elementContent = elementContent;
     }
+
+    public int getElementId() {
+        return elementId;
+    }
+
+    public void setElementId(int elementId) {
+        this.elementId = elementId;
+    }
+
 }
