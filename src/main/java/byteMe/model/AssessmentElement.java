@@ -5,10 +5,8 @@ public class AssessmentElement {
     private int elementId;
     private String elementContent;
 
-    public AssessmentElement() {
-    }
-
-    public AssessmentElement(String elementContent) {
+    public AssessmentElement(int elementId, String elementContent) {
+        this.elementId = elementId;
         this.elementContent = elementContent;
     }
 

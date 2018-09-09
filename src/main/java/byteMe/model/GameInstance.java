@@ -3,13 +3,13 @@ package byteMe.model;
 import java.util.List;
 import java.util.Map;
 
-public class Session {
+public class GameInstance {
 
     private int id;
-    private List<String> elements;
+    private List<AssessmentElement> elements;
     private Map<Integer, List<Integer>> answers;
 
-    public Session(int id, List<String> elements, Map<Integer, List<Integer>> answers) {
+    public GameInstance(int id, List<AssessmentElement> elements, Map<Integer, List<Integer>> answers) {
         this.id = id;
         this.elements = elements;
         this.answers = answers;
@@ -23,11 +23,11 @@ public class Session {
         this.id = id;
     }
 
-    public List<String> getElements() {
+    public List<AssessmentElement> getElements() {
         return elements;
     }
 
-    public void setElements(List<String> elements) {
+    public void setElements(List<AssessmentElement> elements) {
         this.elements = elements;
     }
 

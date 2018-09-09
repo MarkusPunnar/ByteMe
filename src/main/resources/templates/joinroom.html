@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>uku</title>
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="/css/uku.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Amaranth:400i,700i" rel="stylesheet">
+    <title>ByteMe Join Room</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/joinpage.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Amaranth:400i,700i" rel="stylesheet">
 </head>
 <body>
-	<nav class="navbar navbar-default">
+<nav class="navbar navbar-default">
 
     <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#ByteMe"
@@ -31,11 +31,14 @@
         </ul>
     </div>
 </nav>
-	<strong><i><h1>Please enter a room ID: </h1></i></strong>
-	<div>
-	<input type="text" minlength="6" maxlength="6" required>
-	<input type="submit" name="">
-	</div>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<h1>Please enter a room ID: </h1>
+<p th:if="${param.error}">Room with this ID does not exist</p>
+<div>
+    <form th:action="@{/session/join}" method="post">
+        <input type="text" name="id" minlength="6" maxlength="6" required>
+        <input type="submit" name="Join Room">
+    </form>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
