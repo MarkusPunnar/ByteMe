@@ -1,0 +1,69 @@
+.textfield {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+}
+.descriptiveText {
+    margin: 0 0;
+}
+.navbar {
+    background-color: #1b4977;
+    border: none;
+}
+
+.navbar-default .navbar-nav .button {
+    color: white;
+    font-family: Amaranth;
+    font-weight: 400;
+}
+
+.navbar-default .navbar-nav .button:hover {
+    color: #8d9ab2;
+}
+#home {
+    color: white;
+    font-family: Amaranth;
+    font-weight: 400;
+}
+
+body {
+    background: url(../images/main.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 14rem;
+    font-family: Amaranth;
+    font-weight: 700;
+    font-size: 10vw;
+    color: white;
+}
+
+.confirmButton, .input{
+    font-family: Amaranth;
+    font-weight: 400;
+    font-size: 1.5vw;
+    color: white;
+    background-color: #153759;
+    border: none;
+    padding: 0.4vw 0.7vw;
+    border-radius: 0.4vw;
+    width: 20vw;
+    height: 3vw;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
+
+.inputBox {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+}
+
+.room:hover {
+    background-color: #05398c;
+    color: white;
+    text-decoration: none !important;
+}

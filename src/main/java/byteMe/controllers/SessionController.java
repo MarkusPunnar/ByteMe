@@ -1,14 +1,16 @@
 package byteMe.controllers;
 
 
-import byteMe.model.AssessmentElement;
 import byteMe.model.Session;
 import byteMe.services.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,14 +28,16 @@ public class SessionController {
         this.sessionService = sessionService;
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createRoom() {
+    @PostMapping("/create")
+    public String createRoom(@RequestParam("assessment") List<String> elements) {
+        for (String element: elements) {
+            System.out.println(element);
+        }
         int sessionID = sessionService.generateSessionID();
         while (sessionIDCollection.contains(sessionID)) {
             sessionID = sessionService.generateSessionID();
         }
         sessionIDCollection.add(sessionID);
-        List<AssessmentElement> assessmentElements = new ArrayList<>();
         //Get form inputs and add them to list
         Session newSession = new Session(sessionID, null, new HashMap<>());
         sessionCollection.add(newSession);
