@@ -15,11 +15,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/register", "/about", "/tutorial", "/*",
-                        "/session/*", "/css/*", "/images/*", "/scripts/*", "/fonts/*").permitAll()
-                .anyRequest().authenticated().and()
-                .formLogin().loginPage("/login").permitAll().and().logout().permitAll();
+        http.authorizeRequests().anyRequest().permitAll();
+//                .antMatchers("/register", "/about", "/tutorial", "/*",
+//                        "/session/*", "/css/*", "/images/*", "/scripts/*", "/fonts/*").permitAll()
+//                .anyRequest().authenticated().and()
+//                .formLogin().loginPage("/login").permitAll().and().logout().permitAll();
     }
 
     @Override
