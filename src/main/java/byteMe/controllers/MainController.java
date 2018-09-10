@@ -1,6 +1,7 @@
 package byteMe.controllers;
 
 import byteMe.model.AssessmentElement;
+import byteMe.model.ByteMeUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,8 @@ public class MainController {
     }
 
     @RequestMapping("/register")
-    public String register() {
+    public String register(Model model) {
+        model.addAttribute("user", new ByteMeUser());
         return "register";
     }
 

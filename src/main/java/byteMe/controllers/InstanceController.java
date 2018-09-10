@@ -45,6 +45,9 @@ public class InstanceController {
 
     @RequestMapping(value = "/join", method = RequestMethod.POST)
     public String joinRoom(@ModelAttribute("id") String instanceIDAsString) {
+        if (!instanceIDAsString.matches("\\d+") || instanceIDAsString.length() != 6) {
+            return "redirect:/join?inputerror";
+        }
         int instanceID = Integer.valueOf(instanceIDAsString);
         if (!instanceCollection.keySet().contains(instanceID)) {
             return "redirect:/join?error";

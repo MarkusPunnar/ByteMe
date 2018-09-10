@@ -33,9 +33,10 @@
 </nav>
 <h1>Please enter a room ID: </h1>
 <p th:if="${param.error}">Room with this ID does not exist</p>
+<p th:if="${param.inputerror}">Room ID must be a number with 6 digits</p>
 <div>
     <form th:action="@{/session/join}" method="post">
-        <input type="text" name="id" minlength="6" maxlength="6" required>
+        <input type="text" name="id">
         <input type="submit" name="Join Room">
     </form>
 </div>
