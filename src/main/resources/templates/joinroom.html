@@ -36,7 +36,7 @@
 <p th:if="${param.inputerror}">Room ID must be a number with 6 digits</p>
 <div>
     <form th:action="@{/session/join}" method="post">
-        <input type="text" name="id">
+        <input type="text" name="id" maxlength="6">
         <input type="submit" name="Join Room">
     </form>
 </div>
