@@ -9,32 +9,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-default">
-
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#ByteMe"
-                aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" id="home" th:href="@{/}">ByteMe</a>
-    </div>
-    <div class="collapse navbar-collapse" id="ByteMe">
-        <ul class="nav navbar-nav">
-            <li><a class="button" th:href="@{/about}">About</a></li>
-            <li><a class="button" th:href="@{/tutorial}">Tutorial</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a class="button" th:href="@{/register}">Sign up</a></li>
-            <li><a class="button" th:href="@{/login}">Log in</a></li>
-        </ul>
-    </div>
-</nav>
+<div th:replace="fragments/header.html :: header"></div>
 <h1>ByteMe Create Room</h1>
 <div class="description" id="description">
-    <h4>Choose the number of hinnatavad you wish to enter</h4>
+    <p>Choose the number of hinnatavad you wish to enter</p>
 </div>
 
 <input type="number" id="inputBox">
@@ -42,5 +20,6 @@
 <form th:action="@{/session/create}" method="post">
 </form>
 <script type="text/javascript" src="/scripts/create.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

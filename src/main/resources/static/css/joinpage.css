@@ -1,3 +1,15 @@
+@font-face {
+    font-family: Amaranth;
+    src: url(../fonts/Amaranth-Italic.woff) format("woff"),
+    url(../fonts/Amaranth-Italic.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: Amaranth-Bold;
+    src: url(../fonts/Amaranth-BoldItalic.woff) format("woff"),
+    url(../fonts/Amaranth-BoldItalic.ttf) format("truetype");
+}
+
 h1{
 	color: white;
     font-family: Amaranth;
