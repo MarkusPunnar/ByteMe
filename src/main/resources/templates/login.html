@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>ByteMe Login</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
 <body>
 <h1>ByteMe Login</h1>
@@ -10,7 +12,7 @@
     <p th:if="${param.error}">Invalid username and password</p>
     <div><label> User Name : <input type="text" name="username"/> </label></div>
     <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
+    <div><input type="submit" value="Sign In" class="loginButton"/></div>
 </form>
 </body>
 </html>
