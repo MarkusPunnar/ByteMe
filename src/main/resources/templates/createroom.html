@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>ByteMe Create</title>
-    <link rel="stylesheet" href="/css/create.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Amaranth:400i,700i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/create.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
@@ -35,8 +33,12 @@
     </div>
 </nav>
 <h1>ByteMe Create Room</h1>
-<input type="number" class="textfield">
-<button id="confirmButton" class="confirmButton">Confirm</button>
+<div class="description" id="description">
+    <h4>Choose the number of hinnatavad you wish to enter</h4>
+</div>
+
+<input type="number" id="inputBox">
+<button id="confirmButton">Confirm</button>
 <form th:action="@{/session/create}" method="post">
 </form>
 <script type="text/javascript" src="/scripts/create.js"></script>

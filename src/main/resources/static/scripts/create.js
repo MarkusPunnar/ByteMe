@@ -1,31 +1,39 @@
 function addTextfields() {
-    var numberOfElements = Number(input.value);
-    var form = document.querySelector("form");
+
+    var numberOfElements = Number(input.val());
+
+    $("#confirmButton").remove();
+    $("#inputBox").remove();
+    $("#description").remove();
+
     for (var i = 0; i < numberOfElements; i++) {
-        var descriptiveText = document.createElement("p");
-        var node = document.createTextNode("Text " + (i+1));
-        descriptiveText.appendChild(node);
-        var lineBreak = document.createElement("br");
-        var inputBox = document.createElement("input");
-        inputBox.setAttribute("type", "text");
-        inputBox.setAttribute("name", "assessment")
-        inputBox.classList.add("textfield");
-        descriptiveText.classList.add("descriptiveText");
-        form.appendChild(lineBreak);
-        form.appendChild(descriptiveText);
-        form.appendChild(inputBox);
+
+        var txt = $("<p></p>").text("Text " + (i+1));
+        $("form").append(txt);
+
+        var inputBox = $("<input></input>");
+        inputBox.attr("type", "text");
+        inputBox.attr("name", "assessment");
+        inputBox.addClass("textfield");
+        $("form").append(inputBox);
     }
-    var button = document.createElement("input");
-    button.setAttribute("type", "submit");
-    button.setAttribute("value", "Create");
-    button.classList.add("input");
-    var lineBreak2 = document.createElement("br");
-    form.appendChild(lineBreak2);
-    form.appendChild(button);
-    this.removeEventListener("click", addTextfields);
+
+    var div = $("<div></div>");
+    div.addClass("buttons");
+    $("form").append(div);
+
+    var reset = $("<a></a>").text("Reset");
+    reset.attr("th:href", "@{/create}")
+    reset.addClass("room");
+    $("form").append(reset);
+
+    var create = $("<a></a>").text("Create");
+    //create.attr("th:href", "@{/create}")
+    create.addClass("room");
+    $("form").append(create);
 }
 
-var button = document.getElementById("confirmButton");
-var input = document.querySelector("input");
+var button = $("#confirmButton");
+var input = $("input");
 
-button.addEventListener("click", addTextfields);
+button.click(addTextfields);
