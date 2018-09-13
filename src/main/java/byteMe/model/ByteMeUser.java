@@ -1,19 +1,10 @@
 package byteMe.model;
 
-import javax.validation.constraints.NotNull;
-
 public class ByteMeUser {
 
-    @NotNull
     private String username;
-
-    @NotNull
     private String password;
-
-    @NotNull
     private String confirmedPassword;
-
-    @NotNull
     private String email;
 
     public String getUsername() {

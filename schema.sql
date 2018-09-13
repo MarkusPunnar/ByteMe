@@ -24,10 +24,11 @@ CREATE TABLE grades (
     FOREIGN KEY (elementID) REFERENCES InstanceElements(ID)
 );
 
-CREATE TABLE users (
-    userID int NOT NULL,
-    username VARCHAR(255),
-    hashedPassword VARCHAR(255),
-    useremail varchar(255),
-    PRIMARY KEY (userID)
+CREATE TABLE Users (
+    UserID int NOT NULL AUTO_INCREMENT,
+    Username varchar(255) NOT NULL,
+    HashedPassword varchar(255) NOT NULL,
+    UserEmail varchar(255) NOT NULL,
+    UserRole varchar(255) NOT NULL,
+    PRIMARY KEY (ID)
 );

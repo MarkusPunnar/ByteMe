@@ -1,11 +1,11 @@
 package byteMe.services;
 
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-@Service
+@Component
 public class GameInstanceService {
 
     public int generateInstanceID() {
