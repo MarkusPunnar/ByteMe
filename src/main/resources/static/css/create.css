@@ -10,30 +10,12 @@
     url(../fonts/Amaranth-BoldItalic.ttf) format("truetype");
 }
 
-input {
-    display: block;
-    margin: 0 auto;
-    width: 8vw;
-    height: 3vw;
-    font-size: 2.5vw;
-    font-family: Amaranth;
-    text-align: center;
-}
-
-.textfield {
-    margin-left: 4rem;
-    width:  80rem;
-    height: 3.5rem;
-    font-size: 2vw;
-    font-family: Amaranth;
-}
-
 p {
-    text-align: left;
-    margin-left: 5rem;
+    text-align: center;
     font-family: Amaranth;
     color: white;
-    font-size: 2vw;
+    font-size: 2em;
+    margin: 1em auto;
 }
 
 .navbar {
@@ -50,6 +32,7 @@ p {
 .navbar-default .navbar-nav .button:hover {
     color: #8d9ab2;
 }
+
 #home {
     color: white;
     font-family: Amaranth;
@@ -62,68 +45,35 @@ body {
 }
 
 h1{
-    margin-top: 6rem;
+    margin-top: 0.7em;
     text-align: center;
     font-family: Amaranth;
     font-weight: 700;
     color: white;
-    font-size: 8vw;
+    font-size: 8em;
 }
 
-h4{
-    text-align: center;
-    font-family: Amaranth;
-    font-weight: 700;
-    color: white;
-    font-size: 3vw;
-}
-
-button {
-    font-family: Amaranth;
-    font-weight: 400;
-    font-size: 1.5vw;
-    color: white;
-    background-color: #153759;
-    border: none;
-    padding: 0.4vw 0.7vw;
-    border-radius: 0.4vw;
-    width: 20vw;
-    height: 3vw;
-    text-align: center;
+input {
     display: block;
     margin: 0 auto;
-    margin-top: 2rem;
 }
 
-.inputBox {
-    display: block;
-    margin: 0 auto;
-    margin-bottom: 1rem;
+.container {
+    width: 50%;
 }
 
-.room {
-    font-family: Amaranth;
-    font-weight: 400;
-    font-size: 2vw;
+.btn {
+    margin: 1em auto;
+}
+
+label {
     color: white;
-    background-color: #153759;
-    border: none;
-    border-radius: 0.4vw;
-    width: 8vw;
-    height: 3vw;
-    margin: 1rem auto;
-    display: block;
+}
+
+div {
     text-align: center;
-}
-
-.room:hover {
-    background-color: #05398c;
-    color: white;
-    text-decoration: none !important;
 }
 
 .buttons {
-    text-align: center;
-    color: white;
-    margin-top: 3vw;
+    margin: 1em 1em;
 }

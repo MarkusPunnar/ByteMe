@@ -10,16 +10,6 @@
     url(../fonts/Amaranth-BoldItalic.ttf) format("truetype");
 }
 
-input {
-    display: block;
-    margin: 0 auto;
-    width: 25vw;
-    height: 3vw;
-    font-size: 2.5vw;
-    font-family: Amaranth;
-    text-align: center;
-}
-
 .navbar {
     background-color: #1b4977;
     border: none;
@@ -45,43 +35,23 @@ body {
     background-size: cover;
 }
 
-h1{
-    margin-top: 1em;
-    text-align: center;
+h1 {
     font-family: Amaranth;
     font-weight: 700;
     color: white;
-    font-size: 5em;
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 1em;
 }
 
-.registerButton {
+.container {
+    width: 45%;
+    text-align: center;
+}
+
+.btn {
+    background-color: white;
+    color: #153759;
     font-family: Amaranth;
     font-weight: 400;
-    font-size: 2em;
-    color: white;
-    background-color: #153759;
-    border: none;
-    border-radius: 0.4em;
-    width: 8em;
-    height: 2em;
-    text-align: center;
-    display: block;
-    margin: 0.5em auto;
-}
-
-.registerButton:hover {
-    background-color: #05398c;
-}
-
-div {
-    display: block;
-    margin: 20px auto;
-    text-align: center;
-}
-
-p {
-    text-align: center;
-    font-family: Amaranth;
-    font-size: 2em;
-    color: red;
 }

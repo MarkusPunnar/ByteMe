@@ -11,14 +11,13 @@
 <body>
 <div th:replace="fragments/header.html :: header"></div>
 <h1>ByteMe Create Room</h1>
-<div class="description" id="description">
-    <p>Choose the number of hinnatavad you wish to enter</p>
+<div class="container">
+    <p>Choose the number of elements you wish to enter</p>
+    <input type="number">
+    <button class="btn btn-info">Confirm</button>
+    <form th:action="@{/session/create}" method="post">
+    </form>
 </div>
-
-<input type="number" id="inputBox">
-<button id="confirmButton">Confirm</button>
-<form th:action="@{/session/create}" method="post">
-</form>
 <script type="text/javascript" src="/scripts/create.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

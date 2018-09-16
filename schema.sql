@@ -1,34 +1,70 @@
 CREATE DATABASE byteme;
 
-CREATE TABLE Activeinstances (
-    ID int NOT NULL,
-    Hostname varchar (255) NOT NULL,
-    elementAmount int,
-    PRIMARY KEY (ID)
-);
+USE byteme;
 
-CREATE TABLE InstanceElements (
-    ID int NOT NULL,
-    InstanceID int NOT NULL,
-    elementContent varchar(255),
-    PRIMARY KEY (ID),
-    FOREIGN KEY (InstanceID) REFERENCES ActiveInstances(ID)
-);
-
-CREATE TABLE grades (
-    ID int NOT NULL,
-    instanceID int NOT NULL,
-    elementID int NOT NULL,
-    gradeScore int NOT NULL,
-	  PRIMARY KEY (ID),
-    FOREIGN KEY (elementID) REFERENCES InstanceElements(ID)
-);
-
-CREATE TABLE Users (
+CREATE TABLE IF NOT EXISTS Users (
     UserID int NOT NULL AUTO_INCREMENT,
     Username varchar(255) NOT NULL,
     HashedPassword varchar(255) NOT NULL,
     UserEmail varchar(255) NOT NULL,
     UserRole varchar(255) NOT NULL,
-    PRIMARY KEY (ID)
+    PRIMARY KEY (UserID)
+);
+
+CREATE TABLE IF NOT EXISTS Rooms (
+    RoomID INT NOT NULL,
+    Hostname INT NOT NULL,
+    elementAmount INT,
+    PRIMARY KEY (RoomID),
+    FOREIGN KEY (Hostname) REFERENCES Users(UserID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Roomusers (
+	RoomID INT,
+  ConnecteduserID INT,
+  FOREIGN KEY (ConnecteduserID) REFERENCES Users(UserID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (RoomID) REFERENCES Rooms(RoomID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Elements (
+    ElementID int NOT NULL AUTO_INCREMENT,
+    RoomID int NOT NULL,
+    ElementContent varchar(255) NOT NULL,
+    PRIMARY KEY (ElementID),
+    FOREIGN KEY (RoomID) REFERENCES Rooms(RoomID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Grades (
+    GradeID int NOT NULL,
+    RoomID int NOT NULL,
+    ElementID int NOT NULL,
+    GradeScore int NOT NULL,
+	PRIMARY KEY (GradeID),
+    FOREIGN KEY (ElementID) REFERENCES Elements(ElementID) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (RoomID) REFERENCES Rooms(RoomID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Roomusers (
+	RoomID INT,
+  ConnecteduserID INT,
+  FOREIGN KEY (ConnecteduserID) REFERENCES Users(UserID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (RoomID) REFERENCES Rooms(RoomID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Elements (
+    ElementID int NOT NULL,
+    RoomID int NOT NULL,
+    ElementContent varchar(255) NOT NULL,
+    PRIMARY KEY (ElementID),
+    FOREIGN KEY (RoomID) REFERENCES Rooms(RoomID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Grades (
+    GradeID int NOT NULL,
+    RoomID int NOT NULL,
+    ElementID int NOT NULL,
+    GradeScore int NOT NULL,
+	PRIMARY KEY (GradeID),
+    FOREIGN KEY (ElementID) REFERENCES Elements(ElementID) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (RoomID) REFERENCES Rooms(RoomID) ON UPDATE CASCADE ON DELETE CASCADE
 );

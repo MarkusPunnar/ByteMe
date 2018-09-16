@@ -1,6 +1,6 @@
 package byteMe.model;
 
-public class UserEntity {
+public class UserDto {
 
     private int id;
     private String username;
@@ -8,7 +8,7 @@ public class UserEntity {
     private String email;
     private String role;
 
-    public UserEntity(String username, String hashedPassword, String email, String role) {
+    public UserDto(String username, String hashedPassword, String email, String role) {
         this.username = username;
         this.hashedPassword = hashedPassword;
         this.email = email;

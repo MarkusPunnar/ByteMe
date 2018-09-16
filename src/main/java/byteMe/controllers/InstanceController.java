@@ -1,45 +1,39 @@
 package byteMe.controllers;
 
 
-import byteMe.model.AssessmentElement;
-import byteMe.model.GameInstance;
 import byteMe.services.GameInstanceService;
+import byteMe.services.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/session")
 public class InstanceController {
 
     private GameInstanceService instanceService;
-    private Map<Integer, GameInstance> instanceCollection = new HashMap<>();
+    private RoomRepository roomRepository;
 
     @Autowired
-    public InstanceController(GameInstanceService instanceService) {
+    public InstanceController(GameInstanceService instanceService, RoomRepository roomRepository) {
         this.instanceService = instanceService;
+        this.roomRepository = roomRepository;
     }
 
     @PostMapping("/create")
     public String createRoom(@RequestParam("assessment") List<String> instanceElements, Model model) {
-        List<AssessmentElement> orderedInstanceElements = new ArrayList<>();
-        for (int i = 0; i < instanceElements.size(); i++) {
-            AssessmentElement newElement = new AssessmentElement(i, instanceElements.get(i));
-            orderedInstanceElements.add(newElement);
+        int roomID = instanceService.generateInstanceID();
+        while (roomRepository.getRoomIDCount(roomID)!= 0) {
+            roomID = instanceService.generateInstanceID();
         }
-        int instanceId = instanceService.generateInstanceID();
-        while (instanceCollection.keySet().contains(instanceId)) {
-            instanceId = instanceService.generateInstanceID();
+        roomRepository.addRoom(roomID, 0, instanceElements.size());
+        for (String instanceElement : instanceElements) {
+            roomRepository.addElement(roomID, instanceElement);
         }
-        GameInstance newGameInstance = new GameInstance(instanceId, orderedInstanceElements, new HashMap<>());
-        instanceCollection.put(instanceId, newGameInstance);
-        model.addAttribute("instanceId", instanceId);
+        model.addAttribute("roomID", roomID);
         return "hostwait";
     }
 
@@ -49,9 +43,6 @@ public class InstanceController {
             return "redirect:/join?inputerror";
         }
         int instanceID = Integer.valueOf(instanceIDAsString);
-        if (!instanceCollection.keySet().contains(instanceID)) {
-            return "redirect:/join?error";
-        }
         return "redirect:/session/waitingroom/" + instanceIDAsString;
     }
 

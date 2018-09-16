@@ -1,39 +1,36 @@
 function addTextfields() {
 
-    var numberOfElements = Number(input.val());
+    var numberOfElements = Number($("input").val());
+    var formElement = $("form");
 
-    $("#confirmButton").remove();
-    $("#inputBox").remove();
-    $("#description").remove();
+    $("p").remove();
+    $("input").remove();
+    $("button").remove();
 
     for (var i = 0; i < numberOfElements; i++) {
-
-        var txt = $("<p></p>").text("Text " + (i+1));
-        $("form").append(txt);
-
-        var inputBox = $("<input></input>");
-        inputBox.attr("type", "text");
-        inputBox.attr("name", "assessment");
-        inputBox.addClass("textfield");
-        $("form").append(inputBox);
+        formElement.append("<div></div>");
+        var divNumber = i+1;
+        $("form div:nth-of-type(" + divNumber + ")").addClass("form-group");
+        $("form div:nth-of-type(" + divNumber + ")").addClass("element");
+        var labelValue = "Element" + (i+1);
+        $("form div:nth-of-type(" + divNumber + ")").append("<label></label>");
+        document.getElementsByTagName("label")[i].setAttribute("for", labelValue);
+        document.getElementsByTagName("label")[i].textContent = labelValue;
+        $("form div:nth-of-type(" + divNumber + ")").append("<input>");
+        $("input").addClass("form-control");
+        document.getElementsByTagName("input")[i].setAttribute("id", labelValue);
+        $("input").attr("type", "text");
     }
+    $(".container").append("<button type=submit id=confirm class=buttons></button>");
+    $("#confirm").text("Confirm");
+    $("#confirm").addClass("btn");
+    $("#confirm").addClass("btn-info");
 
-    var div = $("<div></div>");
-    div.addClass("buttons");
-    $("form").append(div);
-
-    var reset = $("<a></a>").text("Reset");
-    reset.attr("th:href", "@{/create}")
-    reset.addClass("room");
-    $("form").append(reset);
-
-    var create = $("<a></a>").text("Create");
-    //create.attr("th:href", "@{/create}")
-    create.addClass("room");
-    $("form").append(create);
+    $(".container").append("<a class=buttons id=reset></a>");
+    $("#reset").attr("href", "/create");
+    $("#reset").text("Reset");
+    $("#reset").addClass("btn");
+    $("#reset").addClass("btn-info");
 }
 
-var button = $("#confirmButton");
-var input = $("input");
-
-button.click(addTextfields);
+$("button").on("click", addTextfields);
