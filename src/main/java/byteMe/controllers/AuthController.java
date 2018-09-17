@@ -34,12 +34,12 @@ public class AuthController {
             }
             UserDto user = new UserDto(newUser.getUsername(),
                     encoder.encode(newUser.getPassword()), newUser.getEmail(), "user");
-            List<String> registeredUsers = handle.createQuery("SELECT username FROM users")
+            List<String> registeredUsers = handle.createQuery("SELECT username FROM Users")
                     .mapTo(String.class).list();
             if (registeredUsers.contains(newUser.getUsername())) {
                 return "redirect:/register?usernameerror";
             }
-            int id = handle.createUpdate("INSERT INTO users (username, hashedPassword, useremail, userrole)" +
+            int id = handle.createUpdate("INSERT INTO Users (username, hashedPassword, useremail, userrole)" +
                     " VALUES (:username, :hashedPassword, :email, :role)").bindBean(user)
                     .executeAndReturnGeneratedKeys("userid").mapTo(int.class).findOnly();
             user.setId(id);

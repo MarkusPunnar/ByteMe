@@ -37,6 +37,12 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+        <!--For using MariaDB in test environment-->
+        <!--<dependency>-->
+            <!--<groupId>org.mariadb.jdbc</groupId>-->
+            <!--<artifactId>mariadb-java-client</artifactId>-->
+            <!--<version>1.5.7</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>

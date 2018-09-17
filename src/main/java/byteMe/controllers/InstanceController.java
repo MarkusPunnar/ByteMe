@@ -45,6 +45,9 @@ public class InstanceController {
             return "redirect:/join?inputerror";
         }
         int instanceID = Integer.valueOf(instanceIDAsString);
+        if (roomRepository.getRoomIDCount(instanceID) == 0) {
+            return "redirect:/join?error";
+        }
         return "redirect:/session/waitingroom/" + instanceIDAsString;
     }
 

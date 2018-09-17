@@ -32,7 +32,7 @@ public class MainController {
     @RequestMapping("/about")
     public String aboutPage(Model model) {
         jdbi.useHandle(handle -> {
-            int userCount = handle.createQuery("SELECT COUNT(*) FROM users").mapTo(int.class).findOnly();
+            int userCount = handle.createQuery("SELECT COUNT(*) FROM Users").mapTo(int.class).findOnly();
             model.addAttribute("count", userCount);
         });
         return "about";

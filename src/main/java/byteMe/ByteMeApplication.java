@@ -18,7 +18,7 @@ public class ByteMeApplication {
 
     @Bean
     Jdbi jdbi() {
-        Jdbi jdbi = Jdbi.create("jdbc:mysql://localhost:3306/byteme", "root", "root");
+        Jdbi jdbi = Jdbi.create("jdbc:mysql://localhost:3306/byteme", "byteme", "lo102llu33");
         jdbi.installPlugin(new SqlObjectPlugin());
         return jdbi;
     }
