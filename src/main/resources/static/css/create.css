@@ -14,7 +14,7 @@ p {
     text-align: center;
     font-family: Amaranth;
     color: white;
-    font-size: 2em;
+    font-size: 2vw;
     margin: 1em auto;
 }
 
@@ -50,7 +50,7 @@ h1{
     font-family: Amaranth;
     font-weight: 700;
     color: white;
-    font-size: 7em;
+    font-size: 7vw;
 }
 
 input {

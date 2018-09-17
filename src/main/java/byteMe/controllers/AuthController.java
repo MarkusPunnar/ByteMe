@@ -1,7 +1,7 @@
 package byteMe.controllers;
 
 import byteMe.model.ByteMeUser;
-import byteMe.model.UserDto;
+import byteMe.model.UserDAO;
 import byteMe.services.AuthService;
 import org.jdbi.v3.core.Jdbi;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,7 +32,7 @@ public class AuthController {
             if (!authService.doPasswordsMatch(newUser)) {
                 return "redirect:/register?passworderror";
             }
-            UserDto user = new UserDto(newUser.getUsername(),
+            UserDAO user = new UserDAO(newUser.getUsername(),
                     encoder.encode(newUser.getPassword()), newUser.getEmail(), "user");
             List<String> registeredUsers = handle.createQuery("SELECT username FROM Users")
                     .mapTo(String.class).list();

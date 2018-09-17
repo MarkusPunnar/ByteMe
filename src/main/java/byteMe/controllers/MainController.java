@@ -21,14 +21,6 @@ public class MainController {
         return "index";
     }
 
-    // For browsershots.org
-    @ResponseBody
-    @RequestMapping("robots.txt")
-    public String browserShots() {
-        return "User-agent: Browsershots\n" +
-                "Disallow:";
-    }
-
     @RequestMapping("/about")
     public String aboutPage(Model model) {
         jdbi.useHandle(handle -> {

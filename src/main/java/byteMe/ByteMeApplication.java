@@ -31,5 +31,5 @@ public class ByteMeApplication {
     @Bean
     RoomRepository roomRepository() {
         return jdbi().open().attach(RoomRepository.class);
-}
+    }
 }
