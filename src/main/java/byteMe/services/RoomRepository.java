@@ -9,9 +9,12 @@ public interface RoomRepository extends SqlObject {
     @SqlQuery("SELECT COUNT(*) FROM rooms WHERE RoomID = :roomID")
     int getRoomIDCount(int roomID);
 
-    @SqlUpdate("INSERT INTO Rooms (RoomID, Hostname, elementAmount) VALUES (:roomID, :host, :amount")
+    @SqlUpdate("INSERT INTO Rooms (RoomID, Hostname, elementAmount) VALUES (:roomID, :host, :amount)")
     void addRoom(int roomID, int host, int amount);
 
-    @SqlUpdate("INSERT INTO Elements (RoomID, ElementContent) VALUES (:roomID, :content")
+    @SqlUpdate("INSERT INTO Elements (RoomID, ElementContent) VALUES (:roomID, :content)")
     void addElement(int roomID, String content);
+
+    @SqlQuery("SELECT username FROM users JOIN rooms ON rooms.Hostname = users.userID AND rooms.roomID = :roomID")
+    String getHostName(int roomID);
 }

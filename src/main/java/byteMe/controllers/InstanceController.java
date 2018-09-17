@@ -29,11 +29,13 @@ public class InstanceController {
         while (roomRepository.getRoomIDCount(roomID)!= 0) {
             roomID = instanceService.generateInstanceID();
         }
-        roomRepository.addRoom(roomID, 0, instanceElements.size());
+        roomRepository.addRoom(roomID, 1, instanceElements.size());
         for (String instanceElement : instanceElements) {
             roomRepository.addElement(roomID, instanceElement);
         }
+        String hostname = roomRepository.getHostName(roomID);
         model.addAttribute("roomID", roomID);
+        model.addAttribute("host", hostname);
         return "hostwait";
     }
 
