@@ -2,7 +2,7 @@ package byteMe.controllers;
 
 
 import byteMe.services.GameInstanceService;
-import byteMe.services.RoomRepository;
+import byteMe.services.InstanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,25 +15,25 @@ import java.util.List;
 public class InstanceController {
 
     private final GameInstanceService instanceService;
-    private final RoomRepository roomRepository;
+    private final InstanceRepository instanceRepository;
 
     @Autowired
-    public InstanceController(GameInstanceService instanceService, RoomRepository roomRepository) {
+    public InstanceController(GameInstanceService instanceService, InstanceRepository instanceRepository) {
         this.instanceService = instanceService;
-        this.roomRepository = roomRepository;
+        this.instanceRepository = instanceRepository;
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createRoom(@RequestParam("assessment") List<String> instanceElements, Model model) {
         int roomID = instanceService.generateInstanceID();
-        while (roomRepository.getRoomIDCount(roomID)!= 0) {
+        while (instanceRepository.getRoomIDCount(roomID)!= 0) {
             roomID = instanceService.generateInstanceID();
         }
-        roomRepository.addRoom(roomID, 1, instanceElements.size());
+        instanceRepository.addRoom(roomID, 1, instanceElements.size());
         for (String instanceElement : instanceElements) {
-            roomRepository.addElement(roomID, instanceElement);
+            instanceRepository.addElement(roomID, instanceElement);
         }
-        String hostname = roomRepository.getHostName(roomID);
+        String hostname = instanceRepository.getHostName(roomID);
         model.addAttribute("roomID", roomID);
         model.addAttribute("host", hostname);
         return "hostwait";
@@ -45,7 +45,7 @@ public class InstanceController {
             return "redirect:/join?inputerror";
         }
         int instanceID = Integer.valueOf(instanceIDAsString);
-        if (roomRepository.getRoomIDCount(instanceID) == 0) {
+        if (instanceRepository.getRoomIDCount(instanceID) == 0) {
             return "redirect:/join?error";
         }
         return "redirect:/session/waitingroom/" + instanceIDAsString;
@@ -53,6 +53,15 @@ public class InstanceController {
 
     @RequestMapping("/waitingroom/{instanceID}")
     public String waitingRoom(@PathVariable("instanceID") String instanceIDAsString) {
+        int instanceID = Integer.valueOf(instanceIDAsString);
+
         return "waitingroom";
+    }
+
+    @ResponseBody
+    @RequestMapping("/{instanceID}/getUsers")
+    public String getConnectedUsers(@PathVariable("instanceID") String instanceIDAsString) {
+        System.out.println("Request made");
+        return "Request made";
     }
 }

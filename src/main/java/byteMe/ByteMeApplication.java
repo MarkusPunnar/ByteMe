@@ -1,6 +1,8 @@
 package byteMe;
 
-import byteMe.services.RoomRepository;
+import byteMe.services.AuthRepository;
+import byteMe.services.InstanceRepository;
+import byteMe.services.MainRepository;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,7 +37,17 @@ public class ByteMeApplication {
     }
 
     @Bean
-    RoomRepository roomRepository() {
-        return jdbi().open().attach(RoomRepository.class);
+    InstanceRepository roomRepository() {
+        return jdbi().open().attach(InstanceRepository.class);
+    }
+
+    @Bean
+    AuthRepository instanceRepository() {
+        return jdbi().open().attach(AuthRepository.class);
+    }
+
+    @Bean
+    MainRepository mainRepository() {
+        return jdbi().open().attach(MainRepository.class);
     }
 }

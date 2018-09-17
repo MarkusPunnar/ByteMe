@@ -3,7 +3,8 @@ package byteMe.controllers;
 import byteMe.model.ByteMeUser;
 import byteMe.model.UserDAO;
 import byteMe.services.AuthService;
-import org.jdbi.v3.core.Jdbi;
+import byteMe.services.AuthRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,33 +18,28 @@ import java.util.List;
 public class AuthController {
 
     private final AuthService authService;
-    private final Jdbi jdbi;
     private final PasswordEncoder encoder;
+    private final AuthRepository authRepository;
 
-    public AuthController(AuthService authService, Jdbi jdbi, PasswordEncoder encoder) {
+    @Autowired
+    public AuthController(AuthService authService, PasswordEncoder encoder, AuthRepository authRepository) {
         this.authService = authService;
-        this.jdbi = jdbi;
         this.encoder = encoder;
+        this.authRepository = authRepository;
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerUser(@ModelAttribute ByteMeUser newUser) {
-        return jdbi.inTransaction(handle -> {
-            if (!authService.doPasswordsMatch(newUser)) {
-                return "redirect:/register?passworderror";
-            }
-            UserDAO user = new UserDAO(newUser.getUsername(),
-                    encoder.encode(newUser.getPassword()), newUser.getEmail(), "user");
-            List<String> registeredUsers = handle.createQuery("SELECT username FROM Users")
-                    .mapTo(String.class).list();
-            if (registeredUsers.contains(newUser.getUsername())) {
-                return "redirect:/register?usernameerror";
-            }
-            int id = handle.createUpdate("INSERT INTO Users (username, hashedPassword, useremail, userrole)" +
-                    " VALUES (:username, :hashedPassword, :email, :role)").bindBean(user)
-                    .executeAndReturnGeneratedKeys("userid").mapTo(int.class).findOnly();
-            user.setId(id);
-            return "success";
-        });
+        if (!authService.doPasswordsMatch(newUser)) {
+            return "redirect:/register?passworderror";
+        }
+        UserDAO user = new UserDAO(newUser.getUsername(),
+                encoder.encode(newUser.getPassword()), newUser.getEmail(), "user");
+        List<String> registeredUsers = authRepository.getAllUsernames();
+        if (registeredUsers.contains(newUser.getUsername())) {
+            return "redirect:/register?usernameerror";
+        }
+        user.setId(authRepository.registerUser(user));
+        return "success";
     }
 }

@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ByteMe Host Waiting</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-<h1>Your room ID is <span th:text="${roomID}"></span>.</h1>
+<h1>Your room ID is <span id="roomID" th:text="${roomID}"></span>.</h1>
 <h3>The host's name is <span th:text="${host}"></span>.</h3>
 <p>Wait for people to connect.</p>
+<script type="text/javascript" src="/scripts/hostwait.js"></script>
 </body>
 </html>

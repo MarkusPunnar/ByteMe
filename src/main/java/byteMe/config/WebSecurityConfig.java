@@ -21,11 +21,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .anyRequest().authenticated().and()
 //                .formLogin().loginPage("/login").permitAll().and().logout().permitAll();
     }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        auth.inMemoryAuthentication().withUser("user")
-                .password(encoder.encode("password")).authorities("USER");
-    }
 }
