@@ -4,33 +4,35 @@ function addTextfields() {
     var formElement = $("form");
 
     $("p").remove();
-    $("input").remove();
+    $("input[type=number]").remove();
     $("button").remove();
 
     for (var i = 0; i < numberOfElements; i++) {
         formElement.append("<div></div>");
         var divNumber = i+1;
         $("form div:nth-of-type(" + divNumber + ")").addClass("form-group");
-        $("form div:nth-of-type(" + divNumber + ")").addClass("element");
         var labelValue = "Element" + (i+1);
         $("form div:nth-of-type(" + divNumber + ")").append("<label></label>");
         document.getElementsByTagName("label")[i].setAttribute("for", labelValue);
         document.getElementsByTagName("label")[i].textContent = labelValue;
-        $("form div:nth-of-type(" + divNumber + ")").append("<input>");
-        $("input").addClass("form-control");
-        document.getElementsByTagName("input")[i].setAttribute("id", labelValue);
-        $("input").attr("type", "text");
+        $("form div:nth-of-type(" + divNumber + ")").append("<input class=element>");
+        $(".element").addClass("form-control");
+        document.getElementsByTagName("input")[i+1].setAttribute("id", labelValue);
+        $(".element").attr("type", "text");
+        $(".element").attr("name", "assessment");
     }
-    $(".container").append("<button type=submit id=confirm class=buttons></button>");
+    $("form").append("<button type=submit id=confirm class=buttons></button>");
     $("#confirm").text("Confirm");
     $("#confirm").addClass("btn");
-    $("#confirm").addClass("btn-info");
+    $("#confirm").addClass("btn-primary");
+    $("#confirm").addClass("btn-lg");
 
     $(".container").append("<a class=buttons id=reset></a>");
     $("#reset").attr("href", "/create");
     $("#reset").text("Reset");
     $("#reset").addClass("btn");
-    $("#reset").addClass("btn-info");
+    $("#reset").addClass("btn-primary");
+    $("#reset").addClass("btn-lg");
 }
 
 $("button").on("click", addTextfields);

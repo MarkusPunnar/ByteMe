@@ -50,7 +50,7 @@ h1{
     font-family: Amaranth;
     font-weight: 700;
     color: white;
-    font-size: 8em;
+    font-size: 7em;
 }
 
 input {
@@ -63,6 +63,10 @@ input {
 }
 
 .btn {
+    background-color: white;
+    color: #153759;
+    font-family: Amaranth;
+    font-weight: 400;
     margin: 1em auto;
 }
 

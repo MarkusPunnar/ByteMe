@@ -14,8 +14,8 @@ import java.util.List;
 @RequestMapping("/session")
 public class InstanceController {
 
-    private GameInstanceService instanceService;
-    private RoomRepository roomRepository;
+    private final GameInstanceService instanceService;
+    private final RoomRepository roomRepository;
 
     @Autowired
     public InstanceController(GameInstanceService instanceService, RoomRepository roomRepository) {
@@ -23,7 +23,7 @@ public class InstanceController {
         this.roomRepository = roomRepository;
     }
 
-    @PostMapping("/create")
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createRoom(@RequestParam("assessment") List<String> instanceElements, Model model) {
         int roomID = instanceService.generateInstanceID();
         while (roomRepository.getRoomIDCount(roomID)!= 0) {
