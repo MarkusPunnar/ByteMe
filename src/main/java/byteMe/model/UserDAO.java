@@ -2,33 +2,26 @@ package byteMe.model;
 
 public class UserDAO {
 
-    private int id;
+    private int userID;
     private String username;
     private String hashedPassword;
-    private String email;
-    private String role;
+    private String userEmail;
+    private String userRole;
 
-    public UserDAO(String username, String hashedPassword, String email, String role) {
+    public UserDAO(int userID, String username, String hashedPassword, String userEmail, String userRole) {
+        this.userID = userID;
         this.username = username;
         this.hashedPassword = hashedPassword;
-        this.email = email;
-        this.role = role;
+        this.userEmail = userEmail;
+        this.userRole = userRole;
     }
 
-    public int getId() {
-        return id;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public String getHashedPassword() {
@@ -39,19 +32,28 @@ public class UserDAO {
         this.hashedPassword = hashedPassword;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getRole() {
-        return role;
+
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
 }

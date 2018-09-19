@@ -2,23 +2,37 @@ package byteMe.config;
 
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().permitAll();
-//                .antMatchers("/register", "/about", "/tutorial", "/*",
-//                        "/session/*", "/css/*", "/images/*", "/scripts/*", "/fonts/*").permitAll()
-//                .anyRequest().authenticated().and()
-//                .formLogin().loginPage("/login").permitAll().and().logout().permitAll();
+        http.headers().defaultsDisabled().cacheControl();
+        http.authorizeRequests().antMatchers("/", "/register", "/auth/register", "/about", "/tutorial",
+                "/fonts/*", "/scripts/*", "/css/*", "/images/*").permitAll()
+                .anyRequest().authenticated().and()
+                .formLogin().loginPage("/login").successForwardUrl("/").permitAll()
+                .and().logout().logoutSuccessUrl("/").permitAll();
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/images/*");
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/images/**")
+                .addResourceLocations("classpath:/static/images/")
+                .setCachePeriod(3600 * 24);
+
     }
 }

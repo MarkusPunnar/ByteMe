@@ -2,7 +2,6 @@ package byteMe.services;
 
 import byteMe.model.UserDAO;
 import org.jdbi.v3.sqlobject.SqlObject;
-import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
@@ -15,5 +14,8 @@ public interface AuthRepository extends SqlObject {
 
     @SqlUpdate("INSERT INTO Users (username, hashedPassword, useremail, userrole)" +
             " VALUES (:username, :hashedPassword, :email, :role)")
-    int registerUser(@BindBean UserDAO userDAO);
+    void registerUser(String username, String hashedPassword, String email, String role);
+
+    @SqlQuery("SELECT * FROM Users WHERE username = :username")
+    UserDAO getUserData(String username);
 }

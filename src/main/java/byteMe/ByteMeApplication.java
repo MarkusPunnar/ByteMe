@@ -1,16 +1,23 @@
 package byteMe;
 
+import byteMe.model.UserDAO;
 import byteMe.services.AuthRepository;
 import byteMe.services.InstanceRepository;
 import byteMe.services.MainRepository;
 import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.core.mapper.reflect.ConstructorMapper;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.Properties;
 
 @SpringBootApplication
 public class ByteMeApplication {
@@ -27,6 +34,7 @@ public class ByteMeApplication {
     @Bean
     Jdbi jdbi() {
         Jdbi jdbi = Jdbi.create("jdbc:mysql://localhost:3306/byteme", dbUser, dbPassword);
+        jdbi.registerRowMapper(ConstructorMapper.factory(UserDAO.class));
         jdbi.installPlugin(new SqlObjectPlugin());
         return jdbi;
     }

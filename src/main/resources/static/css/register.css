@@ -35,6 +35,12 @@ body {
     background-size: cover;
 }
 
+#logout {
+    background-color: #1b4977;
+    border: none;
+    margin: 1em 1em;
+}
+
 h1 {
     font-family: Amaranth;
     font-weight: 700;

@@ -1,7 +1,7 @@
 function addTextfields() {
 
-    var numberOfElements = Number($("input").val());
-    var formElement = $("form");
+    var numberOfElements = Number($("input[type=number]").val());
+    var formElement = $("#create");
 
     $("p").remove();
     $("input[type=number]").remove();
@@ -10,18 +10,18 @@ function addTextfields() {
     for (var i = 0; i < numberOfElements; i++) {
         formElement.append("<div></div>");
         var divNumber = i+1;
-        $("form div:nth-of-type(" + divNumber + ")").addClass("form-group");
+        $("#create div:nth-of-type(" + divNumber + ")").addClass("form-group");
         var labelValue = "Element" + (i+1);
-        $("form div:nth-of-type(" + divNumber + ")").append("<label></label>");
+        $("#create div:nth-of-type(" + divNumber + ")").append("<label></label>");
         document.getElementsByTagName("label")[i].setAttribute("for", labelValue);
         document.getElementsByTagName("label")[i].textContent = labelValue;
         $("form div:nth-of-type(" + divNumber + ")").append("<input class=element>");
         $(".element").addClass("form-control");
-        document.getElementsByTagName("input")[i+1].setAttribute("id", labelValue);
+        document.getElementsByTagName("input")[i+2].setAttribute("id", labelValue);
         $(".element").attr("type", "text");
         $(".element").attr("name", "assessment");
     }
-    $("form").append("<button type=submit id=confirm class=buttons></button>");
+    formElement.append("<button type=submit id=confirm class=buttons></button>");
     $("#confirm").text("Confirm");
     $("#confirm").addClass("btn");
     $("#confirm").addClass("btn-primary");

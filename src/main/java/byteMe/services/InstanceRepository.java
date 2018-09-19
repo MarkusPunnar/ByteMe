@@ -18,4 +18,10 @@ public interface InstanceRepository extends SqlObject {
     @SqlQuery("SELECT username FROM Users JOIN Rooms ON Rooms.Hostname = Users.userID AND Rooms.roomID = :roomID")
     String getHostName(int roomID);
 
+    @SqlQuery("SELECT userID FROM Users WHERE username = :username")
+    int getUserID(String username);
+
+    @SqlUpdate("INSERT INTO Roomusers (RoomID, ConnecteduserID) VALUES (:roomID, :userID)")
+    void addUserToRoom(int roomID, int userID);
+
 }

@@ -39,11 +39,11 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
         <!--For using MariaDB in test environment-->
-        <!--<dependency>-->
-            <!--<groupId>org.mariadb.jdbc</groupId>-->
-            <!--<artifactId>mariadb-java-client</artifactId>-->
-            <!--<version>1.5.7</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>1.5.7</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
@@ -53,6 +53,10 @@
             <artifactId>jdbi3-sqlobject</artifactId>
             <version>3.2.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -60,6 +64,15 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
             </plugin>
         </plugins>
     </build>

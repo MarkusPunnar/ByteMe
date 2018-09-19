@@ -29,7 +29,9 @@ public class InstanceController {
         while (instanceRepository.getRoomIDCount(roomID)!= 0) {
             roomID = instanceService.generateInstanceID();
         }
-        instanceRepository.addRoom(roomID, 1, instanceElements.size());
+        String username = instanceService.getCurrentUsername();
+        int hostID = instanceRepository.getUserID(username);
+        instanceRepository.addRoom(roomID, hostID, instanceElements.size());
         for (String instanceElement : instanceElements) {
             instanceRepository.addElement(roomID, instanceElement);
         }
@@ -48,6 +50,9 @@ public class InstanceController {
         if (instanceRepository.getRoomIDCount(instanceID) == 0) {
             return "redirect:/join?error";
         }
+        String username = instanceService.getCurrentUsername();
+        int userID = instanceRepository.getUserID(username);
+        instanceRepository.addUserToRoom(instanceID, userID);
         return "redirect:/session/waitingroom/" + instanceIDAsString;
     }
 

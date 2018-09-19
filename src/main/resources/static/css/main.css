@@ -77,3 +77,9 @@ p {
     color: white;
     margin-top: 3vw;
 }
+
+#logout {
+    background-color: #1b4977;
+    border: none;
+    margin: 1em 1em;
+}

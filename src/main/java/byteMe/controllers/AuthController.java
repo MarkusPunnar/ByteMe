@@ -1,7 +1,6 @@
 package byteMe.controllers;
 
 import byteMe.model.ByteMeUser;
-import byteMe.model.UserDAO;
 import byteMe.services.AuthService;
 import byteMe.services.AuthRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +32,14 @@ public class AuthController {
         if (!authService.doPasswordsMatch(newUser)) {
             return "redirect:/register?passworderror";
         }
-        UserDAO user = new UserDAO(newUser.getUsername(),
-                encoder.encode(newUser.getPassword()), newUser.getEmail(), "user");
         List<String> registeredUsers = authRepository.getAllUsernames();
         if (registeredUsers.contains(newUser.getUsername())) {
             return "redirect:/register?usernameerror";
         }
-        user.setId(authRepository.registerUser(user));
+        authRepository.registerUser(newUser.getUsername(), encoder.encode(newUser.getPassword()), newUser.getEmail(), "user");
+        Thread thread = new Thread(() -> authService.sendEmail(newUser.getEmail()));
+        thread.setDaemon(true);
+        thread.start();
         return "success";
     }
 }
