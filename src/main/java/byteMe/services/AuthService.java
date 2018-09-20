@@ -39,7 +39,7 @@ public class AuthService {
         model.addAttribute("loggedIn", isAuthenticated());
     }
 
-    public boolean isAuthenticated() {
+    private boolean isAuthenticated() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return auth != null && !(auth instanceof AnonymousAuthenticationToken) && auth.isAuthenticated();
     }

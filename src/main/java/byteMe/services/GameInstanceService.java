@@ -16,12 +16,11 @@ public class GameInstanceService {
     }
 
     public String getCurrentUsername() {
-        String username = null;
         Object userObject = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (userObject instanceof UserDetails) {
-            username = ((UserDetails) userObject).getUsername();
+           return ((UserDetails) userObject).getUsername();
         }
-        return username;
+        return null;
     }
 
 }

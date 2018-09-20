@@ -1,8 +1,10 @@
 package byteMe.controllers;
 
 
+import byteMe.model.RoomUserDataStore;
 import byteMe.services.GameInstanceService;
 import byteMe.services.InstanceRepository;
+import org.jdbi.v3.core.Jdbi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,58 +17,66 @@ import java.util.List;
 public class InstanceController {
 
     private final GameInstanceService instanceService;
-    private final InstanceRepository instanceRepository;
+    private final Jdbi jdbi;
 
     @Autowired
-    public InstanceController(GameInstanceService instanceService, InstanceRepository instanceRepository) {
+    public InstanceController(GameInstanceService instanceService, Jdbi jdbi) {
         this.instanceService = instanceService;
-        this.instanceRepository = instanceRepository;
+        this.jdbi = jdbi;
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createRoom(@RequestParam("assessment") List<String> instanceElements, Model model) {
-        int roomID = instanceService.generateInstanceID();
-        while (instanceRepository.getRoomIDCount(roomID)!= 0) {
-            roomID = instanceService.generateInstanceID();
-        }
-        String username = instanceService.getCurrentUsername();
-        int hostID = instanceRepository.getUserID(username);
-        instanceRepository.addRoom(roomID, hostID, instanceElements.size());
-        for (String instanceElement : instanceElements) {
-            instanceRepository.addElement(roomID, instanceElement);
-        }
-        String hostname = instanceRepository.getHostName(roomID);
-        model.addAttribute("roomID", roomID);
-        model.addAttribute("host", hostname);
-        return "hostwait";
+        return jdbi.inTransaction(handle -> {
+            InstanceRepository repository = handle.attach(InstanceRepository.class);
+            int roomID = instanceService.generateInstanceID();
+            while (repository.getRoomIDCount(roomID) != 0) {
+                roomID = instanceService.generateInstanceID();
+            }
+            String username = instanceService.getCurrentUsername();
+            int hostID = repository.getUserID(username);
+            repository.addRoom(roomID, hostID, instanceElements.size());
+            for (String instanceElement : instanceElements) {
+                repository.addElement(roomID, instanceElement);
+            }
+            String hostname = repository.getHostName(roomID);
+            model.addAttribute("roomID", roomID);
+            model.addAttribute("host", hostname);
+            return "hostwait";
+        });
     }
 
     @RequestMapping(value = "/join", method = RequestMethod.POST)
     public String joinRoom(@ModelAttribute("id") String instanceIDAsString) {
-        if (!instanceIDAsString.matches("\\d+") || instanceIDAsString.length() != 6) {
-            return "redirect:/join?inputerror";
-        }
-        int instanceID = Integer.valueOf(instanceIDAsString);
-        if (instanceRepository.getRoomIDCount(instanceID) == 0) {
-            return "redirect:/join?error";
-        }
-        String username = instanceService.getCurrentUsername();
-        int userID = instanceRepository.getUserID(username);
-        instanceRepository.addUserToRoom(instanceID, userID);
-        return "redirect:/session/waitingroom/" + instanceIDAsString;
+        return jdbi.inTransaction(handle -> {
+            if (!instanceIDAsString.matches("\\d+") || instanceIDAsString.length() != 6) {
+                return "redirect:/join?inputerror";
+            }
+            InstanceRepository repository = handle.attach(InstanceRepository.class);
+            int instanceID = Integer.valueOf(instanceIDAsString);
+            if (repository.getRoomIDCount(instanceID) == 0) {
+                return "redirect:/join?error";
+            }
+            String username = instanceService.getCurrentUsername();
+            int userID = repository.getUserID(username);
+            repository.addUserToRoom(instanceID, userID);
+            return "redirect:/session/waitingroom/" + instanceIDAsString;
+        });
     }
 
     @RequestMapping("/waitingroom/{instanceID}")
     public String waitingRoom(@PathVariable("instanceID") String instanceIDAsString) {
-        int instanceID = Integer.valueOf(instanceIDAsString);
-
         return "waitingroom";
     }
 
     @ResponseBody
     @RequestMapping("/{instanceID}/getUsers")
-    public String getConnectedUsers(@PathVariable("instanceID") String instanceIDAsString) {
-        System.out.println("Request made");
-        return "Request made";
+    public RoomUserDataStore getConnectedUsers(@PathVariable("instanceID") String instanceIDAsString) {
+        return jdbi.inTransaction(handle -> {
+            Integer instanceID = Integer.valueOf(instanceIDAsString);
+            InstanceRepository repository = handle.attach(InstanceRepository.class);
+            List<String> connectedUsers = repository.getRoomConnectedUsers(instanceID);
+            return new RoomUserDataStore(connectedUsers.size(), connectedUsers);
+        });
     }
 }

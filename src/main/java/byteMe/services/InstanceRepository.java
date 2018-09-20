@@ -4,6 +4,8 @@ import org.jdbi.v3.sqlobject.SqlObject;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
+import java.util.List;
+
 public interface InstanceRepository extends SqlObject {
 
     @SqlQuery("SELECT COUNT(*) FROM Rooms WHERE RoomID = :roomID")
@@ -23,5 +25,9 @@ public interface InstanceRepository extends SqlObject {
 
     @SqlUpdate("INSERT INTO Roomusers (RoomID, ConnecteduserID) VALUES (:roomID, :userID)")
     void addUserToRoom(int roomID, int userID);
+
+    @SqlQuery("SELECT username FROM Users JOIN Roomusers ON" +
+            " Roomusers.connectedUserid = Users.userID WHERE Roomusers.RoomID = :roomID")
+    List<String> getRoomConnectedUsers(int roomID);
 
 }
