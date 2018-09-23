@@ -1,47 +1,8 @@
-@font-face {
-    font-family: Amaranth;
-    src: url(../fonts/Amaranth-Italic.woff) format("woff"),
-    url(../fonts/Amaranth-Italic.ttf) format("truetype");
-}
-
-@font-face {
-    font-family: Amaranth-Bold;
-    src: url(../fonts/Amaranth-BoldItalic.woff) format("woff"),
-    url(../fonts/Amaranth-BoldItalic.ttf) format("truetype");
-}
-
-.navbar {
-    background-color: #1b4977;
-    border: none;
-}
-
-.navbar-default .navbar-nav .button {
-    color: white;
-    font-family: Amaranth;
-    font-weight: 400;
-}
-
-.navbar-default .navbar-nav .button:hover {
-    color: #8d9ab2;
-}
-#home {
-    color: white;
-    font-family: Amaranth;
-    font-weight: 400;
-}
-
-body {
-    background: url(../images/main.jpg) no-repeat center center fixed;
-    background-size: cover;
-}
+@import "universal.css";
 
 h1 {
-    text-align: center;
     margin-top: 14rem;
-    font-family: Amaranth-Bold;
-    font-weight: 700;
     font-size: 10vw;
-    color: white;
 }
 
 p {
@@ -76,10 +37,4 @@ p {
     text-align: center;
     color: white;
     margin-top: 3vw;
-}
-
-#logout {
-    background-color: #1b4977;
-    border: none;
-    margin: 1em 1em;
 }

@@ -1,14 +1,4 @@
-@font-face {
-    font-family: Amaranth;
-    src: url(../fonts/Amaranth-Italic.woff) format("woff"),
-    url(../fonts/Amaranth-Italic.ttf) format("truetype");
-}
-
-@font-face {
-    font-family: Amaranth-Bold;
-    src: url(../fonts/Amaranth-BoldItalic.woff) format("woff"),
-    url(../fonts/Amaranth-BoldItalic.ttf) format("truetype");
-}
+@import "universal.css";
 
 p {
     text-align: center;
@@ -18,44 +8,9 @@ p {
     margin: 1em auto;
 }
 
-#logout {
-    background-color: #1b4977;
-    border: none;
-    margin: 1em 1em;
-}
-
-.navbar {
-    background-color: #1b4977;
-    border: none;
-}
-
-.navbar-default .navbar-nav .button {
-    color: white;
-    font-family: Amaranth;
-    font-weight: 400;
-}
-
-.navbar-default .navbar-nav .button:hover {
-    color: #8d9ab2;
-}
-
-#home {
-    color: white;
-    font-family: Amaranth;
-    font-weight: 400;
-}
-
-body {
-    background: url(../images/main.jpg) no-repeat center center fixed;
-    background-size: cover;
-}
 
 h1{
     margin-top: 0.7em;
-    text-align: center;
-    font-family: Amaranth;
-    font-weight: 700;
-    color: white;
     font-size: 7vw;
 }
 

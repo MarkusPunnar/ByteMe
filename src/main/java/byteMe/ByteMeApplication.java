@@ -1,9 +1,6 @@
 package byteMe;
 
 import byteMe.model.UserDAO;
-import byteMe.services.AuthRepository;
-import byteMe.services.InstanceRepository;
-import byteMe.services.MainRepository;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.mapper.reflect.ConstructorMapper;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
@@ -37,20 +34,5 @@ public class ByteMeApplication {
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    InstanceRepository roomRepository() {
-        return jdbi().open().attach(InstanceRepository.class);
-    }
-
-    @Bean
-    AuthRepository instanceRepository() {
-        return jdbi().open().attach(AuthRepository.class);
-    }
-
-    @Bean
-    MainRepository mainRepository() {
-        return jdbi().open().attach(MainRepository.class);
     }
 }

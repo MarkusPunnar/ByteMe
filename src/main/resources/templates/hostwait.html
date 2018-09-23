@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ByteMe Host Waiting</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/hostwait.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
+<div th:replace="fragments/header.html :: header"></div>
 <h1>Your room ID is <span id="roomID" th:text="${roomID}"></span></h1>
 <h3>The host's name is <span th:text="${host}"></span>.</h3>
 <p>Wait for people to connect.</p>
-<p>These are the users connected to this room:</p>
+<p>The users connected to this room:</p>
 <div>
 </div>
+<form th:action="@{/session/{roomID}/startRoom(roomID=${roomID})}" method="post">
+    <input type="submit" value="Start Room">
+</form>
 <script type="text/javascript" src="/scripts/hostwait.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

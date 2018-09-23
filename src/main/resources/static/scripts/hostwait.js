@@ -3,7 +3,7 @@ function getConnectedUsers() {
     $.get("http://localhost:8080/session/" + roomID + "/getUsers", function (data) {
         var displayedUsers = document.querySelectorAll(".roomuser").length;
         for (var i = displayedUsers; i < data.userCount; i++) {
-            $("div").append("<p class='roomuser'>" + data.usernames[i] + "</p>");
+            $("p+div").append("<p class='roomuser'>" + data.usernames[i] + "</p>");
         }
     });
 }

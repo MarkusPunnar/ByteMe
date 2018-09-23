@@ -1,6 +1,7 @@
 package byteMe.services;
 
 import byteMe.model.UserDAO;
+import org.jdbi.v3.core.Jdbi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,29 +18,33 @@ import java.util.Set;
 
 public class ByteMeUserDetailsService implements UserDetailsService {
 
-    private AuthRepository authRepository;
+
+    private Jdbi jdbi;
 
     @Autowired
-    public ByteMeUserDetailsService(AuthRepository authRepository) {
-        this.authRepository = authRepository;
+    public ByteMeUserDetailsService(Jdbi jdbi) {
+        this.jdbi = jdbi;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Set<GrantedAuthority> userRoles = new HashSet<>();
-        UserDAO userInfo = authRepository.getUserData(username);
-        if (userInfo == null) {
-            throw new UsernameNotFoundException("User was not found");
-        }
-        switch (userInfo.getUserRole()) {
-            case "user":
-                userRoles.add(new SimpleGrantedAuthority("ROLE_USER"));
-                break;
-            case "admin":
-                userRoles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-                userRoles.add(new SimpleGrantedAuthority("ROLE_USER"));
-                break;
-        }
-        return new User(userInfo.getUsername(), userInfo.getHashedPassword(), userRoles);
+        return jdbi.inTransaction(handle -> {
+            AuthRepository authRepository = handle.attach(AuthRepository.class);
+            UserDAO userInfo = authRepository.getUserData(username);
+            if (userInfo == null) {
+                throw new UsernameNotFoundException("User was not found");
+            }
+            switch (userInfo.getUserRole()) {
+                case "user":
+                    userRoles.add(new SimpleGrantedAuthority("ROLE_USER"));
+                    break;
+                case "admin":
+                    userRoles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+                    userRoles.add(new SimpleGrantedAuthority("ROLE_USER"));
+                    break;
+            }
+            return new User(userInfo.getUsername(), userInfo.getHashedPassword(), userRoles);
+        });
     }
 }
