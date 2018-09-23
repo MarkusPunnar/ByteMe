@@ -1,8 +1,11 @@
 function checkForStart() {
     var roomID = $("input[type=hidden]").attr("value");
     $.get("http://localhost:8080/session/" + roomID + "/status", function (data) {
-        console.log(data)
+        if (data === "true") {
+            clearInterval(interval);
+            $("body").load("http://localhost:8080/session/" + roomID + "/enterRoom");
+        }
     })
 }
 
-setInterval(checkForStart, 3000);
+var interval = setInterval(checkForStart, 3000);

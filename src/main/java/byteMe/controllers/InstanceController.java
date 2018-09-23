@@ -89,11 +89,11 @@ public class InstanceController {
         });
     }
 
-    @RequestMapping(value = "/{instanceID}/startRoom", method = RequestMethod.POST)
+    @RequestMapping(value = "/{instanceID}/room", method = RequestMethod.POST)
     public String startRoom(@PathVariable("instanceID") String instanceID, Model model) {
         authService.addAuthInfoToModel(model);
         instanceService.getRoomStatusStore().put(Integer.valueOf(instanceID), true);
-        return "display";
+        return "displayhost";
     }
 
     @ResponseBody
@@ -104,5 +104,10 @@ public class InstanceController {
             return "true";
         }
         return "false";
+    }
+
+    @RequestMapping("/{instanceID}/enterRoom")
+    public String enterRoom(@PathVariable("instanceID") String instanceID) {
+        return "display";
     }
 }
