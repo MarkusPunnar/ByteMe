@@ -1,6 +1,7 @@
 package byteMe.controllers;
 
 import byteMe.model.ByteMeUser;
+import byteMe.model.UserDAO;
 import byteMe.services.AuthRepository;
 import byteMe.services.AuthService;
 import org.jdbi.v3.core.Jdbi;
@@ -19,13 +20,11 @@ import java.util.List;
 public class AuthController {
 
     private final AuthService authService;
-    private final PasswordEncoder encoder;
     private final Jdbi jdbi;
 
     @Autowired
-    public AuthController(AuthService authService, PasswordEncoder encoder, Jdbi jdbi) {
+    public AuthController(AuthService authService, Jdbi jdbi) {
         this.authService = authService;
-        this.encoder = encoder;
         this.jdbi = jdbi;
     }
 
@@ -41,7 +40,8 @@ public class AuthController {
             if (registeredUsers.contains(newUser.getUsername())) {
                 return "redirect:/register?usernameerror";
             }
-            authRepository.registerUser(newUser.getUsername(), encoder.encode(newUser.getPassword()), newUser.getEmail(), "user");
+            UserDAO userToRegister = authService.createUserDAO(newUser);
+            authRepository.registerUser(userToRegister);
 //            Thread thread = new Thread(() -> authService.sendEmail(newUser.getEmail()));
 //            thread.setDaemon(true);
 //            thread.start();

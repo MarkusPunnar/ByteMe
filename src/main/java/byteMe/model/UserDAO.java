@@ -2,13 +2,13 @@ package byteMe.model;
 
 public class UserDAO {
 
-    private int userID;
+    private Integer userID;
     private String username;
     private String hashedPassword;
     private String userEmail;
     private String userRole;
 
-    public UserDAO(int userID, String username, String hashedPassword, String userEmail, String userRole) {
+    public UserDAO(Integer userID, String username, String hashedPassword, String userEmail, String userRole) {
         this.userID = userID;
         this.username = username;
         this.hashedPassword = hashedPassword;
