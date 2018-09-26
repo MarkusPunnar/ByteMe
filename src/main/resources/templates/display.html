@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>ByteMe Display</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-<h1>Here will go the elements</h1>
+<div class="container">
+    <h1>Element #<span th:text="${elementNumber}"></span></h1>
+    <div class="element">
+        <p th:text="${elementContent}"></p>
+    </div>
+    <h3>Give your grade from 1 to 10</h3>
+    <form th:action="@{/room/{instanceID}/gradeElement/{elementNumber}(instanceID=${roomID}, elementNumber=${elementNumber})}"
+          method="post">
+        <div class="form-group">
+            <label for="grade">Your grade</label>
+            <input type="number" name="grade" id="grade" class="form-control">
+        </div>
+        <input name="current" type="hidden" th:value="${elementID}">
+        <input id="roomID" type="hidden" th:value="${roomID}">
+        <button type="submit" class="btn btn-primary btn-lg">Grade</button>
+    </form>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

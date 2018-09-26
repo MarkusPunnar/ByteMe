@@ -4,7 +4,7 @@ package byteMe.controllers;
 import byteMe.model.RoomUserDataStore;
 import byteMe.services.AuthService;
 import byteMe.services.GameInstanceService;
-import byteMe.services.InstanceRepository;
+import byteMe.services.RoomStartupRepository;
 import org.jdbi.v3.core.Jdbi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,14 +15,14 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/session")
-public class InstanceController {
+public class RoomStartupController {
 
     private final GameInstanceService instanceService;
     private final Jdbi jdbi;
     private final AuthService authService;
 
     @Autowired
-    public InstanceController(GameInstanceService instanceService, Jdbi jdbi, AuthService authService) {
+    public RoomStartupController(GameInstanceService instanceService, Jdbi jdbi, AuthService authService) {
         this.instanceService = instanceService;
         this.jdbi = jdbi;
         this.authService = authService;
@@ -32,7 +32,7 @@ public class InstanceController {
     public String createRoom(@RequestParam("assessment") List<String> instanceElements, Model model) {
         authService.addAuthInfoToModel(model);
         return jdbi.inTransaction(handle -> {
-            InstanceRepository repository = handle.attach(InstanceRepository.class);
+            RoomStartupRepository repository = handle.attach(RoomStartupRepository.class);
             int roomID = instanceService.generateInstanceID();
             while (repository.getRoomIDCount(roomID) != 0) {
                 roomID = instanceService.generateInstanceID();
@@ -58,7 +58,7 @@ public class InstanceController {
             if (!instanceIDAsString.matches("\\d+") || instanceIDAsString.length() != 6) {
                 return "redirect:/join?inputerror";
             }
-            InstanceRepository repository = handle.attach(InstanceRepository.class);
+            RoomStartupRepository repository = handle.attach(RoomStartupRepository.class);
             int instanceID = Integer.valueOf(instanceIDAsString);
             if (repository.getRoomIDCount(instanceID) == 0) {
                 return "redirect:/join?error";
@@ -83,7 +83,7 @@ public class InstanceController {
         authService.addAuthInfoToModel(model);
         return jdbi.inTransaction(handle -> {
             Integer instanceID = Integer.valueOf(instanceIDAsString);
-            InstanceRepository repository = handle.attach(InstanceRepository.class);
+            RoomStartupRepository repository = handle.attach(RoomStartupRepository.class);
             List<String> connectedUsers = repository.getRoomConnectedUsers(instanceID);
             return new RoomUserDataStore(connectedUsers.size(), connectedUsers);
         });
@@ -93,7 +93,7 @@ public class InstanceController {
     public String startRoom(@PathVariable("instanceID") String instanceID, Model model) {
         authService.addAuthInfoToModel(model);
         instanceService.getRoomStatusStore().put(Integer.valueOf(instanceID), true);
-        return "displayhost";
+        return "adminview";
     }
 
     @ResponseBody
@@ -104,10 +104,5 @@ public class InstanceController {
             return "true";
         }
         return "false";
-    }
-
-    @RequestMapping("/{instanceID}/enterRoom")
-    public String enterRoom(@PathVariable("instanceID") String instanceID) {
-        return "display";
     }
 }
