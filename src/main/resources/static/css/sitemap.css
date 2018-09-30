@@ -1,0 +1,33 @@
+@import "universal.css";
+
+.container {
+    width: 60%;
+}
+
+.row {
+    margin: 1em 0;
+}
+
+h1 {
+    font-size: 5em;
+}
+
+p {
+    color: white;
+    font-size: 2em;
+    font-family: Amaranth;
+    font-weight: 400;
+}
+
+
+
+.reference {
+    color: black;
+    font-size: 1.5em;
+    font-family: Amaranth;
+    font-weight: 400;
+}
+
+a:hover {
+    text-decoration: none;
+}

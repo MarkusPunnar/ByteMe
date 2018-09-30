@@ -67,4 +67,10 @@ public class MainController {
         authService.addAuthInfoToModel(model);
         return "joinroom";
     }
+
+    @RequestMapping("/sitemap")
+    public String sitemap(Model model) {
+        authService.addAuthInfoToModel(model);
+        return "sitemap";
+    }
 }

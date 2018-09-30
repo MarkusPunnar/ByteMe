@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ByteMe Sitemap</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/sitemap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<div th:replace="fragments/header.html :: header"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-9 col-xs-offset-1">
+            <h1>ByteMe Site map</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <p>ByteMe informative pages</p>
+            <a class="reference" th:href="@{/about}">ByteMe About page</a>
+            <br>
+            <a class="reference" th:href="@{/tutorial}">ByteMe Tutorial page</a>
+            <br>
+            <a class="reference" th:href="@{/sitemap}">ByteMe Site map</a>
+            <br>
+            <a class="reference" th:href="@{/login}">ByteMe Login</a>
+            <br>
+            <a class="reference" th:href="@{/register}">ByteMe Sign up</a>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <p>ByteMe functional pages (Require authentication)</p>
+            <a class="reference" th:href="@{/create}">ByteMe Join room</a>
+            <br>
+            <a class="reference" th:href="@{/join}">ByteMe Create room</a>
+        </div>
+    </div>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
