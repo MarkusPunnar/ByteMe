@@ -35,7 +35,7 @@ public class AuthService {
         mailMessage.setFrom("noreply@dev.punnar.eu");
         mailMessage.setTo(emailTo);
         mailMessage.setSubject("Byteme registration");
-        mailMessage.setText("Test email");
+        mailMessage.setText("Thank you for your registration to ByteMe!");
         javaMailSender.send(mailMessage);
     }
 
