@@ -8,4 +8,6 @@ function getConnectedUsers() {
     });
 }
 
-setInterval(getConnectedUsers, 3000);
+$(document).ready(function () {
+    setInterval(getConnectedUsers, 3000);
+});

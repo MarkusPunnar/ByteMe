@@ -35,4 +35,6 @@ function addTextfields() {
     $("#reset").addClass("btn-lg");
 }
 
-$("button").on("click", addTextfields);
+$(document).ready(function () {
+    $("button").on("click", addTextfields);
+});

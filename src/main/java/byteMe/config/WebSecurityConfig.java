@@ -19,7 +19,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
         http.authorizeRequests().antMatchers("/", "/register", "/auth/register", "/about", "/tutorial", "/sitemap",
                 "/fonts/*", "/scripts/*", "/css/*", "/images/*").permitAll()
                 .anyRequest().authenticated().and()
-                .formLogin().loginPage("/login").successForwardUrl("/").permitAll()
+                .formLogin().loginPage("/login").permitAll()
                 .and().logout().logoutSuccessUrl("/").permitAll();
     }
 

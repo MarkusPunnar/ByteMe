@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <th:block th:include="fragments/head"/>
     <title>ByteMe Tutorial</title>
 </head>
 <body>
+<div th:replace="fragments/header.html :: header"></div>
 <h1>ByteMe Tutorial</h1>
 </body>
 </html>
