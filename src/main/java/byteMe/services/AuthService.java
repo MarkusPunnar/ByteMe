@@ -35,7 +35,7 @@ public class AuthService {
         mailMessage.setFrom("noreply@dev.punnar.eu");
         mailMessage.setTo(emailTo);
         mailMessage.setSubject("Byteme registration");
-        mailMessage.setText("Test email");
+        mailMessage.setText("Thank you for your registration to ByteMe!");
         javaMailSender.send(mailMessage);
     }
 
@@ -43,7 +43,7 @@ public class AuthService {
         model.addAttribute("loggedIn", isAuthenticated());
     }
 
-    private boolean isAuthenticated() {
+    public boolean isAuthenticated() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return auth != null && !(auth instanceof AnonymousAuthenticationToken) && auth.isAuthenticated();
     }

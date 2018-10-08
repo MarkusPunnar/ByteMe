@@ -29,8 +29,7 @@ public class AuthController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String registerUser(@ModelAttribute ByteMeUser newUser, Model model) {
-        authService.addAuthInfoToModel(model);
+    public String registerUser(@ModelAttribute ByteMeUser newUser) {
         return jdbi.inTransaction(handle -> {
             AuthRepository authRepository = handle.attach(AuthRepository.class);
             if (!authService.doPasswordsMatch(newUser)) {

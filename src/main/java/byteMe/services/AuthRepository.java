@@ -19,4 +19,7 @@ public interface AuthRepository extends SqlObject {
 
     @SqlQuery("SELECT * FROM Users WHERE username = :username")
     UserDAO getUserData(String username);
+
+    @SqlQuery("SELECT Hostname FROM Rooms WHERE RoomID = :roomID")
+    int getHostIdByRoom(int roomID);
 }
