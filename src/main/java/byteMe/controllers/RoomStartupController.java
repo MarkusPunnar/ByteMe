@@ -39,8 +39,8 @@ public class RoomStartupController {
             while (repository.getRoomIDCount(roomID) != 0) {
                 roomID = instanceService.generateInstanceID();
             }
-            String username = instanceService.getCurrentUsername();
-            int hostID = repository.getUserID(username);
+            String displayname = instanceService.getCurrentUsername(jdbi);
+            int hostID = repository.getUserID(displayname);
             repository.addRoom(roomID, hostID, instanceElements.size());
             for (String instanceElement : instanceElements) {
                 repository.addElement(roomID, instanceElement);
@@ -65,7 +65,7 @@ public class RoomStartupController {
             if (repository.getRoomIDCount(instanceID) == 0) {
                 return "redirect:/join?error";
             }
-            String username = instanceService.getCurrentUsername();
+            String username = instanceService.getCurrentUsername(jdbi);
             int userID = repository.getUserID(username);
             repository.addUserToRoom(instanceID, userID);
             return "redirect:/session/waitingroom/" + instanceIDAsString;
@@ -102,7 +102,7 @@ public class RoomStartupController {
         int instanceID = Integer.parseInt(instanceIDAsString);
         return jdbi.inTransaction(handle -> {
             AuthRepository authRepository = handle.attach(AuthRepository.class);
-            String loggedInUser = instanceService.getCurrentUsername();
+            String loggedInUser = instanceService.getCurrentUsername(jdbi);
             if (loggedInUser == null) {
                 return "redirect:/autherror";
             }

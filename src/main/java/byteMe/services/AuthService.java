@@ -12,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import java.security.Principal;
+
 @Service
 public class AuthService {
 
@@ -49,7 +51,11 @@ public class AuthService {
     }
 
     public UserDAO createUserDAO(ByteMeUser user) {
-        return new UserDAO(null,user.getUsername(), encoder.encode(user.getPassword()),
-                user.getEmail(), "user");
+        String hashedPw = encoder.encode(user.getPassword());
+        return new UserDAO(null, user.getDisplayname(), hashedPw, user.getEmail());
+    }
+
+    public PasswordEncoder getEncoder() {
+        return encoder;
     }
 }

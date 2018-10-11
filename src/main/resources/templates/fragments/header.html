@@ -24,7 +24,7 @@
         </ul>
         <ul th:if="${!session.loggedIn}" class="nav navbar-nav navbar-right">
             <li><a class="button" th:href="@{/register}">Sign up</a></li>
-            <li><a class="button" th:href="@{/login}">Log in</a></li>
+            <li><a class="button" th:href="@{/loginform}">Log in</a></li>
         </ul>
         <ul th:if="${session.loggedIn}" class="nav navbar-nav navbar-right">
             <form th:action="@{/logout}" th:method="post">

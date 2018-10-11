@@ -37,7 +37,7 @@ public class MainController {
         return "tutorial";
     }
 
-    @RequestMapping("/login")
+    @RequestMapping("/loginform")
     public String loginPage() {
         return "login";
     }
