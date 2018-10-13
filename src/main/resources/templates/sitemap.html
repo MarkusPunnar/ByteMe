@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:include="fragments/head"/>
+    <th:block th:include="fragments/head.html :: head"/>
     <title>ByteMe Sitemap</title>
     <link rel="stylesheet" href="css/sitemap.css">
 </head>
@@ -16,6 +16,8 @@
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <p>ByteMe informative pages</p>
+            <a class="reference" th:href="@{/}">ByteMe Main page</a>
+            <br>
             <a class="reference" th:href="@{/about}">ByteMe About page</a>
             <br>
             <a class="reference" th:href="@{/tutorial}">ByteMe Tutorial page</a>

@@ -3,17 +3,15 @@ package byteMe.model;
 public class UserDAO {
 
     private Integer userID;
-    private String username;
+    private String displayname;
     private String hashedPassword;
-    private String userEmail;
-    private String userRole;
+    private String email;
 
-    public UserDAO(Integer userID, String username, String hashedPassword, String userEmail, String userRole) {
+    public UserDAO(Integer userID, String displayname, String hashedPassword, String email) {
         this.userID = userID;
-        this.username = username;
+        this.displayname = displayname;
         this.hashedPassword = hashedPassword;
-        this.userEmail = userEmail;
-        this.userRole = userRole;
+        this.email = email;
     }
 
     public int getUserID() {
@@ -32,28 +30,20 @@ public class UserDAO {
         this.hashedPassword = hashedPassword;
     }
 
-    public String getUsername() {
-        return username;
+    public String getDisplayname() {
+        return displayname;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setDisplayname(String displayname) {
+        this.displayname = displayname;
     }
 
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public String getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

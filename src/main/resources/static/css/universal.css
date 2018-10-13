@@ -13,13 +13,14 @@
 .navbar {
     background-color: #1b4977;
     border: none;
+    margin-bottom: 0;
 }
 
 .navbar-default .navbar-nav .button {
     color: white;
     font-family: Amaranth;
     font-weight: 400;
-}
+    }
 
 .navbar-default .navbar-nav .button:hover {
     color: #8d9ab2;

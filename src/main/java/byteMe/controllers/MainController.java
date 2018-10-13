@@ -1,35 +1,37 @@
 package byteMe.controllers;
 
 import byteMe.model.ByteMeUser;
-import byteMe.services.AuthService;
 import byteMe.services.MainRepository;
 import org.jdbi.v3.core.Jdbi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.io.File;
 
 @Controller
 public class MainController {
 
+    @Value("${static.statistics.resource}")
+    private String statsResourceLocation;
     private final Jdbi jdbi;
-    private final AuthService authService;
 
     @Autowired
-    public MainController(Jdbi jdbi, AuthService authService) {
+    public MainController(Jdbi jdbi) {
         this.jdbi = jdbi;
-        this.authService = authService;
     }
 
     @RequestMapping("/")
-    public String mainPage(Model model) {
-        authService.addAuthInfoToModel(model);
+    public String mainPage() {
         return "index";
     }
 
     @RequestMapping("/about")
     public String aboutPage(Model model) {
-        authService.addAuthInfoToModel(model);
         return jdbi.inTransaction(handle -> {
             int userCount = handle.attach(MainRepository.class).getUserCount();
             model.addAttribute("count", userCount);
@@ -38,39 +40,45 @@ public class MainController {
     }
 
     @RequestMapping("/tutorial")
-    public String tutorialPage(Model model) {
-        authService.addAuthInfoToModel(model);
+    public String tutorialPage() {
         return "tutorial";
     }
 
-    @RequestMapping("/login")
-    public String loginPage(Model model) {
-        authService.addAuthInfoToModel(model);
+    @RequestMapping("/loginform")
+    public String loginPage() {
         return "login";
     }
 
     @RequestMapping("/register")
     public String register(Model model) {
-        authService.addAuthInfoToModel(model);
         model.addAttribute("user", new ByteMeUser());
         return "register";
     }
 
     @RequestMapping("/create")
-    public String createRoom(Model model) {
-        authService.addAuthInfoToModel(model);
+    public String createRoom() {
         return "createroom";
     }
 
     @RequestMapping("/join")
-    public String joinRoom(Model model) {
-        authService.addAuthInfoToModel(model);
+    public String joinRoom() {
         return "joinroom";
     }
 
     @RequestMapping("/sitemap")
-    public String sitemap(Model model) {
-        authService.addAuthInfoToModel(model);
+    public String sitemap() {
         return "sitemap";
+    }
+
+    @RequestMapping("/autherror")
+    public String authError() {
+        return "autherror";
+    }
+
+    @ResponseBody
+    @RequestMapping("/stats")
+    public FileSystemResource stats() {
+        File file = new File(statsResourceLocation);
+        return new FileSystemResource(file);
     }
 }

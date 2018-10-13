@@ -21,12 +21,13 @@
             <li><a class="button" th:href="@{/about}">About</a></li>
             <li><a class="button" th:href="@{/tutorial}">Tutorial</a></li>
             <li><a class="button" th:href="@{/sitemap}">Site map</a></li>
+            <li><a class="button" th:href="@{/stats}">Statistics</a></li>
         </ul>
-        <ul th:if="${!loggedIn}" class="nav navbar-nav navbar-right">
+        <ul th:if="${!session.loggedIn}" class="nav navbar-nav navbar-right">
             <li><a class="button" th:href="@{/register}">Sign up</a></li>
-            <li><a class="button" th:href="@{/login}">Log in</a></li>
+            <li><a class="button" th:href="@{/loginform}">Log in</a></li>
         </ul>
-        <ul th:if="${loggedIn}" class="nav navbar-nav navbar-right">
+        <ul th:if="${session.loggedIn}" class="nav navbar-nav navbar-right">
             <form th:action="@{/logout}" th:method="post">
                 <input id="logout" type="submit" value="Log Out" class="button">
             </form>

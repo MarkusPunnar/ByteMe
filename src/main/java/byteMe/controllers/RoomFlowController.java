@@ -1,7 +1,6 @@
 package byteMe.controllers;
 
 import byteMe.model.ByteMeElement;
-import byteMe.services.AuthService;
 import byteMe.services.RoomFlowRepsitory;
 import org.jdbi.v3.core.Jdbi;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +18,15 @@ import java.util.List;
 public class RoomFlowController {
 
     private Jdbi jdbi;
-    private AuthService authService;
 
     @Autowired
-    public RoomFlowController(Jdbi jdbi, AuthService authService) {
+    public RoomFlowController(Jdbi jdbi) {
         this.jdbi = jdbi;
-        this.authService = authService;
     }
 
     @RequestMapping("/{instanceID}/displayElement/{elementNumber}")
     public String createDisplay(@PathVariable("instanceID") String instanceIDAsString,
                                 @PathVariable("elementNumber") String elementNumberAsString, Model model) {
-        authService.addAuthInfoToModel(model);
         Integer instanceID = Integer.valueOf(instanceIDAsString);
         model.addAttribute("roomID", instanceID);
         Integer elementNumber = Integer.valueOf(elementNumberAsString);
@@ -52,8 +48,7 @@ public class RoomFlowController {
     public String gradeElement(@PathVariable("instanceID") String instanceIDAsString,
                                @PathVariable("elementNumber") String elementNumberAsString,
                                @ModelAttribute("grade") Integer grade,
-                               @ModelAttribute("current") String elementIDAsString, Model model) {
-        authService.addAuthInfoToModel(model);
+                               @ModelAttribute("current") String elementIDAsString) {
         int elementNumber = Integer.valueOf(elementNumberAsString);
         int instanceID = Integer.valueOf(instanceIDAsString);
         int elementID = Integer.valueOf(elementIDAsString);
@@ -65,8 +60,7 @@ public class RoomFlowController {
     }
 
     @RequestMapping("/{instanceID}/summary")
-    public String showSummary(@PathVariable String instanceID, Model model) {
-        authService.addAuthInfoToModel(model);
+    public String showSummary(@PathVariable String instanceID) {
         return "summary";
     }
 }

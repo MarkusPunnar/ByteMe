@@ -17,17 +17,17 @@ public interface RoomStartupRepository extends SqlObject {
     @SqlUpdate("INSERT INTO Elements (RoomID, ElementContent, ElementType) VALUES (:roomID, :content, \"text\")")
     void addElement(int roomID, String content);
 
-    @SqlQuery("SELECT username FROM Users JOIN Rooms ON Rooms.Hostname = Users.userID AND Rooms.roomID = :roomID")
+    @SqlQuery("SELECT displayname FROM Users JOIN Rooms ON Rooms.Hostname = Users.userID AND Rooms.roomID = :roomID")
     String getHostName(int roomID);
 
-    @SqlQuery("SELECT UserID FROM Users WHERE username = :username")
-    int getUserID(String username);
+    @SqlQuery("SELECT UserID FROM Users WHERE Displayname = :displayname")
+    int getUserID(String displayname);
 
     @SqlUpdate("INSERT INTO Roomusers (RoomID, ConnecteduserID) VALUES (:roomID, :userID)")
     void addUserToRoom(int roomID, int userID);
 
-    @SqlQuery("SELECT username FROM Users JOIN Roomusers ON" +
-            " Roomusers.connectedUserid = Users.userID WHERE Roomusers.RoomID = :roomID")
+    @SqlQuery("SELECT Displayname FROM Users JOIN Roomusers ON" +
+            " Roomusers.connectedUserid = Users.UserID WHERE Roomusers.RoomID = :roomID")
     List<String> getRoomConnectedUsers(int roomID);
 
 }
