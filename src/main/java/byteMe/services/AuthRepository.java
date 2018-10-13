@@ -34,7 +34,4 @@ public interface AuthRepository extends SqlObject {
 
     @SqlQuery("SELECT Displayname FROM Users WHERE GoogleID = :googleID")
     String getGoogleUserDisplayName(String googleID);
-
-    @SqlQuery("SELECT Hashedpassword FROM Users WHERE Displayname = :displayname")
-    String getPasswordByDisplayName(String displayname);
 }

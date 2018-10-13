@@ -14,12 +14,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableOAuth2Sso
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
+public class ByteMeConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
     private final AuthService authService;
 
     @Autowired
-    public WebSecurityConfig(AuthService authService) {
+    public ByteMeConfig(AuthService authService) {
         this.authService = authService;
     }
 
@@ -27,8 +27,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.headers().defaultsDisabled().cacheControl();
-        http.authorizeRequests().antMatchers("/", "/register", "/auth/*", "/about", "/tutorial", "/sitemap", "/loginform",
-                "/fonts/*", "/scripts/*", "/css/*", "/images/*").permitAll().anyRequest()
+        http.authorizeRequests()
+                .antMatchers("/", "/register", "/auth/*", "/about", "/tutorial", "/sitemap", "/loginform",
+                "/fonts/*", "/scripts/*", "/css/*", "/images/*", "/stats").permitAll().anyRequest()
                 .authenticated().and().oauth2Login().successHandler(new ByteMeAuthenticationSuccessHandler())
                 .defaultSuccessUrl("/auth/redirect").loginPage("/loginform")
                 .and().logout().logoutSuccessUrl("/").permitAll();
@@ -41,8 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/images/**")
-                .addResourceLocations("classpath:/static/images/")
+        registry.addResourceHandler("/static/**")
+                .addResourceLocations("classpath:/static/")
                 .setCachePeriod(3600 * 24);
     }
 

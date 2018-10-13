@@ -4,13 +4,20 @@ import byteMe.model.ByteMeUser;
 import byteMe.services.MainRepository;
 import org.jdbi.v3.core.Jdbi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.io.File;
 
 @Controller
 public class MainController {
 
+    @Value("${static.statistics.resource}")
+    private String statsResourceLocation;
     private final Jdbi jdbi;
 
     @Autowired
@@ -66,5 +73,12 @@ public class MainController {
     @RequestMapping("/autherror")
     public String authError() {
         return "autherror";
+    }
+
+    @ResponseBody
+    @RequestMapping("/stats")
+    public FileSystemResource stats() {
+        File file = new File(statsResourceLocation);
+        return new FileSystemResource(file);
     }
 }
