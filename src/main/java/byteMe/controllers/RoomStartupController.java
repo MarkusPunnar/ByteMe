@@ -51,6 +51,10 @@ public class RoomStartupController {
         });
     }
 
+    @RequestMapping(value = "/create/fileupload", method = RequestMethod.POST)
+    public void uploadFile(){
+
+    }
     @RequestMapping(value = "/join", method = RequestMethod.POST)
     public String joinRoom(@ModelAttribute("id") String instanceIDAsString, Model model) {
         authService.addAuthInfoToModel(model);

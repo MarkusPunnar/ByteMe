@@ -17,7 +17,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
     protected void configure(HttpSecurity http) throws Exception {
         http.headers().defaultsDisabled().cacheControl();
         http.authorizeRequests().antMatchers("/", "/register", "/auth/register", "/about", "/tutorial", "/sitemap",
-                "/fonts/*", "/scripts/*", "/css/*", "/images/*").permitAll()
+                "/fonts/*", "/scripts/*", "/css/*", "/create", "/images/*").permitAll()
                 .anyRequest().authenticated().and()
                 .formLogin().loginPage("/login").permitAll()
                 .and().logout().logoutSuccessUrl("/").permitAll();

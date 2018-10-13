@@ -2,6 +2,7 @@ package byteMe.services;
 
 import byteMe.model.UserDAO;
 import org.jdbi.v3.sqlobject.SqlObject;
+import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
