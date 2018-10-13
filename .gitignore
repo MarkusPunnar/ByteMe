@@ -5,3 +5,7 @@ out
 target
 src/main/resources/application.properties
 src/main/resources/testserver.properties
+src/main/resources/static/scripts/bootstrap.min.js
+src/main/resources/static/scripts/jquery.min.js
+src/main/resources/static/css/bootstrap.min.css
+src/main/resources/static/css/leaflet.css
