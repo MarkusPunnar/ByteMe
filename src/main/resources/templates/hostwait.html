@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <th:block th:include="fragments/head.html :: head"/>
     <title>ByteMe Host Waiting</title>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/hostwait.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/scripts/hostwait.js"></script>
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"></div>
@@ -19,7 +17,5 @@
 <form th:action="@{/session/{roomID}/room(roomID=${roomID})}" method="post">
     <input type="submit" value="Start Room">
 </form>
-<script type="text/javascript" src="/scripts/hostwait.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

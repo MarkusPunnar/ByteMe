@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <th:block th:include="fragments/head.html :: head"/>
     <title>ByteMe Create</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/create.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/scripts/create.js"></script>
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"></div>
@@ -14,11 +12,29 @@
 <div class="container">
     <p>Choose the number of elements you wish to enter</p>
     <input type="number">
-    <button class="btn btn-primary">Confirm</button>
+    <!--<p>Choose the type of elements</p>
+    <select action="/create/fileupload">
+        <option value="Text">Text</option>
+        <option value="Pic">Picture</option>
+    </select>
+    <br>-->
+    <div>
+        <form method="POST" enctype="multipart/form-data" action="/fileupload">
+                <input type="file" name="file" />
+                <input type="submit" value="Upload" />
+        </form>
+    </div>
+
+    <div>
+        <ul>
+            <li th:each="file : ${files}">
+                <a th:href="${file}" th:text="${file}" />
+            </li>
+        </ul>
+    </div>
+    <button class="btn btn-primary" id="confirm">Confirm</button>
     <form id="create" th:action="@{/session/create}" method="post">
     </form>
 </div>
-<script type="text/javascript" src="/scripts/create.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

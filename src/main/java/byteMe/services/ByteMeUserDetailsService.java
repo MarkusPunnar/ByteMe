@@ -15,7 +15,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-
 public class ByteMeUserDetailsService implements UserDetailsService {
 
 
@@ -35,16 +34,8 @@ public class ByteMeUserDetailsService implements UserDetailsService {
             if (userInfo == null) {
                 throw new UsernameNotFoundException("User was not found");
             }
-            switch (userInfo.getUserRole()) {
-                case "user":
-                    userRoles.add(new SimpleGrantedAuthority("ROLE_USER"));
-                    break;
-                case "admin":
-                    userRoles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-                    userRoles.add(new SimpleGrantedAuthority("ROLE_USER"));
-                    break;
-            }
-            return new User(userInfo.getUsername(), userInfo.getHashedPassword(), userRoles);
+            userRoles.add(new SimpleGrantedAuthority("ROLE_USER"));
+            return new User(userInfo.getDisplayname(), userInfo.getHashedPassword(), userRoles);
         });
     }
 }

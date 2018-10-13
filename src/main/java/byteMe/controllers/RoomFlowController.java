@@ -3,6 +3,7 @@ package byteMe.controllers;
 import byteMe.model.ByteMeElement;
 import byteMe.services.RoomFlowRepsitory;
 import org.jdbi.v3.core.Jdbi;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +19,7 @@ public class RoomFlowController {
 
     private Jdbi jdbi;
 
+    @Autowired
     public RoomFlowController(Jdbi jdbi) {
         this.jdbi = jdbi;
     }

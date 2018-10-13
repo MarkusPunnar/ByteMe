@@ -2,17 +2,17 @@ package byteMe.model;
 
 public class ByteMeUser {
 
-    private String username;
+    private String displayname;
     private String password;
     private String confirmedPassword;
     private String email;
 
-    public String getUsername() {
-        return username;
+    public String getDisplayname() {
+        return displayname;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setDisplayname(String displayname) {
+        this.displayname = displayname;
     }
 
     public String getPassword() {

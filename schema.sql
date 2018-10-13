@@ -3,12 +3,12 @@ CREATE DATABASE byteme;
 USE byteme;
 
 CREATE TABLE IF NOT EXISTS Users (
-    UserID int NOT NULL AUTO_INCREMENT,
-    Username varchar(255) NOT NULL,
-    HashedPassword varchar(255) NOT NULL,
-    UserEmail varchar(255) NOT NULL,
-    UserRole varchar(255) NOT NULL,
-    PRIMARY KEY (UserID)
+  UserID INT AUTO_INCREMENT NOT NULL,
+  GoogleID varchar(255),
+  Displayname varchar(255),
+  Hashedpassword varchar(255),
+  Email varchar(255),
+  PRIMARY KEY (UserID)
 );
 
 CREATE TABLE IF NOT EXISTS Rooms (
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS Rooms (
     Hostname INT NOT NULL,
     elementAmount INT,
     PRIMARY KEY (RoomID),
-    FOREIGN KEY (Hostname) REFERENCES Users(UserID) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (Hostname) REFERENCES Users (UserID) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Roomusers (
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS Grades (
     RoomID int NOT NULL,
     ElementID int NOT NULL,
     GradeScore int NOT NULL,
-	PRIMARY KEY (GradeID),
+	  PRIMARY KEY (GradeID),
     FOREIGN KEY (ElementID) REFERENCES Elements(ElementID) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (RoomID) REFERENCES Rooms(RoomID) ON UPDATE CASCADE ON DELETE CASCADE
 );

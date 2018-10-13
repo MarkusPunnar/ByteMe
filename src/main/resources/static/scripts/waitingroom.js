@@ -1,5 +1,5 @@
 function checkForStart() {
-    var roomID = $("input[type=hidden]").attr("value");
+    var roomID = $("#roomID").attr("value");
     $.get("http://localhost:8080/session/" + roomID + "/status", function (data) {
         if (data === "true") {
             clearInterval(interval);
@@ -7,5 +7,7 @@ function checkForStart() {
         }
     });
 }
-
-var interval = setInterval(checkForStart, 3000);
+var interval;
+$(document).ready(function () {
+    interval = setInterval(checkForStart, 3000);
+});

@@ -7,20 +7,23 @@ function addTextfields() {
     $("input[type=number]").remove();
     $("button").remove();
 
-    for (var i = 0; i < numberOfElements; i++) {
-        formElement.append("<div></div>");
-        var divNumber = i+1;
-        $("#create div:nth-of-type(" + divNumber + ")").addClass("form-group");
-        var labelValue = "Element" + (i+1);
-        $("#create div:nth-of-type(" + divNumber + ")").append("<label></label>");
-        document.getElementsByTagName("label")[i].setAttribute("for", labelValue);
-        document.getElementsByTagName("label")[i].textContent = labelValue;
-        $("form div:nth-of-type(" + divNumber + ")").append("<input class=element>");
-        $(".element").addClass("form-control");
-        document.getElementsByTagName("input")[i+2].setAttribute("id", labelValue);
-        $(".element").attr("type", "text");
-        $(".element").attr("name", "assessment");
-    }
+        for (var i = 0; i < numberOfElements; i++) {
+            formElement.append("<div></div>");
+            var divNumber = i + 1;
+            $("#create div:nth-of-type(" + divNumber + ")").addClass("form-group");
+            var labelValue = "Element" + (i + 1);
+            $("#create div:nth-of-type(" + divNumber + ")").append("<label></label>");
+            document.getElementsByTagName("label")[i].setAttribute("for", labelValue);
+            document.getElementsByTagName("label")[i].textContent = labelValue;
+            $("form div:nth-of-type(" + divNumber + ")").append("<input class=element>");
+            $(".element").addClass("form-control");
+            document.getElementsByTagName("input")[i].setAttribute("id", labelValue);
+            $(".element").attr("type", "text");
+            $(".element").attr("name", "assessment");
+            $("#create div:nth-of-type(" + divNumber + ")").append("<select id='select'+ divNumber></select>");
+            document.getElementById("select" + divNumber).append("<option>Text</option>");
+        }
+
     formElement.append("<button type=submit id=confirm class=buttons></button>");
     $("#confirm").text("Confirm");
     $("#confirm").addClass("btn");
@@ -34,5 +37,6 @@ function addTextfields() {
     $("#reset").addClass("btn-primary");
     $("#reset").addClass("btn-lg");
 }
-
-$("button").on("click", addTextfields);
+$(document).ready(function () {
+    $("#confirm").on("click", addTextfields);
+});

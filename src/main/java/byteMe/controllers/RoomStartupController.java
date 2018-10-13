@@ -2,6 +2,8 @@ package byteMe.controllers;
 
 
 import byteMe.model.RoomUserDataStore;
+import byteMe.model.UserDAO;
+import byteMe.services.AuthRepository;
 import byteMe.services.AuthService;
 import byteMe.services.GameInstanceService;
 import byteMe.services.RoomStartupRepository;
@@ -37,8 +39,8 @@ public class RoomStartupController {
             while (repository.getRoomIDCount(roomID) != 0) {
                 roomID = instanceService.generateInstanceID();
             }
-            String username = instanceService.getCurrentUsername();
-            int hostID = repository.getUserID(username);
+            String displayname = instanceService.getCurrentUsername(jdbi);
+            int hostID = repository.getUserID(displayname);
             repository.addRoom(roomID, hostID, instanceElements.size());
             for (String instanceElement : instanceElements) {
                 repository.addElement(roomID, instanceElement);
@@ -51,6 +53,10 @@ public class RoomStartupController {
         });
     }
 
+    @RequestMapping(value = "/create/fileupload", method = RequestMethod.POST)
+    public void uploadFile(){
+
+    }
     @RequestMapping(value = "/join", method = RequestMethod.POST)
     public String joinRoom(@ModelAttribute("id") String instanceIDAsString, Model model) {
         authService.addAuthInfoToModel(model);
@@ -63,7 +69,7 @@ public class RoomStartupController {
             if (repository.getRoomIDCount(instanceID) == 0) {
                 return "redirect:/join?error";
             }
-            String username = instanceService.getCurrentUsername();
+            String username = instanceService.getCurrentUsername(jdbi);
             int userID = repository.getUserID(username);
             repository.addUserToRoom(instanceID, userID);
             return "redirect:/session/waitingroom/" + instanceIDAsString;
@@ -89,17 +95,33 @@ public class RoomStartupController {
         });
     }
 
-    @RequestMapping(value = "/{instanceID}/room", method = RequestMethod.POST)
-    public String startRoom(@PathVariable("instanceID") String instanceID, Model model) {
-        authService.addAuthInfoToModel(model);
+    @PostMapping(value = "/{instanceID}/room")
+    public String startRoom(@PathVariable("instanceID") String instanceID) {
         instanceService.getRoomStatusStore().put(Integer.valueOf(instanceID), true);
         return "adminview";
     }
 
+    @RequestMapping("/{instanceID}/room")
+    public String enterAdminView(@PathVariable("instanceID") String instanceIDAsString) {
+        int instanceID = Integer.parseInt(instanceIDAsString);
+        return jdbi.inTransaction(handle -> {
+            AuthRepository authRepository = handle.attach(AuthRepository.class);
+            String loggedInUser = instanceService.getCurrentUsername(jdbi);
+            if (loggedInUser == null) {
+                return "redirect:/autherror";
+            }
+            UserDAO user = authRepository.getUserData(loggedInUser);
+            int userID = user.getUserID();
+            if (userID != authRepository.getHostIdByRoom(instanceID)) {
+                return "redirect:/autherror";
+            }
+            return "adminview";
+        });
+    }
+
     @ResponseBody
     @RequestMapping("/{instanceID}/status")
-    public String getRoomStatus(@PathVariable("instanceID") String instanceID, Model model) {
-        authService.addAuthInfoToModel(model);
+    public String getRoomStatus(@PathVariable("instanceID") String instanceID) {
         if (instanceService.getRoomStatusStore().get(Integer.valueOf(instanceID))) {
             return "true";
         }

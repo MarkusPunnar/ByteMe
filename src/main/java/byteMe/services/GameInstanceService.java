@@ -1,8 +1,10 @@
 package byteMe.services;
 
 
+import org.jdbi.v3.core.Jdbi;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -18,10 +20,16 @@ public class GameInstanceService {
         return 100000 + ThreadLocalRandom.current().nextInt(900000);
     }
 
-    public String getCurrentUsername() {
+    public String getCurrentUsername(Jdbi jdbi) {
         Object userObject = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (userObject instanceof UserDetails) {
-           return ((UserDetails) userObject).getUsername();
+            return ((UserDetails) userObject).getUsername();
+        } else if (userObject instanceof DefaultOidcUser) {
+            return jdbi.inTransaction(handle -> {
+                AuthRepository authRepository = handle.attach(AuthRepository.class);
+                String googleID = ((DefaultOidcUser) userObject).getName();
+                return authRepository.getGoogleUserDisplayName(googleID);
+            });
         }
         return null;
     }
