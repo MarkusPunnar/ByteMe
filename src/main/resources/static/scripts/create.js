@@ -1,4 +1,4 @@
-function addTextfields() {
+function addElementChoices() {
 
     var numberOfElements = Number($("input[type=number]").val());
     var formElement = $("#create");
@@ -13,15 +13,18 @@ function addTextfields() {
             $("#create div:nth-of-type(" + divNumber + ")").addClass("form-group");
             var labelValue = "Element" + (i + 1);
             $("#create div:nth-of-type(" + divNumber + ")").append("<label></label>");
-            document.getElementsByTagName("label")[i].setAttribute("for", labelValue);
-            document.getElementsByTagName("label")[i].textContent = labelValue;
-            $("form div:nth-of-type(" + divNumber + ")").append("<input class=element>");
+            document.getElementsByTagName("label")[3*i].setAttribute("for", labelValue);
+            document.getElementsByTagName("label")[3*i].textContent = labelValue;
+            $("form div:nth-of-type(" + divNumber + ")").append("<input class=element type='text' name='assessment'>");
             $(".element").addClass("form-control");
-            document.getElementsByTagName("input")[i].setAttribute("id", labelValue);
-            $(".element").attr("type", "text");
-            $(".element").attr("name", "assessment");
-            $("#create div:nth-of-type(" + divNumber + ")").append("<select id='select'+ divNumber></select>");
-            document.getElementById("select" + divNumber).append("<option>Text</option>");
+            document.getElementsByTagName("input")[3*i + 1].setAttribute("id", labelValue);
+            var radioDiv = $('<div class="radio"></div>');
+            $("form div:nth-of-type(" + divNumber + ")").append(radioDiv);
+            document.getElementsByClassName("radio")[i].innerHTML ="<label><input class='textRadio' type='radio' checked>Text</label>" +
+                "<label><input class='picRadio' type='radio'>Picture</label>";
+            var radioName = "elementType" + i;
+            document.getElementsByClassName("textRadio")[i].setAttribute("name", radioName);
+            document.getElementsByClassName("picRadio")[i].setAttribute("name", radioName);
         }
 
     formElement.append("<button type=submit id=confirm class=buttons></button>");
@@ -36,7 +39,46 @@ function addTextfields() {
     $("#reset").addClass("btn");
     $("#reset").addClass("btn-primary");
     $("#reset").addClass("btn-lg");
+    addRadioButtonListener();
 }
+
+function textfieldToFileupload() {
+    var parent = document.getElementById("Element" + (this.elementNumber+1)).parentNode;
+    var fileInput = $("<input type='file'>");
+    console.log(parent);
+    console.log(fileInput);
+    document.getElementById("Element" + (this.elementNumber+1)).setAttribute("type", "file");
+    document.getElementById("Element" + (this.elementNumber+1)).classList.remove("form-control");
+}
+
+function fileuploadToTextfield() {
+    var parent = document.getElementById("Element" + (this.elementNumber+1)).parentNode;
+    var fileInput = $("<input type='file'>");
+    console.log(parent);
+    console.log(fileInput);
+    document.getElementById("Element" + (this.elementNumber+1)).setAttribute("type", "text");
+    document.getElementById("Element" + (this.elementNumber+1)).classList.add("form-control");
+}
+
+function addRadioButtonListener() {
+    var textButtons = document.getElementsByClassName("textRadio");
+    var pictureButtons = document.getElementsByClassName("picRadio");
+    for(i = 0; i < pictureButtons.length; i++) {
+        var nameAttribute = pictureButtons[i].getAttribute("name");
+        var elementNumber = nameAttribute[nameAttribute.length - 1];
+        pictureButtons[i].addEventListener("click",textfieldToFileupload);
+        pictureButtons[i].elementNumber = Number(elementNumber);
+    }
+
+    for(i = 0; i < textButtons.length; i++) {
+        var nameAttribute = textButtons[i].getAttribute("name");
+        var elementNumber = nameAttribute[nameAttribute.length - 1];
+        textButtons[i].addEventListener("click",fileuploadToTextfield);
+        textButtons[i].elementNumber = Number(elementNumber);
+    }
+}
+
 $(document).ready(function () {
-    $("#confirm").on("click", addTextfields);
+    $("#confirm").on("click", addElementChoices);
 });
+
