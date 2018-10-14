@@ -5,7 +5,7 @@ function addElementChoices() {
 
     $("p").remove();
     $("input[type=number]").remove();
-    $("button").remove();
+    $("#confirm").remove();
 
         for (var i = 0; i < numberOfElements; i++) {
             formElement.append("<div></div>");
@@ -62,19 +62,11 @@ function saveFile(inputlistElement){
 }
 
 function textfieldToFileupload() {
-    var parent = document.getElementById("Element" + (this.elementNumber+1)).parentNode;
-    var fileInput = $("<input type='file'>");
-    console.log(parent);
-    console.log(fileInput);
     document.getElementById("Element" + (this.elementNumber+1)).setAttribute("type", "file");
     document.getElementById("Element" + (this.elementNumber+1)).classList.remove("form-control");
 }
 
 function fileuploadToTextfield() {
-    var parent = document.getElementById("Element" + (this.elementNumber+1)).parentNode;
-    var fileInput = $("<input type='file'>");
-    console.log(parent);
-    console.log(fileInput);
     document.getElementById("Element" + (this.elementNumber+1)).setAttribute("type", "text");
     document.getElementById("Element" + (this.elementNumber+1)).classList.add("form-control");
 }

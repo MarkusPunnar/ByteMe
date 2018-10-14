@@ -12,26 +12,6 @@
 <div class="container">
     <p>Choose the number of elements you wish to enter</p>
     <input type="number">
-    <!--<p>Choose the type of elements</p>
-    <select action="/create/fileupload">
-        <option value="Text">Text</option>
-        <option value="Pic">Picture</option>
-    </select>
-    <br>-->
-   <!-- <div>
-        <form method="POST" enctype="multipart/form-data" action="/fileupload">
-                <input type="file" name="file" />
-                <input type="submit" value="Upload" />
-        </form>
-    </div>
-
-    <div>
-        <ul>
-            <li th:each="file : ${files}">
-                <a th:href="${file}" th:text="${file}" />
-            </li>
-        </ul>
-    </div>-->
     <button class="btn btn-primary" id="confirm">Confirm</button>
     <form id="create" th:action="@{/session/create}" method="post">
     </form>
