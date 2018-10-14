@@ -15,9 +15,6 @@ function addElementChoices() {
             $("#create div:nth-of-type(" + divNumber + ")").append("<label></label>");
             document.getElementsByTagName("label")[3*i].setAttribute("for", labelValue);
             document.getElementsByTagName("label")[3*i].textContent = labelValue;
-            $("form div:nth-of-type(" + divNumber + ")").append("<input class=element type='text' name='assessment'>");
-            $(".element").addClass("form-control");
-            document.getElementsByTagName("input")[3*i + 1].setAttribute("id", labelValue);
             var radioDiv = $('<div class="radio"></div>');
             $("form div:nth-of-type(" + divNumber + ")").append(radioDiv);
             document.getElementsByClassName("radio")[i].innerHTML ="<label><input class='textRadio' type='radio' checked>Text</label>" +
@@ -25,10 +22,14 @@ function addElementChoices() {
             var radioName = "elementType" + i;
             document.getElementsByClassName("textRadio")[i].setAttribute("name", radioName);
             document.getElementsByClassName("picRadio")[i].setAttribute("name", radioName);
+            $("form div:nth-of-type(" + divNumber + ")").append("<input class=element type='text' name='assessment'>");
+            $(".element").addClass("form-control");
+            document.getElementsByTagName("input")[3*i + 1].setAttribute("id", labelValue);
         }
 
     formElement.append("<button type=submit id=confirm class=buttons></button>");
     $("#confirm").text("Confirm");
+    $("#confirm").action("/upload");
     $("#confirm").addClass("btn");
     $("#confirm").addClass("btn-primary");
     $("#confirm").addClass("btn-lg");
@@ -40,6 +41,24 @@ function addElementChoices() {
     $("#reset").addClass("btn-primary");
     $("#reset").addClass("btn-lg");
     addRadioButtonListener();
+    addConfirmButtonListener();
+}
+
+function addConfirmButtonListener(){
+    $("#confirm").on("click", createPage);
+}
+
+function createPage(){
+    var inputlist = document.getElementsByName("assessment");
+    for(i = 0; i < inputlist; i++){
+        if(inputlist[i].getAttribute("type")==="file"){
+            saveFile(inputlist[i]);
+        }
+    }
+}
+
+function saveFile(inputlistElement){
+
 }
 
 function textfieldToFileupload() {
@@ -63,10 +82,10 @@ function fileuploadToTextfield() {
 function addRadioButtonListener() {
     var textButtons = document.getElementsByClassName("textRadio");
     var pictureButtons = document.getElementsByClassName("picRadio");
-    for(i = 0; i < pictureButtons.length; i++) {
+    for (i = 0; i < pictureButtons.length; i++) {
         var nameAttribute = pictureButtons[i].getAttribute("name");
         var elementNumber = nameAttribute[nameAttribute.length - 1];
-        pictureButtons[i].addEventListener("click",textfieldToFileupload);
+        pictureButtons[i].addEventListener("click", textfieldToFileupload);
         pictureButtons[i].elementNumber = Number(elementNumber);
     }
 
