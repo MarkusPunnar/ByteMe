@@ -15,7 +15,7 @@ function loadFrameworks() {
             document.getElementsByTagName("head")[0].appendChild(linkTag);
         }
     }
-    loadResource("hhttps://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js");
+    loadResource("https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js");
     setTimeout(function () {
         if (typeof $.fn.modal !== 'function') {
             loadResource("/scripts/bootstrap.min.js");
