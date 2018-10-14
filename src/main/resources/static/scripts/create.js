@@ -5,7 +5,7 @@ function addElementChoices() {
 
     $("p").remove();
     $("input[type=number]").remove();
-    $("button").remove();
+    $("#confirm").remove();
 
         for (var i = 0; i < numberOfElements; i++) {
             formElement.append("<div></div>");
@@ -17,7 +17,7 @@ function addElementChoices() {
             document.getElementsByTagName("label")[3*i].textContent = labelValue;
             $("form div:nth-of-type(" + divNumber + ")").append("<input class=element type='text' name='assessment'>");
             $(".element").addClass("form-control");
-            document.getElementsByTagName("input")[3*i + 1].setAttribute("id", labelValue);
+            document.getElementsByTagName("input")[3*i + 3].setAttribute("id", labelValue);
             var radioDiv = $('<div class="radio"></div>');
             $("form div:nth-of-type(" + divNumber + ")").append(radioDiv);
             document.getElementsByClassName("radio")[i].innerHTML ="<label><input class='textRadio' type='radio' checked>Text</label>" +
@@ -43,19 +43,11 @@ function addElementChoices() {
 }
 
 function textfieldToFileupload() {
-    var parent = document.getElementById("Element" + (this.elementNumber+1)).parentNode;
-    var fileInput = $("<input type='file'>");
-    console.log(parent);
-    console.log(fileInput);
     document.getElementById("Element" + (this.elementNumber+1)).setAttribute("type", "file");
     document.getElementById("Element" + (this.elementNumber+1)).classList.remove("form-control");
 }
 
 function fileuploadToTextfield() {
-    var parent = document.getElementById("Element" + (this.elementNumber+1)).parentNode;
-    var fileInput = $("<input type='file'>");
-    console.log(parent);
-    console.log(fileInput);
     document.getElementById("Element" + (this.elementNumber+1)).setAttribute("type", "text");
     document.getElementById("Element" + (this.elementNumber+1)).classList.add("form-control");
 }

@@ -28,7 +28,7 @@ public class ByteMeConfig extends WebSecurityConfigurerAdapter implements WebMvc
     protected void configure(HttpSecurity http) throws Exception {
         http.headers().defaultsDisabled().cacheControl();
         http.authorizeRequests()
-                .antMatchers("/**", "/register", "/auth/*", "/about", "/tutorial", "/sitemap", "/loginform",
+                .antMatchers("/", "/register", "/auth/*", "/about", "/tutorial", "/sitemap", "/loginform",
                 "/fonts/*", "/scripts/*", "/css/*", "/images/*", "/stats").permitAll().anyRequest()
                 .authenticated().and().oauth2Login().successHandler(new ByteMeAuthenticationSuccessHandler())
                 .defaultSuccessUrl("/auth/redirect").loginPage("/loginform")
