@@ -10,3 +10,8 @@ src/main/resources/static/scripts/bootstrap.min.js
 src/main/resources/static/scripts/jquery.min.js
 src/main/resources/static/css/bootstrap.min.css
 src/main/resources/static/css/leaflet.css
+src/main/resources/static/scripts/leaflet.js
+src/main/resources/static/scripts/mapbox.js
+src/main/resources/static/css/mapbox.css
+src/main/resources/static/images/image2vector.svg
+src/main/resources/static/images/leaf-green.png
