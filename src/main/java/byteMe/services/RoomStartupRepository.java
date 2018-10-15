@@ -14,8 +14,8 @@ public interface RoomStartupRepository extends SqlObject {
     @SqlUpdate("INSERT INTO Rooms (RoomID, Hostname, elementAmount) VALUES (:roomID, :host, :amount)")
     void addRoom(int roomID, int host, int amount);
 
-    @SqlUpdate("INSERT INTO Elements (RoomID, ElementContent, ElementType) VALUES (:roomID, :content, \"text\")")
-    void addElement(int roomID, String content);
+    @SqlUpdate("INSERT INTO Elements (RoomID, ElementContent, ElementType) VALUES (:roomID, :content, :type)")
+    void addElement(int roomID, String content, String type);
 
     @SqlQuery("SELECT displayname FROM Users JOIN Rooms ON Rooms.Hostname = Users.userID AND Rooms.roomID = :roomID")
     String getHostName(int roomID);
