@@ -11,9 +11,9 @@
 <h1>ByteMe Create Room</h1>
 <div class="container">
     <p>Choose the number of elements you wish to enter</p>
-    <input type="number">
+    <input id ="elementNumber" type="number">
     <button class="btn btn-primary" id="confirm">Confirm</button>
-    <form id="create" th:action="@{/session/create}" method="post">
+    <form id="create" th:action="@{/session/create}" method="post" enctype="multipart/form-data">
     </form>
 </div>
 </body>

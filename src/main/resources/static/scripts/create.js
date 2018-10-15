@@ -45,28 +45,30 @@ function addElementChoices() {
 function textfieldToFileupload() {
     document.getElementById("Element" + (this.elementNumber+1)).setAttribute("type", "file");
     document.getElementById("Element" + (this.elementNumber+1)).classList.remove("form-control");
+    document.getElementById("Element" + (this.elementNumber+1)).setAttribute("name", "picture");
 }
 
 function fileuploadToTextfield() {
     document.getElementById("Element" + (this.elementNumber+1)).setAttribute("type", "text");
     document.getElementById("Element" + (this.elementNumber+1)).classList.add("form-control");
+    document.getElementById("Element" + (this.elementNumber+1)).setAttribute("name", "assessment");
 }
 
 function addRadioButtonListener() {
     var textButtons = document.getElementsByClassName("textRadio");
     var pictureButtons = document.getElementsByClassName("picRadio");
-    for(i = 0; i < pictureButtons.length; i++) {
-        var nameAttribute = pictureButtons[i].getAttribute("name");
-        var elementNumber = nameAttribute[nameAttribute.length - 1];
+    for(var i = 0; i < pictureButtons.length; i++) {
+        var picNameAttribute = pictureButtons[i].getAttribute("name");
+        var pictureNumber = picNameAttribute[picNameAttribute.length - 1];
         pictureButtons[i].addEventListener("click",textfieldToFileupload);
-        pictureButtons[i].elementNumber = Number(elementNumber);
+        pictureButtons[i].elementNumber = Number(pictureNumber);
     }
 
-    for(i = 0; i < textButtons.length; i++) {
-        var nameAttribute = textButtons[i].getAttribute("name");
-        var elementNumber = nameAttribute[nameAttribute.length - 1];
-        textButtons[i].addEventListener("click",fileuploadToTextfield);
-        textButtons[i].elementNumber = Number(elementNumber);
+    for(var j = 0; j < textButtons.length; j++) {
+        var textNameAttribute = textButtons[j].getAttribute("name");
+        var textNumber = textNameAttribute[textNameAttribute.length - 1];
+        textButtons[j].addEventListener("click",fileuploadToTextfield);
+        textButtons[j].elementNumber = Number(textNumber);
     }
 }
 

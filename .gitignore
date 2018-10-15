@@ -3,6 +3,7 @@ logs
 *.iml
 out
 target
+upload-dir
 src/main/resources/application.properties
 src/main/resources/testserver.properties
 src/main/resources/static/scripts/bootstrap.min.js
