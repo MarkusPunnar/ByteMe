@@ -1,37 +1,23 @@
 @import "universal.css";
 
-@media (max-width: 576px) {
-    .sidebar {
-        height: fit-content;
-    }
-}
-.sidebar {
-    position: relative;
-    height: 100vh;
-    background-color: #1b4977;
-    padding-right: 0;
-}
-
-.element {
-    width: 100%;
-    border: 1px solid black;
-    height: 3em;
-    color: white;
-    text-decoration: none;
-    display: block;
-    padding-left: 5px;
-}
-
-.element:hover {
-    text-decoration: none;
-    color: gray;
-}
-
 h1 {
     margin-bottom: 1em;
+    font-size: 4em;
 }
 
-.sidebar h1 {
-    font-size: 2.5em;
+p {
+    margin: 1.5em auto;
+    font-family: Amaranth;
+    font-size: 1.5em;
+    color: white;
+}
+
+.content {
+    margin: auto;
+    width: 60%;
+    height: 80%;
+    background-color: #1b4977;
+    border: 1px solid white;
+    border-radius: 1em;
 }
 

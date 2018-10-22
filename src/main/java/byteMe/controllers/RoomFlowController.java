@@ -1,7 +1,9 @@
 package byteMe.controllers;
 
 import byteMe.model.ByteMeElement;
+import byteMe.services.AuthRepository;
 import byteMe.services.RoomFlowRepsitory;
+import byteMe.services.RoomStartupRepository;
 import org.jdbi.v3.core.Jdbi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -60,7 +62,16 @@ public class RoomFlowController {
     }
 
     @RequestMapping("/{instanceID}/summary")
-    public String showSummary(@PathVariable String instanceID) {
-        return "summary";
+    public String showSummary(@PathVariable("instanceID") String instanceIDAsString, Model model) {
+        Integer instanceID = Integer.parseInt(instanceIDAsString);
+        return jdbi.inTransaction(handle -> {
+            RoomFlowRepsitory roomFlowRepsitory = handle.attach(RoomFlowRepsitory.class);
+            RoomStartupRepository roomRepository = handle.attach(RoomStartupRepository.class);
+            String hostname = roomRepository.getHostName(instanceID);
+            int elementCount = roomFlowRepsitory.getAllElementsByRoom(instanceID).size();
+            model.addAttribute("hostname", hostname);
+            model.addAttribute("elementCount", elementCount);
+            return "summary";
+        });
     }
 }
