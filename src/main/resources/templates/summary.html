@@ -7,40 +7,13 @@
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"></div>
-<div class="row">
-    <div class="col-12 col-sm-3 sidebar">
-        <div>
-            <h1 id="sidebar-header">Graded elements</h1>
-        </div>
-        <a class="element" th:href="@{/lala}">Element 1</a>
-        <a class="element" th:href="@{/lala}">Element 2</a>
-        <a class="element" th:href="@{/lala}">Element 3</a>
-    </div>
-    <div class="col-12 col-sm-8">
-        <h1>Room summary</h1>
-        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis condimentum odio, eget feugiat
-            augue.
-            Duis id urna at ex iaculis tristique vel sodales ligula. Donec mollis egestas lectus, eget finibus justo
-            tincidunt eget. Ut scelerisque, sapien sit amet interdum aliquam, velit est interdum leo, et molestie
-            nibh
-            metus non eros. Cras condimentum justo non rhoncus convallis. Praesent ornare ipsum a nisl aliquet
-            egestas.
-            Pellentesque quis orci vulputate, auctor nisi feugiat, interdum ex. Nam placerat odio eu ex ultricies
-            dictum. Mauris ex leo, viverra vel diam vel, iaculis porta mauris. Curabitur magna nisl, lacinia non
-            mauris
-            nec, finibus tincidunt leo. Ut eu sagittis velit, eget dignissim dui. Praesent condimentum risus tellus,
-            non
-            facilisis eros ullamcorper sit amet.</p>
-        <p>Quisque bibendum ex leo, et varius sapien congue et. Phasellus mattis dolor in risus fermentum laoreet.
-            Donec
-            auctor, eros quis pharetra mattis, massa orci sollicitudin odio, id blandit nunc elit ut justo. Etiam
-            magna
-            sapien, aliquet vel ante eu, congue euismod nibh. Aliquam vel vestibulum urna, in feugiat dolor.
-            Maecenas
-            rutrum, ante ut feugiat venenatis, nisl libero consequat dui, eget varius nibh sapien eu ex. Interdum et
-            malesuada fames ac ante ipsum primis in faucibus. Donec placerat consectetur tellus vel faucibus. In ut
-            augue scelerisque, consectetur ligula ut, tempus nulla.</p>
-    </div>
+<h1>Room summary</h1>
+<div class="content">
+    <p>Room host name: <span th:text="${hostname}"></span></p>
+    <p>Total elements in room: <span th:text="${elementCount}"></span></p>
+    <p>Total people who have graded the elements: PLACEHOLDER VALUE</p>
+    <p>Time elapsed from room creation: PLACEHOLDER VALUE</p>
+    <p>Time until room closure: PLACEHOLDER VALUE</p>
 </div>
 </body>
 </html>
