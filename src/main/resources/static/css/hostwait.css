@@ -1,1 +1,22 @@
 @import "universal.css";
+
+h3, p{
+    font-family: Amaranth;
+    font-weight: 400;
+    font-size: 2.5vw;
+    text-align: center;
+    color: white;
+}
+
+.smallerText{
+    font-size: 2vw;
+}
+
+input{
+    background-color: white;
+    color: #153759;
+    font-family: Amaranth;
+    font-weight: 400;
+    margin: 1em auto;
+    display: block;
+}

@@ -37,8 +37,8 @@ public class RoomStartupController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createRoom(@RequestParam("assessment") List<String> instanceElements,
-            @RequestParam("picture") List<MultipartFile> instancePictures, Model model) throws IOException {
+    public String createRoom(@RequestParam(value = "assessment", required = false) List<String> instanceElements,
+            @RequestParam(value = "picture", required = false) List<MultipartFile> instancePictures, Model model) throws IOException {
         authService.addAuthInfoToModel(model);
         return jdbi.inTransaction(handle -> {
             RoomStartupRepository repository = handle.attach(RoomStartupRepository.class);
