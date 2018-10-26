@@ -15,12 +15,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import byteMe.storage.StorageProperties;
-import byteMe.storage.StorageService;
-
 @SpringBootApplication
 @EnableOAuth2Sso
-@EnableConfigurationProperties(StorageProperties.class)
 public class ByteMeApplication {
 
     @Value("${spring.datasource.username}")
@@ -44,13 +40,5 @@ public class ByteMeApplication {
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    CommandLineRunner init(StorageService storageService) {
-        return (args) -> {
-            storageService.deleteAll();
-            storageService.init();
-        };
     }
 }
