@@ -6,12 +6,13 @@
 </head>
 <body>
 <div class="container">
-    <h1 th:text="#{element}"> #<span th:text="${elementNumber}"></span></h1>
-    <div class="element">
-        <p th:text="${elementContent}"></p>
+    <h1>Element #<span th:text="${elementNumber}"></span></h1>
+    <div th:switch="${elementType}" class="element">
+       <p th:case="text"><span th:text="${elementContent}"></span></p>
+        <img th:case="picture" th:src="@{/room/{instanceID}/getImage/{elementNumber}(instanceID=${roomID},elementNumber=${elementNumber})}" alt="Picture couldn't be loaded">
     </div>
-    <h3 th:text="#{}" th:text="#{grade}"></h3>
-    <form th:action="@{/room/{instanceID}/gradeElement/{elementNumber}(instanceID=${roomID}, elementNumber=${elementNumber})}"
+    <h3 th:text="#{grade}"></h3>
+    <form th:action="@{/room/{instanceID}/gradeElement/{elementNumber}(instanceID=${roomID},elementNumber=${elementNumber})}"
           method="post">
         <div class="form-group">
             <label for="grade" th:text="#{yourgrade}"></label>

@@ -48,7 +48,7 @@ public class RoomStartupController {
             }
             String displayname = instanceService.getCurrentUsername(jdbi);
             int hostID = repository.getUserID(displayname);
-            repository.addRoom(roomID, hostID, instanceElements.size());
+            repository.addRoom(roomID, hostID, instanceElements.size() + instancePictures.size());
             for (String instanceElement : instanceElements) {
                 repository.addElement(roomID, instanceElement, "text");
             }

@@ -7,12 +7,14 @@
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"></div>
-<h1 th:text="#{byteme}">Byteme</h1>
+<h1 th:text="#{byteme}"></h1>
 <br>
 <p th:text="#{moto}"></p>
-<div class="buttons">
-    <a class="room" th:href="@{/create}" th:text="#{createroombutton}"></a>
-    <a class="room" th:href="@{/join}" th:text="#{joinroombutton}"></a>
+<div class="col-12 buttons">
+    <a id="leftbutton" class="room" th:href="@{/create}" th:text="#{createroombutton}"></a>
+</div>
+<div class="col-12 buttons">
+    <a id="rightbutton" class="room" th:href="@{/join}" th:text="#{joinroombutton}"></a>
 </div>
 </body>
 </html>

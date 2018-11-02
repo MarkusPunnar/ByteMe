@@ -1,7 +1,7 @@
 @import "universal.css";
 
 h1 {
-    margin-top: 14rem;
+    margin-top: 0.5em;
     font-size: 10vw;
 }
 
@@ -37,4 +37,68 @@ p {
     text-align: center;
     color: white;
     margin-top: 3vw;
+}
+@media only screen and (max-width : 415px) {
+    h1 {
+        margin-top: 1.3em;
+        font-size: 5em;
+    }
+    p {
+        margin-top: 1em;
+        font-family: Amaranth;
+        font-weight: 400;
+        font-size: 1.7em;
+        text-align: center;
+        color: white;
+    }
+    .room {
+        font-family: Amaranth;
+        font-weight: 400;
+        font-size: 1em;
+        color: white;
+        background-color: #153759;
+        border: none;
+        padding: 0.4em 1em;
+        border-radius: 0.5em;
+        width: 20em;
+        height: 3em;
+        text-align: center;
+    }
+    .buttons {
+        text-align: center;
+        color: white;
+        margin-top: 2em;
+    }
+}
+@media only screen and (max-width : 768px) and (min-width : 416px){
+    h1 {
+        margin-top: 1.2em;
+        font-size: 6em;
+    }
+    p {
+        margin-top: 0.7em;
+        font-family: Amaranth;
+        font-weight: 400;
+        font-size: 2em;
+        text-align: center;
+        color: white;
+    }
+    .room {
+        font-family: Amaranth;
+        font-weight: 400;
+        font-size: 1em;
+        color: white;
+        background-color: #153759;
+        border: none;
+        padding: 0.4em 1em;
+        border-radius: 0.5em;
+        width: 20em;
+        height: 3em;
+        text-align: center;
+    }
+    .buttons {
+        text-align: center;
+        color: white;
+        margin-top: 2em;
+    }
 }

@@ -11,7 +11,7 @@ public interface RoomStartupRepository extends SqlObject {
     @SqlQuery("SELECT COUNT(*) FROM Rooms WHERE RoomID = :roomID")
     int getRoomIDCount(int roomID);
 
-    @SqlUpdate("INSERT INTO Rooms (RoomID, Hostname, elementAmount) VALUES (:roomID, :host, :amount)")
+    @SqlUpdate("INSERT INTO Rooms (RoomID, Hostname, elementAmount, creationDate) VALUES (:roomID, :host, :amount, NOW())")
     void addRoom(int roomID, int host, int amount);
 
     @SqlUpdate("INSERT INTO Elements (RoomID, ElementContent, ElementType) VALUES (:roomID, :content, :type)")
@@ -29,5 +29,4 @@ public interface RoomStartupRepository extends SqlObject {
     @SqlQuery("SELECT Displayname FROM Users JOIN Roomusers ON" +
             " Roomusers.connectedUserid = Users.UserID WHERE Roomusers.RoomID = :roomID")
     List<String> getRoomConnectedUsers(int roomID);
-
 }
