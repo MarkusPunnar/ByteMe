@@ -14,4 +14,10 @@ public interface RoomFlowRepsitory extends SqlObject {
 
     @SqlUpdate("INSERT INTO Grades (RoomID, ElementID, GradeScore, UserID) VALUES(:roomID, :elementID, :grade, :userID)")
     void saveGrade(int roomID, int elementID, int grade, int userID);
+
+    @SqlQuery("SELECT TIMESTAMPDIFF(SECOND, (SELECT creationDate FROM Rooms WHERE RoomID = :roomID), NOW())")
+    int getSecondsFromCreation(int roomID);
+
+    @SqlQuery("SELECT COUNT(DISTINCT UserID) FROM Grades WHERE RoomID = :roomID")
+    int getGradedUserCount(int roomID);
 }

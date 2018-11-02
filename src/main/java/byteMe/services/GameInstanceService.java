@@ -37,4 +37,11 @@ public class GameInstanceService {
     public Map<Integer, Boolean> getRoomStatusStore() {
         return roomStatusStore;
     }
+
+    public String formatTimeFromCreation(int secondsFromCreation) {
+        int hours = secondsFromCreation / 3600;
+        int minutes = (secondsFromCreation % 3600) / 60;
+        int seconds = secondsFromCreation % 60;
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+    }
 }

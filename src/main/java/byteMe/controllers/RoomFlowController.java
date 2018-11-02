@@ -1,7 +1,6 @@
 package byteMe.controllers;
 
 import byteMe.model.ByteMeElement;
-import byteMe.services.AuthRepository;
 import byteMe.services.GameInstanceService;
 import byteMe.services.RoomFlowRepsitory;
 import byteMe.services.RoomStartupRepository;
@@ -14,14 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/room")
@@ -90,15 +84,41 @@ public class RoomFlowController {
 
     @RequestMapping("/{instanceID}/summary")
     public String showSummary(@PathVariable("instanceID") String instanceIDAsString, Model model) {
-        Integer instanceID = Integer.parseInt(instanceIDAsString);
+        int instanceID = Integer.parseInt(instanceIDAsString);
         return jdbi.inTransaction(handle -> {
             RoomFlowRepsitory roomFlowRepsitory = handle.attach(RoomFlowRepsitory.class);
             RoomStartupRepository roomRepository = handle.attach(RoomStartupRepository.class);
             String hostname = roomRepository.getHostName(instanceID);
             int elementCount = roomFlowRepsitory.getAllElementsByRoom(instanceID).size();
+            int secondsFromCreation = roomFlowRepsitory.getSecondsFromCreation(instanceID);
+            int secondsToClosure = 3600 - secondsFromCreation;
+            String creationTimeString = gameInstanceService.formatTimeFromCreation(secondsFromCreation);
+            String closureTimeString = gameInstanceService.formatTimeFromCreation(secondsToClosure);
+            model.addAttribute("instanceID", instanceID);
+            model.addAttribute("fromCreation", creationTimeString);
+            model.addAttribute("toClosure", closureTimeString);
             model.addAttribute("hostname", hostname);
             model.addAttribute("elementCount", elementCount);
+            model.addAttribute("userCount", roomFlowRepsitory.getGradedUserCount(instanceID));
             return "summary";
+        });
+    }
+
+
+    @RequestMapping("/{instanceID}/timestamps")
+    @ResponseBody
+    public Map<String, String> getTimestamps(@PathVariable("instanceID") String instanceIDAsString) {
+        int instanceID = Integer.parseInt(instanceIDAsString);
+        return jdbi.inTransaction(handle -> {
+            Map<String, String> timestampMap = new HashMap<>();
+            RoomFlowRepsitory roomFlowRepsitory = handle.attach(RoomFlowRepsitory.class);
+            int secondsFromCreation = roomFlowRepsitory.getSecondsFromCreation(instanceID);
+            int secondsToClosure = 3600 - secondsFromCreation;
+            String timeFromCreation = gameInstanceService.formatTimeFromCreation(secondsFromCreation);
+            String timeToClosure = gameInstanceService.formatTimeFromCreation(secondsToClosure);
+            timestampMap.put("creation", timeFromCreation);
+            timestampMap.put("closure", timeToClosure);
+            return timestampMap;
         });
     }
 }
