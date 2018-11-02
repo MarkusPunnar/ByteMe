@@ -15,3 +15,6 @@ src/main/resources/static/scripts/mapbox.js
 src/main/resources/static/css/mapbox.css
 src/main/resources/static/images/image2vector.svg
 src/main/resources/static/images/leaf-green.png
+src/main/resources/static/images/layers-2x.png
+src/main/resources/static/images/layers.png
+src/main/resources/static/images/marker-icon.png
