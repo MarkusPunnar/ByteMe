@@ -2,28 +2,40 @@ package byteMe.controllers;
 
 import byteMe.model.ByteMeElement;
 import byteMe.services.AuthRepository;
+import byteMe.services.GameInstanceService;
 import byteMe.services.RoomFlowRepsitory;
 import byteMe.services.RoomStartupRepository;
 import org.jdbi.v3.core.Jdbi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
 @RequestMapping("/room")
 public class RoomFlowController {
 
+    @Value("${instanceFileLocation}")
+    private String pictureLocation;
     private Jdbi jdbi;
+    private GameInstanceService gameInstanceService;
 
     @Autowired
-    public RoomFlowController(Jdbi jdbi) {
+    public RoomFlowController(Jdbi jdbi, GameInstanceService gameInstanceService) {
         this.jdbi = jdbi;
+        this.gameInstanceService = gameInstanceService;
     }
 
     @RequestMapping("/{instanceID}/displayElement/{elementNumber}")
@@ -40,10 +52,23 @@ public class RoomFlowController {
                 return "redirect:/room/" + instanceIDAsString + "/summary";
             }
             ByteMeElement currentElement = elementList.get(elementNumber - 1);
-            model.addAttribute("elementContent", currentElement.getElementContent());
+            if (currentElement.getElementType().toLowerCase().equals("text")) {
+                model.addAttribute("elementContent", currentElement.getElementContent());
+            }
+            model.addAttribute("elementType", currentElement.getElementType());
             model.addAttribute("elementID", currentElement.getElementID());
             return "display";
         });
+    }
+
+    @RequestMapping(value = "/{instanceID}/getImage/{elementNumber}", produces = MediaType.IMAGE_PNG_VALUE)
+    @ResponseBody
+    public FileSystemResource showImage(@PathVariable("instanceID") String instanceIDAsString,
+                                        @PathVariable("elementNumber") String elementNumberAsString) {
+        Integer elementNumber = Integer.valueOf(elementNumberAsString);
+        String pictureFileName = instanceIDAsString + "_" + (elementNumber - 1) + ".png";
+        String picturePath = pictureLocation + pictureFileName;
+        return new FileSystemResource(picturePath);
     }
 
     @RequestMapping(value = "/{instanceID}/gradeElement/{elementNumber}", method = RequestMethod.POST)
@@ -56,7 +81,9 @@ public class RoomFlowController {
         int elementID = Integer.valueOf(elementIDAsString);
         return jdbi.inTransaction(handle -> {
             RoomFlowRepsitory roomFlowRepsitory = handle.attach(RoomFlowRepsitory.class);
-            roomFlowRepsitory.saveGrade(instanceID, elementID, grade);
+            RoomStartupRepository roomStartupRepository = handle.attach(RoomStartupRepository.class);
+            int gradeUser = roomStartupRepository.getUserID(gameInstanceService.getCurrentUsername(jdbi));
+            roomFlowRepsitory.saveGrade(instanceID, elementID, grade, gradeUser);
             return "redirect:/room/" + instanceIDAsString + "/displayElement/" + (elementNumber + 1);
         });
     }

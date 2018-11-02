@@ -1,15 +1,14 @@
 @import "universal.css";
-h3, p{
+
+h1 {
+    font-size: 5em;
+}
+
+p {
     font-family: Amaranth;
     font-weight: 400;
-    font-size: 3vw;
+    font-size: 2em;
     text-align: center;
     color: white;
-    margin: 0 0;
-}
-h1{
-    font-size: 3.5vw;
-}
-p{
-    font-size: 2vw;
+    margin: 1em 0;
 }
