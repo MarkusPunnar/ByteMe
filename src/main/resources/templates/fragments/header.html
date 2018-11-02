@@ -1,35 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Navbar</title>
+    <title th:text="#{navbar}"></title>
 </head>
 <body>
 <nav class="navbar navbar-default" th:fragment="header">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#ByteMe"
                 aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only" th:text="#{togglenav}"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" id="home" th:href="@{/}">ByteMe</a>
+        <a class="navbar-brand" id="home" th:href="@{/}" th:text="#{byteme}"></a>
     </div>
     <div class="collapse navbar-collapse" id="ByteMe">
         <ul class="nav navbar-nav">
-            <li><a class="button" th:href="@{/about}">About</a></li>
-            <li><a class="button" th:href="@{/tutorial}">Tutorial</a></li>
-            <li><a class="button" th:href="@{/sitemap}">Site map</a></li>
-            <li><a class="button" th:href="@{/stats}">Statistics</a></li>
+            <li><a class="button" th:href="@{/about}" th:text="#{about}"></a></li>
+            <li><a class="button" th:href="@{/tutorial}" th:text="#{tutorial}"></a></li>
+            <li><a class="button" th:href="@{/sitemap}" th:text="#{sitemap}"></a></li>
+            <li><a class="button" th:href="@{/stats}" th:text="#{statistics}"></a></li>
+            <li><a href="?lang=en">EN</a></li>
+            <li><a href="?lang=et">EE</a></li>
         </ul>
         <ul th:if="${!session.loggedIn}" class="nav navbar-nav navbar-right">
-            <li><a class="button" th:href="@{/register}">Sign up</a></li>
-            <li><a class="button" th:href="@{/loginform}">Log in</a></li>
+            <li><a class="button" th:href="@{/register}" th:text="#{signup}"></a></li>
+            <li><a class="button" th:href="@{/loginform}" th:text="#{login}"></a></li>
         </ul>
         <ul th:if="${session.loggedIn}" class="nav navbar-nav navbar-right">
             <form th:action="@{/logout}" th:method="post">
-                <input id="logout" type="submit" value="Log Out" class="button">
+                <input id="logout" type="submit" class="button" th:value="#{logout}">
             </form>
         </ul>
     </div>

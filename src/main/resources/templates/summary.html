@@ -2,15 +2,15 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="fragments/head.html :: head"/>
-    <title>ByteMe Overview</title>
+    <title th:text="#{overview}"></title>
     <link rel="stylesheet" type="text/css" href="/css/summary.css">
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"></div>
-<h1>Room summary</h1>
+<h1 th:text="#{roomsummary}"></h1>
 <div class="content">
-    <p>Room host name: <span th:text="${hostname}"></span></p>
-    <p>Total elements in room: <span th:text="${elementCount}"></span></p>
+    <p th:text="#{hostsname}"> <span th:text="${hostname}"></span></p>
+    <p th:text="#{elementsinroom}"> <span th:text="${elementCount}"></span></p>
     <p>Total people who have graded the elements: PLACEHOLDER VALUE</p>
     <p>Time elapsed from room creation: PLACEHOLDER VALUE</p>
     <p>Time until room closure: PLACEHOLDER VALUE</p>

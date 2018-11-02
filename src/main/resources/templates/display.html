@@ -2,24 +2,24 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="fragments/head.html :: head"/>
-    <title>ByteMe Display</title>
+    <title th:text="#{bytemedisplay}"></title>
 </head>
 <body>
 <div class="container">
-    <h1>Element #<span th:text="${elementNumber}"></span></h1>
+    <h1 th:text="#{element}"> #<span th:text="${elementNumber}"></span></h1>
     <div class="element">
         <p th:text="${elementContent}"></p>
     </div>
-    <h3>Give your grade from 1 to 10</h3>
+    <h3 th:text="#{}" th:text="#{grade}"></h3>
     <form th:action="@{/room/{instanceID}/gradeElement/{elementNumber}(instanceID=${roomID}, elementNumber=${elementNumber})}"
           method="post">
         <div class="form-group">
-            <label for="grade">Your grade</label>
+            <label for="grade" th:text="#{yourgrade}"></label>
             <input type="number" name="grade" id="grade" class="form-control">
         </div>
         <input name="current" type="hidden" th:value="${elementID}">
         <input id="roomID" type="hidden" th:value="${roomID}">
-        <button type="submit" class="btn btn-primary btn-lg">Grade</button>
+        <button type="submit" class="btn btn-primary btn-lg" th:text="#{grade2}"></button>
     </form>
 </div>
 </body>

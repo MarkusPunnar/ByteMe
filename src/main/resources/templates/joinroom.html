@@ -2,14 +2,14 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="fragments/head.html :: head"/>
-    <title>ByteMe Join Room</title>
+    <title th:text="#{joinroom}"></title>
     <link rel="stylesheet" type="text/css" href="/css/joinpage.css">
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"></div>
-<h1>Please enter a room ID: </h1>
-<p th:if="${param.error}">Room with this ID does not exist</p>
-<p th:if="${param.inputerror}">Room ID must be a number with 6 digits</p>
+<h1 th:text="#{enterid}"></h1>
+<p th:if="${param.error}" th:text="#{iddoesntexist}"></p>
+<p th:if="${param.inputerror}" th:text="#{6digits}"></p>
 <div>
     <form th:action="@{/session/join}" method="post">
         <input type="text" name="id" maxlength="6">

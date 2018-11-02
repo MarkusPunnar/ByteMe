@@ -2,17 +2,17 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="fragments/head.html :: head"/>
-    <title>ByteMe Create</title>
+    <title th:text="#{bytemecreate}"></title>
     <link rel="stylesheet" type="text/css" href="css/create.css">
     <script src="/scripts/create.js"></script>
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"></div>
-<h1>ByteMe Create Room</h1>
+<h1 th:text="#{bytemecreateroom}"></h1>
 <div class="container">
-    <p>Choose the number of elements you wish to enter</p>
+    <p th:text="#{numberofelements}"></p>
     <input id ="elementNumber" type="number">
-    <button class="btn btn-primary" id="confirm">Confirm</button>
+    <button class="btn btn-primary" id="confirm" th:text="#{confirm}"></button>
     <form id="create" th:action="@{/session/create}" method="post" enctype="multipart/form-data">
     </form>
 </div>

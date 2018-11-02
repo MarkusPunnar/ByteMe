@@ -2,10 +2,10 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="fragments/head.html :: head"/>
-    <title>Register Success</title>
+    <title th:text="#{registersuccess}"></title>
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"></div>
-<h1>Register successful</h1>
+<h1 th:text="#{registersuccessful}"></h1>
 </body>
 </html>
