@@ -2,17 +2,17 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="fragments/head.html :: head"/>
-    <title>ByteMe Tutorial</title>
+    <title th:text="#{btutorial}"></title>
     <link rel="stylesheet" type="text/css" href="/css/tutorial.css">
 
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"></div>
-<h1>ByteMe Tutorial</h1>
-<p>Step 1: click the "Create Room" button</p>
-<p>Step 2: Choose the number of elements to enter and proceed to enter them</p>
-<p>Step 3: Have friends</p>
-<p>Step 4: Share your room ID with forementioned friends</p>
-<p>Step 5: Enjoy</p>
+<h1 th:text="#{btutorial}"></h1>
+<p th:text="#{step1}"></p>
+<p th:text="#{step2}"></p>
+<p th:text="#{step3}"></p>
+<p th:text="#{step4}"></p>
+<p th:text="#{step5}"></p>
 </body>
 </html>

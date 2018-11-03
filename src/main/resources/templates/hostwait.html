@@ -2,20 +2,20 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="fragments/head.html :: head"/>
-    <title>ByteMe Host Waiting</title>
+    <title th:text="#{hostwait}"></title>
     <link rel="stylesheet" type="text/css" href="/css/hostwait.css">
     <script src="/scripts/hostwait.js"></script>
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"></div>
-<h1>Your room ID is <span id="roomID" th:text="${roomID}"></span></h1>
-<h3>The host's name is <span th:text="${host}"></span></h3>
-<p class="smallerText">Wait for people to connect</p>
-<p>The users connected to this room:</p>
+<h1 th:text="#{roomid}"><span id="roomID" th:text="${roomID}"></span></h1>
+<h3 th:text="#{hostname}"><span th:text="${host}"></span></h3>
+<p class="smallerText" th:text="#{wait}"></p>
+<p th:text="#{connectedusers}"></p>
 <div>
 </div>
 <form th:action="@{/session/{roomID}/room(roomID=${roomID})}" method="post">
-    <input type="submit" value="Start Room">
+    <input type="submit" value="Start Room" th:text="#{startroom}">
 </form>
 </body>
 </html>

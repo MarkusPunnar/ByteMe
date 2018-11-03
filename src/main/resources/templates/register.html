@@ -2,35 +2,35 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="fragments/head.html :: head"/>
-    <title>ByteMe Register</title>
+    <title th:text="#{bregister}"></title>
     <link rel="stylesheet" type="text/css" href="css/register.css">
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"></div>
-<h1>Register to ByteMe</h1>
-<p th:if="${param.passworderror}">Passwords do not match</p>
-<p th:if="${param.usernameerror}">Username already exists</p>
+<h1 th:text="#{registertobyteme}"></h1>
+<p th:if="${param.passworderror}" th:text="#{dontmatch}"></p>
+<p th:if="${param.usernameerror}" th:text="#{userexists}"></p>
 <div class="container">
     <form th:action="@{/auth/register}" th:object="${user}" method="post">
         <div class="form-group">
-            <label for="displayname">Username</label>
+            <label for="displayname" th:text="#{username}"></label>
             <input type="text" class="form-control" id="displayname"
                    placeholder="Username" th:field="*{displayname}">
         </div>
         <div class="form-group">
-            <label for="password">Password</label>
+            <label for="password" th:text="#{password}"></label>
             <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}">
         </div>
         <div class="form-group">
-            <label for="confirm">Confirm Password</label>
+            <label for="confirm" th:text="#{confirmpassword}"></label>
             <input type="password" class="form-control" id="confirm" placeholder="Confirm"
                    th:field="*{confirmedPassword}">
         </div>
         <div class="form-group">
-            <label for="userEmail">Email Address</label>
+            <label for="userEmail" th:text="#{email}"></label>
             <input type="email" class="form-control" id="userEmail" placeholder="Your email" th:field="*{email}">
         </div>
-        <button type="submit" class="btn btn-primary btn-lg">Register</button>
+        <button type="submit" class="btn btn-primary btn-lg" th:text="#{register}"></button>
     </form>
 </div>
 </body>

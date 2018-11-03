@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="fragments/head.html :: head"/>
-    <title>ByteMe Sitemap</title>
+    <title th:text="#{bsitemap}"></title>
     <link rel="stylesheet" href="css/sitemap.css">
 </head>
 <body>
@@ -10,29 +10,29 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-9 col-xs-offset-1">
-            <h1>ByteMe Site map</h1>
+            <h1 th:text="#{bsitemap}"></h1>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6 col-sm-12">
-            <p>ByteMe informative pages</p>
-            <a class="reference" th:href="@{/}">ByteMe Main page</a>
+            <p th:text="#{infopages}"></p>
+            <a class="reference" th:href="@{/}" th:text="#{main}"></a>
             <br>
-            <a class="reference" th:href="@{/about}">ByteMe About page</a>
+            <a class="reference" th:href="@{/about}" th:text="#{aboutpage}"></a>
             <br>
-            <a class="reference" th:href="@{/tutorial}">ByteMe Tutorial page</a>
+            <a class="reference" th:href="@{/tutorial}" th:text="#{tutorialpage}"></a>
             <br>
-            <a class="reference" th:href="@{/sitemap}">ByteMe Site map</a>
+            <a class="reference" th:href="@{/sitemap}" th:text="#{bsitemap}"></a>
             <br>
-            <a class="reference" th:href="@{/login}">ByteMe Login</a>
+            <a class="reference" th:href="@{/login}" th:text="#{bytemelogin}"></a>
             <br>
-            <a class="reference" th:href="@{/register}">ByteMe Sign up</a>
+            <a class="reference" th:href="@{/register}" th:text="#{bsignup}"></a>
         </div>
         <div class="col-md-6 col-sm-12">
-            <p>ByteMe functional pages (Require authentication)</p>
-            <a class="reference" th:href="@{/join}">ByteMe Join room</a>
+            <p th:text="#{functionalpages}"></p>
+            <a class="reference" th:href="@{/join}" th:text="#{joinroom}"></a>
             <br>
-            <a class="reference" th:href="@{/create}">ByteMe Create room</a>
+            <a class="reference" th:href="@{/create}" th:text="#{createroom}"></a>
         </div>
     </div>
 </div>

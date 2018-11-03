@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:lang="#{language}">
 <head>
     <th:block th:include="fragments/head.html :: head"/>
-    <title>ByteMe main page</title>
+    <title th:text="#{main}"></title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"></div>
-<h1>ByteMe</h1>
+<h1 th:text="#{byteme}"></h1>
 <br>
-<p>Keeping score has never been so easy</p>
+<p th:text="#{moto}"></p>
 <div class="col-12 buttons">
-    <a id="leftbutton" class="room" th:href="@{/create}">Create a new room</a>
+    <a id="leftbutton" class="room" th:href="@{/create}" th:text="#{createroombutton}"></a>
 </div>
 <div class="col-12 buttons">
-    <a id="rightbutton" class="room" th:href="@{/join}">Join an existing room</a>
+    <a id="rightbutton" class="room" th:href="@{/join}" th:text="#{joinroombutton}"></a>
 </div>
 </body>
 </html>

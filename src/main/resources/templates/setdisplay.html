@@ -2,17 +2,17 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="fragments/head.html :: head"/>
-    <title>ByteMe Set Display Name</title>
+    <title th:text="#{setdisplayname}"></title>
 </head>
 <body>
-<h1>Enter your ByteMe display name:</h1>
+<h1 th:text="#{enterdisplayname}"></h1>
 <form th:action="@{/auth/setdisplay}" method="post">
     <input type="hidden" th:value="${googleID}" name="googleID">
     <div class="form-group">
-        <label for="displayname">Display name</label>
+        <label for="displayname" th:text="#{displayname}"></label>
         <input type="text" class="form-control" id="displayname" name="displayname" placeholder="Name">
     </div>
-    <button type="submit" class="btn btn-primary btn-lg">Confirm</button>
+    <button type="submit" class="btn btn-primary btn-lg" th:text="#{confirm}"></button>
 </form>
 </body>
 </html>

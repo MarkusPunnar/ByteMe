@@ -2,12 +2,12 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="fragments/head.html :: head"/>
-    <title>ByteMe Waiting Room</title>
+    <title th:text="#{waitingroom}"></title>
     <script src="/scripts/waitingroom.js"></script>
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"></div>
-<h1>Please wait for your game to begin</h1>
+<h1 th:text="#{waitforgame}"></h1>
 <input id="roomID" type="hidden" th:value="${instanceID}">
 </body>
 </html>
