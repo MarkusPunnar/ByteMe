@@ -9,6 +9,7 @@
 <body>
 <div th:replace="fragments/header.html :: header"></div>
 <h1>ByteMe Create Room</h1>
+<p id="error" th:if="${param.uploaderror}">ByteMe only accepts files in with .png extension</p>
 <div class="container">
     <p>Choose the number of elements you wish to enter</p>
     <input id ="elementNumber" type="number">
