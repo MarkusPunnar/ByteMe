@@ -17,11 +17,11 @@ function addElementChoices() {
             $("#create div:nth-of-type(" + divNumber + ")").addClass("form-group");
             var labelValue = "Element " + (i + 1);
             $("#create div:nth-of-type(" + divNumber + ")").append("<label></label>");
-            document.getElementsByTagName("label")[3*i].setAttribute("for", labelValue);
+            document.getElementsByTagName("label")[3*i].setAttribute("for", labelValue.replace(/\s/g,''));
             document.getElementsByTagName("label")[3*i].textContent = labelValue;
             $("form div:nth-of-type(" + divNumber + ")").append("<input class=element type='text' name='assessment'>");
             $(".element").addClass("form-control");
-            document.getElementsByTagName("input")[3*i + 3].setAttribute("id", labelValue);
+            document.getElementsByTagName("input")[3*i + 3].setAttribute("id", labelValue.replace(/\s/g,''));
             var radioDiv = $('<div class="radio"></div>');
             $("form div:nth-of-type(" + divNumber + ")").append(radioDiv);
             if(locale==="et"){

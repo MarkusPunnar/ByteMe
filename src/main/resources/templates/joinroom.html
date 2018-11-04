@@ -13,7 +13,7 @@
 <div>
     <form th:action="@{/session/join}" method="post">
         <input type="text" name="id" maxlength="6">
-        <input type="submit" name="Join Room">
+        <input type="submit" name="Join Room" th:value="#{joingo}">
     </form>
 </div>
 </body>

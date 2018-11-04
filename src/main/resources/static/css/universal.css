@@ -20,11 +20,19 @@
     color: white;
     font-family: Amaranth;
     font-weight: 400;
-    }
+}
 
 .navbar-default .navbar-nav .button:hover {
     color: #8d9ab2;
 }
+
+.languagebutton {
+    color: white !important;
+    font-family: Amaranth;
+    font-weight: 400;
+}
+
+
 #home {
     color: white;
     font-family: Amaranth;
