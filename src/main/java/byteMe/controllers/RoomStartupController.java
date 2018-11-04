@@ -7,6 +7,7 @@ import byteMe.services.AuthRepository;
 import byteMe.services.AuthService;
 import byteMe.services.GameInstanceService;
 import byteMe.services.RoomStartupRepository;
+import org.apache.commons.io.FilenameUtils;
 import org.jdbi.v3.core.Jdbi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -38,8 +41,15 @@ public class RoomStartupController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createRoom(@RequestParam(value = "assessment", required = false) List<String> instanceElements,
-            @RequestParam(value = "picture", required = false) List<MultipartFile> instancePictures, Model model) throws IOException {
+                             @RequestParam(value = "picture", required = false) List<MultipartFile> instancePictures, Model model) throws IOException {
         authService.addAuthInfoToModel(model);
+        for (MultipartFile file : instancePictures) {
+            String fileName = file.getOriginalFilename();
+            String extension = FilenameUtils.getExtension(fileName);
+            if (extension == null || !extension.toLowerCase().equals("png")) {
+                return "redirect:/create?uploaderror";
+            }
+        }
         return jdbi.inTransaction(handle -> {
             RoomStartupRepository repository = handle.attach(RoomStartupRepository.class);
             int roomID = instanceService.generateInstanceID();
@@ -48,12 +58,14 @@ public class RoomStartupController {
             }
             String displayname = instanceService.getCurrentUsername(jdbi);
             int hostID = repository.getUserID(displayname);
-            repository.addRoom(roomID, hostID, instanceElements.size() + instancePictures.size());
-            for (String instanceElement : instanceElements) {
-                repository.addElement(roomID, instanceElement, "text");
+            repository.addRoom(roomID, hostID, instanceService.getTotalRoomElements(instanceElements, instancePictures));
+            if (instanceElements != null) {
+                for (String instanceElement : instanceElements) {
+                    repository.addElement(roomID, instanceElement, "text");
+                }
             }
             for (int i = 0; i < instancePictures.size(); i++) {
-                String picturePath = instanceFilePath + roomID  + "_" + (i+1) + ".png";
+                String picturePath = instanceFilePath + roomID + "_" + (i + 1) + ".png";
                 instancePictures.get(i).transferTo(new File(picturePath));
                 repository.addElement(roomID, picturePath, "picture");
             }
@@ -65,10 +77,6 @@ public class RoomStartupController {
         });
     }
 
-    @RequestMapping(value = "/create/fileupload", method = RequestMethod.POST)
-    public void uploadFile(){
-
-    }
     @RequestMapping(value = "/join", method = RequestMethod.POST)
     public String joinRoom(@ModelAttribute("id") String instanceIDAsString, Model model) {
         authService.addAuthInfoToModel(model);

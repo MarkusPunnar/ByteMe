@@ -6,8 +6,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -43,5 +45,15 @@ public class GameInstanceService {
         int minutes = (secondsFromCreation % 3600) / 60;
         int seconds = secondsFromCreation % 60;
         return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+    }
+
+    public int getTotalRoomElements(List<String> textList, List<MultipartFile> fileList) {
+        if (textList == null) {
+            return fileList.size();
+        }
+        if (fileList == null) {
+            return textList.size();
+        }
+        return fileList.size() + textList.size();
     }
 }
