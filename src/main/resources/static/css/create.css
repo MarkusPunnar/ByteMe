@@ -23,6 +23,11 @@ input {
     width: 50%;
 }
 
+label {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
 .btn {
     background-color: white;
     color: #153759;

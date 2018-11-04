@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="#{language}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="fragments/head.html :: head"/>
     <title th:text="#{hostwait}"></title>
@@ -8,14 +8,14 @@
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"></div>
-<h1 th:text="#{roomid}"><span id="roomID" th:text="${roomID}"></span></h1>
-<h3 th:text="#{hostname}"><span th:text="${host}"></span></h3>
+<h1><span th:text="#{roomid} + ' '"></span><span id="roomID" th:text="${roomID}"></span></h1>
+<h3><span th:text="#{hostname} + ' '"></span><span th:text="${host}"></span></h3>
 <p class="smallerText" th:text="#{wait}"></p>
 <p th:text="#{connectedusers}"></p>
 <div>
 </div>
 <form th:action="@{/session/{roomID}/room(roomID=${roomID})}" method="post">
-    <input type="submit" value="Start Room" th:text="#{startroom}">
+    <input type="submit" th:value="#{startroom}">
 </form>
 </body>
 </html>

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="#{language}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="fragments/head.html :: head"/>
     <title th:text="#{autherror}"></title>
+    <link rel="stylesheet" type="text/css" href="/css/autherror.css">
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"></div>

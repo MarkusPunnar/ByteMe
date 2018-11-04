@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html vocab="http://schema.org/" typeof="WebSite" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="#{language}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="fragments/head.html :: head"/>
     <title th:text="#{bytemelogin}"></title>
@@ -13,11 +13,11 @@
         <p th:if="${param.error}" th:text="#{invalid}"></p>
         <div class="form-group">
             <label for="displayname" th:text="#{username}"></label>
-            <input type="text" name="displayname" id="displayname" class="form-control" placeholder="Username">
+            <input type="text" name="displayname" id="displayname" class="form-control" th:placeholder="#{username}">
         </div>
         <div>
             <label for="password" th:text="#{password}"></label>
-            <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+            <input type="password" name="password" id="password" class="form-control" th:placeholder="#{password}">
         </div>
         <div id="google">
         <a th:href="@{/oauth2/authorization/google}"><img src="images/google.png" alt="Login With Google"></a>

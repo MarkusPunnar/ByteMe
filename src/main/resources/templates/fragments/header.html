@@ -22,8 +22,8 @@
             <li><a class="button" th:href="@{/tutorial}" th:text="#{tutorial}"></a></li>
             <li><a class="button" th:href="@{/sitemap}" th:text="#{sitemap}"></a></li>
             <li><a class="button" th:href="@{/stats}" th:text="#{statistics}"></a></li>
-            <li><a href="?lang=en">EN</a></li>
-            <li><a href="?lang=et">EE</a></li>
+            <li><a href="?lang=en" class="languagebutton">EN</a></li>
+            <li><a href="?lang=et" class="languagebutton">EE</a></li>
         </ul>
         <ul th:if="${!session.loggedIn}" class="nav navbar-nav navbar-right">
             <li><a class="button" th:href="@{/register}" th:text="#{signup}"></a></li>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="#{language}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="fragments/head.html :: head"/>
     <title th:text="#{bregister}"></title>
@@ -15,20 +15,20 @@
         <div class="form-group">
             <label for="displayname" th:text="#{username}"></label>
             <input type="text" class="form-control" id="displayname"
-                   placeholder="Username" th:field="*{displayname}">
+                   th:placeholder="#{username}" th:field="*{displayname}">
         </div>
         <div class="form-group">
             <label for="password" th:text="#{password}"></label>
-            <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}">
+            <input type="password" class="form-control" id="password" th:placeholder="#{password}" th:field="*{password}">
         </div>
         <div class="form-group">
             <label for="confirm" th:text="#{confirmpassword}"></label>
-            <input type="password" class="form-control" id="confirm" placeholder="Confirm"
+            <input type="password" class="form-control" id="confirm" th:placeholder="#{password}"
                    th:field="*{confirmedPassword}">
         </div>
         <div class="form-group">
             <label for="userEmail" th:text="#{email}"></label>
-            <input type="email" class="form-control" id="userEmail" placeholder="Your email" th:field="*{email}">
+            <input type="email" class="form-control" id="userEmail" th:placeholder="#{email}" th:field="*{email}">
         </div>
         <button type="submit" class="btn btn-primary btn-lg" th:text="#{register}"></button>
     </form>

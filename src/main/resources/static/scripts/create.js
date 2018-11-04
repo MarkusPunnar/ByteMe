@@ -1,3 +1,7 @@
+var langbutton = $(".languagebutton");
+langbutton.on("click", addElementChoices());
+var locale = $("html").attr("lang");
+
 function addElementChoices() {
 
     var numberOfElements = Number($("input[type=number]").val());
@@ -11,7 +15,7 @@ function addElementChoices() {
             formElement.append("<div></div>");
             var divNumber = i + 1;
             $("#create div:nth-of-type(" + divNumber + ")").addClass("form-group");
-            var labelValue = "Element" + (i + 1);
+            var labelValue = "Element " + (i + 1);
             $("#create div:nth-of-type(" + divNumber + ")").append("<label></label>");
             document.getElementsByTagName("label")[3*i].setAttribute("for", labelValue);
             document.getElementsByTagName("label")[3*i].textContent = labelValue;
@@ -20,22 +24,34 @@ function addElementChoices() {
             document.getElementsByTagName("input")[3*i + 3].setAttribute("id", labelValue);
             var radioDiv = $('<div class="radio"></div>');
             $("form div:nth-of-type(" + divNumber + ")").append(radioDiv);
-            document.getElementsByClassName("radio")[i].innerHTML ="<label><input class='textRadio' type='radio' checked>Text</label>" +
-                "<label><input class='picRadio' type='radio'>Picture</label>";
+            if(locale==="et"){
+            document.getElementsByClassName("radio")[i].innerHTML ="<label><input class='textRadio' type='radio' checked>Tekst</label>" +
+                "<label><input class='picRadio' type='radio'>Pilt</label>";}
+            else{
+                document.getElementsByClassName("radio")[i].innerHTML ="<label><input class='textRadio' type='radio' checked>Text</label>" +
+                "<label><input class='picRadio' type='radio'>Picture</label>";}
             var radioName = "elementType" + i;
             document.getElementsByClassName("textRadio")[i].setAttribute("name", radioName);
             document.getElementsByClassName("picRadio")[i].setAttribute("name", radioName);
         }
 
     formElement.append("<button type=submit id=confirm class=buttons></button>");
-    $("#confirm").text("Confirm");
+        if(locale==="et")
+            $("#confirm").text("Kinnita");
+        else{
+            $("#confirm").text("Confirm");
+        }
     $("#confirm").addClass("btn");
     $("#confirm").addClass("btn-primary");
     $("#confirm").addClass("btn-lg");
 
     $(".container").append("<a class=buttons id=reset></a>");
     $("#reset").attr("href", "/create");
-    $("#reset").text("Reset");
+    if(locale==="et")
+        $("#reset").text("Algusesse");
+    else{
+        $("#reset").text("Reset");
+    }
     $("#reset").addClass("btn");
     $("#reset").addClass("btn-primary");
     $("#reset").addClass("btn-lg");

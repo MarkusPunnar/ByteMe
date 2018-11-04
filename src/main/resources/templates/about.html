@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="#{language}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="fragments/head.html :: head"/>
     <title th:text="#{main}"></title>
@@ -16,7 +16,7 @@
 <h1 th:text="#{aboutbyteme}"></h1>
 <br>
 <div>
-    <p>Currently there are <span th:text="${count}"></span> users registered to ByteMe!</p>
+    <p><span th:text="#{registeredusers1}"></span><span th:text="${count}"></span> <span th:text="#{registeredusers}"></span></p>
     <p id="tekst">Pancetta prosciutto salami chicken short ribs venison corned beef shoulder pastrami t-bone porchetta
         tongue ham hock. Rump leberkas meatball beef shoulder ham hock. Brisket capicola ball tip doner picanha corned
         beef. Cow filet mignon jowl, turkey doner alcatra ham tenderloin turducken salami kevin. Biltong ball tip
@@ -26,7 +26,6 @@
 <div id="contact">
     <p th:text="#{address}"></p>
 </div>
-<div id='mapid'></div>
 <script src="scripts/about.js"></script>
 </body>
 </html>
