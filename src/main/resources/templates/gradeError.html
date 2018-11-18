@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html th:lang="#{language}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments/head.html :: head"/>
+    <title>Error</title>
+    <link rel="stylesheet" type="text/css" href="/css/error.css">
+</head>
+<body>
+<div th:replace="fragments/header.html :: header"></div>
+<h1>You have already graded this question!</h1>
+<a id="next" th:href="@{/room/{instanceID}/displayElement/{elementNumber}(instanceID=${instanceID},elementNumber=${elementNumber})}">To next question</a>
+</body>
+</html>
