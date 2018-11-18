@@ -32,6 +32,31 @@ public class RoomFlowController {
         this.gameInstanceService = gameInstanceService;
     }
 
+    @ResponseBody
+    @RequestMapping("/{instanceID}/delete/{user}")
+    public void deleteUserData(@PathVariable("instanceID") String instanceIDAsString, @PathVariable("user") String user) {
+        int instanceID = Integer.parseInt(instanceIDAsString);
+        jdbi.useTransaction(handle -> {
+            RoomStartupRepository startupRepository = handle.attach(RoomStartupRepository.class);
+            RoomFlowRepsitory roomFlowRepsitory = handle.attach(RoomFlowRepsitory.class);
+            int userID = startupRepository.getUserID(user);
+            roomFlowRepsitory.deleteUserData(userID, instanceID);
+            roomFlowRepsitory.deleteUserFromRoom(userID, instanceID);
+        });
+    }
+
+    @ResponseBody
+    @RequestMapping("/{instanceID}/getUserData/{user}")
+    public List<Integer> getUserData(@PathVariable("instanceID") String instanceIDAsString, @PathVariable("user") String user) {
+        int instanceID = Integer.parseInt(instanceIDAsString);
+        return jdbi.inTransaction(handle -> {
+           RoomFlowRepsitory roomFlowRepsitory = handle.attach(RoomFlowRepsitory.class);
+           RoomStartupRepository startupRepository = handle.attach(RoomStartupRepository.class);
+           int userID = startupRepository.getUserID(user);
+           return roomFlowRepsitory.getUserGrades(userID, instanceID);
+        });
+    }
+
     @RequestMapping("/{instanceID}/displayElement/{elementNumber}")
     public String createDisplay(@PathVariable("instanceID") String instanceIDAsString,
                                 @PathVariable("elementNumber") String elementNumberAsString, Model model) {

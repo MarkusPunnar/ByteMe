@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS Rooms (
     RoomID INT NOT NULL,
     Hostname INT NOT NULL,
     elementAmount INT,
+    creationDate DATETIME,
     PRIMARY KEY (RoomID),
     FOREIGN KEY (Hostname) REFERENCES Users (UserID) ON UPDATE CASCADE ON DELETE CASCADE
 );
