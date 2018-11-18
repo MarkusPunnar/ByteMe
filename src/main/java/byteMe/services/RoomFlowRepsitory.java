@@ -20,4 +20,7 @@ public interface RoomFlowRepsitory extends SqlObject {
 
     @SqlQuery("SELECT COUNT(DISTINCT UserID) FROM Grades WHERE RoomID = :roomID")
     int getGradedUserCount(int roomID);
+
+    @SqlQuery("SELECT COUNT(*) FROM Grades WHERE UserID = :userID AND ElementID = :elementID")
+    int getUserGradeCount(int userID, int elementID);
 }

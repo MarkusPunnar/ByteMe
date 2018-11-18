@@ -1,1 +1,32 @@
 @import "universal.css";
+
+.error {
+    font-family: Amaranth;
+    font-weight: 400;
+    color: #cc1414;
+    font-size: 1.5em;
+
+}
+p {
+    font-family: Amaranth;
+    font-size: 3em;
+    color: white;
+    text-align: center;
+}
+h3 {
+    font-family: Amaranth;
+    font-size: 2em;
+    color: white;
+    margin-top: 0.5em !important;
+}
+label {
+    font-family: Amaranth;
+    font-size: 1.5em;
+    color: white;
+}
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}

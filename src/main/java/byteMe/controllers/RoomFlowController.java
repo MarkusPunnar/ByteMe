@@ -41,11 +41,16 @@ public class RoomFlowController {
         model.addAttribute("elementNumber", elementNumber);
         return jdbi.inTransaction(handle -> {
             RoomFlowRepsitory roomFlowRepsitory = handle.attach(RoomFlowRepsitory.class);
+            RoomStartupRepository startupRepository = handle.attach(RoomStartupRepository.class);
             List<ByteMeElement> elementList = roomFlowRepsitory.getAllElementsByRoom(instanceID);
             if (elementNumber > elementList.size()) {
                 return "redirect:/room/" + instanceIDAsString + "/summary";
             }
             ByteMeElement currentElement = elementList.get(elementNumber - 1);
+            if (roomFlowRepsitory.getUserGradeCount(startupRepository
+                    .getUserID(gameInstanceService.getCurrentUsername(jdbi)), currentElement.getElementID()) != 0) {
+                return "redirect:/room/" + instanceID + "/gradeError/" + (elementNumber+1);
+            }
             if (currentElement.getElementType().toLowerCase().equals("text")) {
                 model.addAttribute("elementContent", currentElement.getElementContent());
             }
@@ -70,6 +75,9 @@ public class RoomFlowController {
                                @PathVariable("elementNumber") String elementNumberAsString,
                                @ModelAttribute("grade") Integer grade,
                                @ModelAttribute("current") String elementIDAsString) {
+        if (grade < 1 || grade > 10) {
+            return "redirect:/room/" + instanceIDAsString + "/displayElement/" + elementNumberAsString + "?valueerror";
+        }
         int elementNumber = Integer.valueOf(elementNumberAsString);
         int instanceID = Integer.valueOf(instanceIDAsString);
         int elementID = Integer.valueOf(elementIDAsString);
@@ -104,6 +112,13 @@ public class RoomFlowController {
         });
     }
 
+    @RequestMapping("/{instanceID}/gradeError/{elementNumber}")
+    public String gradeError(@PathVariable("elementNumber") String elementNumber, Model model,
+                             @PathVariable("instanceID") String instanceID) {
+        model.addAttribute("elementNumber", elementNumber);
+        model.addAttribute("instanceID", instanceID);
+        return "gradeError";
+    }
 
     @RequestMapping("/{instanceID}/timestamps")
     @ResponseBody
