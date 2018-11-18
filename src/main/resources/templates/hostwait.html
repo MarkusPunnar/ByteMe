@@ -15,7 +15,9 @@
 <div>
 </div>
 <form th:action="@{/session/{roomID}/room(roomID=${roomID})}" method="post">
-    <input type="submit" th:value="#{startroom}">
+    <div class="text-center">
+    <input type="submit" th:value="#{startroom}" class="btn btn-primary btn-md">
+    </div>
 </form>
 </body>
 </html>

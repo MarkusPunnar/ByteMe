@@ -12,11 +12,12 @@ h3, p{
     font-size: 2vw;
 }
 
-input{
+input, btn{
     background-color: white;
     color: #153759;
     font-family: Amaranth;
     font-weight: 400;
-    margin: 1em auto;
+    margin: auto;
     display: block;
+    text-align: center;
 }
