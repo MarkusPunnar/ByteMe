@@ -29,4 +29,7 @@ public interface RoomFlowRepsitory extends SqlObject {
 
     @SqlQuery("SELECT GradeScore FROM Grades WHERE RoomID = :roomID AND UserID = :userID")
     List<Integer> getUserGrades(int userID, int roomID);
+
+    @SqlQuery("SELECT COUNT(*) FROM Grades WHERE UserID = :userID AND ElementID = :elementID")
+    int getUserGradeCount(int userID, int elementID);
 }

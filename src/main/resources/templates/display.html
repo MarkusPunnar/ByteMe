@@ -8,6 +8,7 @@
 <body>
 <div class="container">
     <h1>Element #<span th:text="${elementNumber}"></span></h1>
+    <p class="error" th:if="${param.valueerror}">Please enter a grade between 1 and 10</p>
     <div th:switch="${elementType}" class="element">
        <p th:case="text"><span th:text="${elementContent}"></span></p>
         <img th:case="picture" th:src="@{/room/{instanceID}/getImage/{elementNumber}(instanceID=${roomID},elementNumber=${elementNumber})}" alt="Picture couldn't be loaded">

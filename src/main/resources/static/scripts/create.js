@@ -5,6 +5,10 @@ var locale = $("html").attr("lang");
 function addElementChoices() {
 
     var numberOfElements = Number($("input[type=number]").val());
+    if (numberOfElements < 1){
+        $("#inputerror").text("Please enter a value above 0");
+        return;
+    }
     var formElement = $("#create");
 
     $("p").remove();

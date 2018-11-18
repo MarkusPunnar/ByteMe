@@ -9,7 +9,9 @@
 <body>
 <div th:replace="fragments/header.html :: header"></div>
 <h1 th:text="#{bytemecreateroom}"></h1>
-<p id="error" th:if="${param.uploaderror}">ByteMe only accepts files in with .png extension</p>
+<p class="error" th:if="${param.uploaderror}">ByteMe only accepts files in with .png extension</p>
+<p id="inputerror" class="error"></p>
+<p class="error" th:if="${param.elementalerror}">Please enter a value above 0</p>
 <div class="container">
     <p th:text="#{numberofelements}"></p>
     <input id ="elementNumber" type="number">

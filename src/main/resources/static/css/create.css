@@ -8,7 +8,7 @@ p {
     margin: 1em auto;
 }
 
-#error {
+.error {
     font-family: Amaranth;
     font-weight: 400;
     color: #cc1414;
