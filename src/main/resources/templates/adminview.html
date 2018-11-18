@@ -4,9 +4,20 @@
     <th:block th:include="fragments/head.html :: head"/>
     <title th:text="#{hostdisplay}"></title>
     <link rel="stylesheet" type="text/css" href="/css/adminview.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="/scripts/admin.js"></script>
 </head>
 <body>
+<input type="hidden" th:value="${instanceID}">
 <div th:replace="fragments/header.html :: header"></div>
-<h1 th:text="#{adminview}"></h1>
+<div class="container">
+    <h1 th:text="#{adminview}"></h1>
+    <div class="row">
+        <div id="userlist" class="col-xs-6">
+        </div>
+        <div id="usergrade" class="col-xs-6">
+        </div>
+    </div>
+</div>
 </body>
 </html>

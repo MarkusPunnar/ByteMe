@@ -114,8 +114,10 @@ public class RoomStartupController {
     }
 
     @PostMapping(value = "/{instanceID}/room")
-    public String startRoom(@PathVariable("instanceID") String instanceID) {
-        instanceService.getRoomStatusStore().put(Integer.valueOf(instanceID), true);
+    public String startRoom(@PathVariable("instanceID") String instanceIDAsString, Model model) {
+        Integer instanceID = Integer.valueOf(instanceIDAsString);
+        instanceService.getRoomStatusStore().put(instanceID, true);
+        model.addAttribute("instanceID", instanceID);
         return "adminview";
     }
 
