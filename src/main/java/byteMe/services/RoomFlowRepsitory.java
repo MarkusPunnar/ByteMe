@@ -1,6 +1,7 @@
 package byteMe.services;
 
 import byteMe.model.ByteMeElement;
+import byteMe.model.ByteMeGrade;
 import org.jdbi.v3.sqlobject.SqlObject;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
@@ -12,7 +13,7 @@ public interface RoomFlowRepsitory extends SqlObject {
     @SqlQuery("SELECT * FROM Elements WHERE RoomID = :roomID")
     List<ByteMeElement> getAllElementsByRoom(Integer roomID);
 
-    @SqlUpdate("INSERT INTO Grades (RoomID, ElementID, GradeScore, UserID) VALUES(:roomID, :elementID, :grade, :userID)")
+    @SqlUpdate("INSERT INTO Grades (RoomID, ElementID, GradeScore, UserID, Deleted) VALUES(:roomID, :elementID, :grade, :userID, \"N\")")
     void saveGrade(int roomID, int elementID, int grade, int userID);
 
     @SqlQuery("SELECT TIMESTAMPDIFF(SECOND, (SELECT creationDate FROM Rooms WHERE RoomID = :roomID), NOW())")
@@ -27,9 +28,15 @@ public interface RoomFlowRepsitory extends SqlObject {
     @SqlUpdate("DELETE FROM Roomusers WHERE ConnecteduserID = :userID AND RoomID = :roomID")
     void deleteUserFromRoom(int userID, int roomID);
 
-    @SqlQuery("SELECT GradeScore FROM Grades WHERE RoomID = :roomID AND UserID = :userID")
-    List<Integer> getUserGrades(int userID, int roomID);
+    @SqlQuery("SELECT ElementID, GradeScore, Deleted FROM Grades WHERE RoomID = :roomID AND UserID = :userID")
+    List<ByteMeGrade> getUserGrades(int userID, int roomID);
 
     @SqlQuery("SELECT COUNT(*) FROM Grades WHERE UserID = :userID AND ElementID = :elementID")
     int getUserGradeCount(int userID, int elementID);
+
+    @SqlUpdate("UPDATE Grades SET Deleted = \"Y\" WHERE UserID = :userID AND ElementID = :elementID")
+    void deleteGrade(int userID, int elementID);
+
+    @SqlUpdate("UPDATE Grades SET GradeScore = :newGrade WHERE UserID = :userID AND ElementID = :elementID AND RoomID = :roomID")
+    void editGrade(int userID, int elementID, int roomID, int newGrade);
 }

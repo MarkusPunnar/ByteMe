@@ -1,6 +1,7 @@
 package byteMe.controllers;
 
 import byteMe.model.ByteMeElement;
+import byteMe.model.ByteMeGrade;
 import byteMe.services.GameInstanceService;
 import byteMe.services.RoomFlowRepsitory;
 import byteMe.services.RoomStartupRepository;
@@ -46,14 +47,47 @@ public class RoomFlowController {
     }
 
     @ResponseBody
+    @RequestMapping("/{instanceID}/deleteElementData/{user}/{elementNumber}")
+    public void deleteElementData(@PathVariable("instanceID") String instanceIDAsString,
+                                  @PathVariable("elementNumber") String elementNumberAsString,
+                                  @PathVariable("user") String user) {
+        Integer instanceID = Integer.valueOf(instanceIDAsString);
+        Integer elementNumber = Integer.valueOf(elementNumberAsString);
+        jdbi.useTransaction(handle -> {
+            RoomFlowRepsitory roomFlowRepsitory = handle.attach(RoomFlowRepsitory.class);
+            RoomStartupRepository startupRepository = handle.attach(RoomStartupRepository.class);
+            List<ByteMeElement> byteMeElements = roomFlowRepsitory.getAllElementsByRoom(instanceID);
+            int elementID = byteMeElements.get(elementNumber).getElementID();
+            int userID = startupRepository.getUserID(user);
+            roomFlowRepsitory.deleteGrade(userID, elementID);
+        });
+    }
+
+    @ResponseBody
     @RequestMapping("/{instanceID}/getUserData/{user}")
-    public List<Integer> getUserData(@PathVariable("instanceID") String instanceIDAsString, @PathVariable("user") String user) {
+    public List<ByteMeGrade> getUserData(@PathVariable("instanceID") String instanceIDAsString, @PathVariable("user") String user) {
         int instanceID = Integer.parseInt(instanceIDAsString);
         return jdbi.inTransaction(handle -> {
-           RoomFlowRepsitory roomFlowRepsitory = handle.attach(RoomFlowRepsitory.class);
-           RoomStartupRepository startupRepository = handle.attach(RoomStartupRepository.class);
-           int userID = startupRepository.getUserID(user);
-           return roomFlowRepsitory.getUserGrades(userID, instanceID);
+            RoomFlowRepsitory roomFlowRepsitory = handle.attach(RoomFlowRepsitory.class);
+            RoomStartupRepository startupRepository = handle.attach(RoomStartupRepository.class);
+            int userID = startupRepository.getUserID(user);
+            return roomFlowRepsitory.getUserGrades(userID, instanceID);
+        });
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/{instanceID}/{elementID}/edit/{user}/{grade}")
+    public void editUserGrade(@PathVariable("instanceID") String instanceIDAsString, @PathVariable("elementID") String elementIDAsString,
+                              @PathVariable("user") String user, @PathVariable("grade") String newGrade) {
+        int instanceID = Integer.valueOf(instanceIDAsString);
+        int elementID = Integer.valueOf(elementIDAsString);
+        int grade = Integer.parseInt(newGrade);
+        jdbi.useTransaction(handle -> {
+            RoomStartupRepository startupRepository = handle.attach(RoomStartupRepository.class);
+            RoomFlowRepsitory flowRepsitory = handle.attach(RoomFlowRepsitory.class);
+            int userID = startupRepository.getUserID(user);
+            flowRepsitory.editGrade(userID, elementID, instanceID, grade);
         });
     }
 
@@ -74,7 +108,7 @@ public class RoomFlowController {
             ByteMeElement currentElement = elementList.get(elementNumber - 1);
             if (roomFlowRepsitory.getUserGradeCount(startupRepository
                     .getUserID(gameInstanceService.getCurrentUsername(jdbi)), currentElement.getElementID()) != 0) {
-                return "redirect:/room/" + instanceID + "/gradeError/" + (elementNumber+1);
+                return "redirect:/room/" + instanceID + "/gradeError/" + (elementNumber + 1);
             }
             if (currentElement.getElementType().toLowerCase().equals("text")) {
                 model.addAttribute("elementContent", currentElement.getElementContent());

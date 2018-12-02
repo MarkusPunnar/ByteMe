@@ -1,14 +1,13 @@
 @import "universal.css";
 
 .roomuser {
-    margin-left: 5px;
     font-family: Amaranth;
     font-weight: 400;
     font-size: 2em;
     color: white;
 }
 
-span:hover {
+.roomuser:hover {
     color: #9fa7b5;
 }
 
@@ -26,7 +25,7 @@ span:hover {
     color: white;
 }
 
-.nousers {
+.nousers, h3 {
     font-family: Amaranth;
     font-weight: 400;
     font-size: 2em;
@@ -34,9 +33,31 @@ span:hover {
 }
 
 h1 {
-    margin-bottom: 2em;
+    margin: 1em auto;
+    font-size: 3em;
+}
+
+p {
+    font-size: 1em;
+    color: #8c1919;
+    margin: 1em auto;
 }
 
 .fa {
     font-size: 2em !important;
+    margin-right: 10px !important;
+    color: black; !important;
+}
+
+.fa:hover {
+    color: #333435;
+}
+
+.editbutton {
+    color: white !important;
+    font-family: Amaranth;
+    font-weight: 400;
+    border-radius: 0.5em;
+    background-color: #153759;
+    border: none;
 }

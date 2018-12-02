@@ -8,7 +8,7 @@
     <script src="/scripts/admin.js"></script>
 </head>
 <body>
-<input type="hidden" th:value="${instanceID}">
+<input id="id" type="hidden" th:value="${instanceID}">
 <div th:replace="fragments/header.html :: header"></div>
 <div class="container">
     <h1 th:text="#{adminview}"></h1>
