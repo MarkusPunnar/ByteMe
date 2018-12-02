@@ -10,10 +10,13 @@
 <h1 th:text="#{enterid}"></h1>
 <p th:if="${param.error}" th:text="#{iddoesntexist}"></p>
 <p th:if="${param.inputerror}" th:text="#{6digits}"></p>
-<div>
+<div class="container">
     <form th:action="@{/session/join}" method="post">
-        <input type="text" name="id" maxlength="6">
-        <input type="submit" name="Join Room" th:value="#{joingo}">
+        <div class="form-group">
+            <label for="id" th:text="#{testshit}"></label>
+            <input id="id" class="form-control" type="text" name="id" maxlength="6">
+            <input id="submitbutton" type="submit" name="Join Room" th:value="#{joingo}">
+        </div>
     </form>
 </div>
 </body>

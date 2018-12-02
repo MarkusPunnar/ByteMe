@@ -1,11 +1,19 @@
 @import "universal.css";
 
+.btn{
+    margin-top: 1em;
+    background-color: white;
+    color: #153759;
+    font-family: Amaranth;
+    font-weight: 500;
+}
+
 h1{
 	display: block;
 	margin-top: 10vw;
 }
 input[type="text"] {
-    width: 33.8vw;
+    width: 4.3em;
     height: 10vw;
     font-size: 10vw;
     display: block;
@@ -18,6 +26,10 @@ input[type="submit"]{
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 2vw;
+    color: white;
+    background-color: #153759;
+    border-radius: 0.4vw;
+    border: none;
 }
 
 p {
@@ -52,4 +64,9 @@ p {
     text-align: center;
     color: white;
     margin-top: 3vw;
+}
+
+.container {
+    text-align: center;
+    margin-bottom: 1em;
 }
