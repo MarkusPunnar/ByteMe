@@ -1,1 +1,42 @@
 @import "universal.css";
+
+.roomuser {
+    margin-left: 5px;
+    font-family: Amaranth;
+    font-weight: 400;
+    font-size: 2em;
+    color: white;
+}
+
+span:hover {
+    color: #9fa7b5;
+}
+
+.heading {
+    font-family: Amaranth;
+    font-weight: 400;
+    font-size: 2.5em;
+    color: white;
+}
+
+.grade {
+    font-family: Amaranth;
+    font-weight: 400;
+    font-size: 1.5em;
+    color: white;
+}
+
+.nousers {
+    font-family: Amaranth;
+    font-weight: 400;
+    font-size: 2em;
+    color: white;
+}
+
+h1 {
+    margin-bottom: 2em;
+}
+
+.fa {
+    font-size: 2em !important;
+}

@@ -1,5 +1,13 @@
 @import "universal.css";
 
+.btn{
+    margin-top: 1em;
+    background-color: white;
+    color: #153759;
+    font-family: Amaranth;
+    font-weight: 500;
+}
+
 h1{
 	display: block;
 	margin-top: 10vw;
