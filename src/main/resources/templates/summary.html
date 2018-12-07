@@ -17,5 +17,5 @@
     <p><span th:text="#{creationtime}"></span><span th:text="${fromCreation}" id="creation"></span></p>
     <p><span th:text="#{closetime}"></span><span th:text="${toClosure}" id="closure"></span></p>
 </div>
-</body>
+<a class="details" th:href="@{/summary/summarydetails/{instanceID}(instanceID=${instanceID})}" th:text="#{summarydetails}"></a></body>
 </html>

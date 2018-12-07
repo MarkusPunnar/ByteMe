@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html th:lang="#{language}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments/head.html :: head"/>
+    <title th:text="#{summarydetails}"></title>
+    <link rel="stylesheet" type="text/css" href="/css/summarydetails.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="/scripts/summarydetails.js"></script>
+</head>
+<body>
+<div th:replace="fragments/header.html :: header"></div>
+<input id="instanceID" type="hidden" th:value="${instanceID}">
+<div class="container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#users" data-toggle="tab" id="userstab" th:text="#{byuser}"></a></li>
+            <li><a href="#elements" data-toggle="tab" th:text="#{byelement}" id="elementstab"></a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="userdiv" class="tab-pane active show">
+                <h3 id="byusers">Details by users</h3>
+                <table id="userstable">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div id="elementdiv" class="tab-pane">
+                <h3 id="byelements">Details by elements</h3>
+                <table id="elementstable">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
