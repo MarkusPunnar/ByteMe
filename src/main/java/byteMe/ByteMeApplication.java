@@ -1,6 +1,7 @@
 package byteMe;
 
 import byteMe.model.ByteMeElement;
+import byteMe.model.ByteMeGrade;
 import byteMe.model.UserDAO;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.mapper.reflect.ConstructorMapper;
@@ -31,6 +32,7 @@ public class ByteMeApplication {
         Jdbi jdbi = Jdbi.create("jdbc:mysql://localhost:3306/byteme", dbUser, dbPassword);
         jdbi.registerRowMapper(ConstructorMapper.factory(UserDAO.class));
         jdbi.registerRowMapper(ConstructorMapper.factory(ByteMeElement.class));
+        jdbi.registerRowMapper(ConstructorMapper.factory(ByteMeGrade.class));
         jdbi.installPlugin(new SqlObjectPlugin());
         return jdbi;
     }
