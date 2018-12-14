@@ -73,14 +73,14 @@ p {
         background-color: #153759;
         border-radius: 0.4vw;
         font-size: 0.7em;
-        padding: 10px 1px 1px 1px;
+        padding: 0.5em;
     }
 }
 #googlenupp {
     border: none;
     font-family: Amaranth;
     font-weight: 400;
-    padding: 3px 3px 3px 3px;
+    padding: 0.5em;
     color: white;
     background-color: #153759;
     border-radius: 0.4vw;
@@ -92,5 +92,6 @@ p {
         background-color: #153759;
         border-radius: 0.4vw;
         font-size: 0.8em;
+        padding: 0.3em;
     }
 }

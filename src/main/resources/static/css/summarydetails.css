@@ -5,20 +5,23 @@ h1 {
     font-size: 4em;
 }
 
-p {
-    margin: 1.5em auto;
+p, #userstable, #elementstable{
     font-family: Amaranth;
     font-size: 1.5em;
     color: white;
+    margin: 0;
 }
 
-.content {
-    margin: auto;
-    width: 60%;
-    height: 80%;
-    background-color: #1b4977;
-    border: 1px solid white;
-    border-radius: 1em;
+#elementstab, #userstab {
+    font-family: Amaranth;
+    font-size: 1.8em;
+    color: black;
+}
+
+h3 {
+    font-family: Amaranth;
+    font-size: 2em;
+    color: white;
 }
 
 table{

@@ -32,6 +32,11 @@ input[type="submit"]{
     border: none;
 }
 
+#submitbutton{
+    font-size: 2em;
+    font-family: Amaranth;
+}
+
 p {
     margin-top: 1vw;
     font-family: Amaranth;
