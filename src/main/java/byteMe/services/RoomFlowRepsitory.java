@@ -1,6 +1,7 @@
 package byteMe.services;
 
 import byteMe.model.ByteMeElement;
+import byteMe.model.ByteMeGrade;
 import org.jdbi.v3.sqlobject.SqlObject;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
@@ -27,8 +28,14 @@ public interface RoomFlowRepsitory extends SqlObject {
     @SqlUpdate("DELETE FROM Roomusers WHERE ConnecteduserID = :userID AND RoomID = :roomID")
     void deleteUserFromRoom(int userID, int roomID);
 
-    @SqlQuery("SELECT GradeScore FROM Grades WHERE RoomID = :roomID AND UserID = :userID")
-    List<Integer> getUserGrades(int userID, int roomID);
+    @SqlUpdate("UPDATE Grades SET Deleted = \"Y\" WHERE UserID = :userID AND ElementID = :elementID")
+    void deleteUserGrade(int userID, int elementID);
+
+    @SqlUpdate("UPDATE Grades SET GradeScore = :grade WHERE UserID = :userID AND ElementID = :elementID")
+    void editGrade(int grade, int elementID, int userID);
+
+    @SqlQuery("SELECT * FROM Grades WHERE RoomID = :roomID AND UserID = :userID")
+    List<ByteMeGrade> getUserGrades(int userID, int roomID);
 
     @SqlQuery("SELECT COUNT(*) FROM Grades WHERE UserID = :userID AND ElementID = :elementID")
     int getUserGradeCount(int userID, int elementID);

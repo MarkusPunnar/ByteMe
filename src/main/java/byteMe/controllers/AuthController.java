@@ -44,9 +44,9 @@ public class AuthController {
             }
             UserDAO userToRegister = authService.createUserDAO(newUser);
             authRepository.registerUser(userToRegister);
-//            Thread thread = new Thread(() -> authService.sendEmail(newUser.getEmail()));
-//            thread.setDaemon(true);
-//            thread.start();
+            Thread thread = new Thread(() -> authService.sendEmail(newUser.getEmail()));
+            thread.setDaemon(true);
+            thread.start();
             return "success";
         });
     }

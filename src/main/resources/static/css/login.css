@@ -30,6 +30,11 @@ p {
 #google {
     margin-top: 1em;
 }
+
+#googlenupp {
+    text-decoration: none !important;
+}
+
 @media only screen and (max-width : 768px) and (min-width : 511px){
     h1{
         margin-top: 0.6em;

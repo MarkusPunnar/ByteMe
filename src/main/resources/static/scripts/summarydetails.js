@@ -27,7 +27,12 @@ function createTables() {
                     $("#userstable tbody tr")[rowsCreated].append(userstd);
                     for (var k = 0; k < numberofelements; k++) {
                         userstd = document.createElement("td");
-                        userstd.append(grades[k].gradeScore);
+                        if (grades[k].deleted === "N") {
+                            userstd.append(grades[k].gradeScore);
+                        }
+                        else {
+                            userstd.append("-");
+                        }
                         $("#userstable tbody tr")[rowsCreated].append(userstd);
                     }
                     rowsCreated++;
@@ -60,18 +65,18 @@ function tabSwitch() {
     $("#userstab").click(function () {
         $("#byelements").hide();
         $("#byusers").show();
-        $("#userdiv").toggleClass("active");
-        $("#userdiv").toggleClass("show");
-        $("#elementdiv").toggleClass("active");
-        $("#elementdiv").toggleClass("show");
+        $("#userdiv").addClass("active");
+        $("#userdiv").addClass("show");
+        $("#elementdiv").removeClass("active");
+        $("#elementdiv").removeClass("show");
     });
     $("#elementstab").click(function () {
         $("#byusers").hide();
         $("#byelements").show();
-        $("#userdiv").toggleClass("active");
-        $("#userdiv").toggleClass("show");
-        $("#elementdiv").toggleClass("active");
-        $("#elementdiv").toggleClass("show");
+        $("#userdiv").removeClass("active");
+        $("#userdiv").removeClass("show");
+        $("#elementdiv").addClass("active");
+        $("#elementdiv").addClass("show");
     });
 }
 

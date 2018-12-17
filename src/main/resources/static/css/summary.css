@@ -25,14 +25,20 @@ p {
 .details {
     font-family: Amaranth;
     font-weight: 400;
-    font-size: 1.5vw;
+    font-size: 2em;
     color: white;
     background-color: #153759;
     border: none;
-    padding: 0.4vw 0.7vw;
-    border-radius: 0.4vw;
-    width: 6vw;
-    height: 3vw;
+    text-align: center;
+    border-radius: 0.4em;
+    width: 5em;
+    height: 1.5em;
     display: block;
+    padding: 3em auto;
     margin: 1em auto;
+    text-decoration: none !important;
+}
+
+.details:hover {
+    color: #9fa7b5;
 }

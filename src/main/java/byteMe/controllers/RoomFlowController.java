@@ -1,6 +1,7 @@
 package byteMe.controllers;
 
 import byteMe.model.ByteMeElement;
+import byteMe.model.ByteMeGrade;
 import byteMe.services.GameInstanceService;
 import byteMe.services.RoomFlowRepsitory;
 import byteMe.services.RoomStartupRepository;
@@ -46,8 +47,33 @@ public class RoomFlowController {
     }
 
     @ResponseBody
+    @RequestMapping("/deleteGrade/{user}/{elementID}")
+    public void deleteUserGrade(@PathVariable("user") String user, @PathVariable("elementID") String elementIDAsString) {
+        int elementID = Integer.parseInt(elementIDAsString);
+        jdbi.useTransaction(handle -> {
+            RoomStartupRepository startupRepository = handle.attach(RoomStartupRepository.class);
+            RoomFlowRepsitory flowRepsitory = handle.attach(RoomFlowRepsitory.class);
+            int userID = startupRepository.getUserID(user);
+            flowRepsitory.deleteUserGrade(userID, elementID);
+        });
+    }
+
+    @ResponseBody
+    @RequestMapping("/editGrade/{element}/{grade}/{user}")
+    public void editUserGrade(@PathVariable("element") String elementIDAsString, @PathVariable("grade") Integer grade,
+                              @PathVariable("user") String user) {
+        int elementID = Integer.parseInt(elementIDAsString);
+        jdbi.useTransaction(handle -> {
+            RoomStartupRepository startupRepository = handle.attach(RoomStartupRepository.class);
+            RoomFlowRepsitory flowRepsitory = handle.attach(RoomFlowRepsitory.class);
+            int userID = startupRepository.getUserID(user);
+            flowRepsitory.editGrade(grade, elementID, userID);
+        });
+    }
+
+    @ResponseBody
     @RequestMapping("/{instanceID}/getUserData/{user}")
-    public List<Integer> getUserData(@PathVariable("instanceID") String instanceIDAsString, @PathVariable("user") String user) {
+    public List<ByteMeGrade> getUserData(@PathVariable("instanceID") String instanceIDAsString, @PathVariable("user") String user) {
         int instanceID = Integer.parseInt(instanceIDAsString);
         return jdbi.inTransaction(handle -> {
            RoomFlowRepsitory roomFlowRepsitory = handle.attach(RoomFlowRepsitory.class);
@@ -90,7 +116,7 @@ public class RoomFlowController {
     public FileSystemResource showImage(@PathVariable("instanceID") String instanceIDAsString,
                                         @PathVariable("elementNumber") String elementNumberAsString) {
         Integer elementNumber = Integer.valueOf(elementNumberAsString);
-        String pictureFileName = instanceIDAsString + "_" + (elementNumber - 1) + ".png";
+        String pictureFileName = instanceIDAsString + "_" + (elementNumber) + ".png";
         String picturePath = pictureLocation + pictureFileName;
         return new FileSystemResource(picturePath);
     }

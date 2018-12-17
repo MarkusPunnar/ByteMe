@@ -62,8 +62,9 @@ public class RoomStartupController {
                     repository.addElement(roomID, instanceElement, "text");
                 }
             }
+            int elementCount = instanceElements == null ? 0 : instanceElements.size();
             for (int i = 0; i < instancePictures.size(); i++) {
-                String picturePath = instanceFilePath + roomID + "_" + (i + 1) + ".png";
+                String picturePath = instanceFilePath + roomID + "_" + (elementCount + i + 1) + ".png";
                 instancePictures.get(i).transferTo(new File(picturePath));
                 repository.addElement(roomID, picturePath, "picture");
             }
